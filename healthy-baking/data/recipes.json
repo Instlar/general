@@ -1,0 +1,1155 @@
+[
+  {
+    "slug": "bananovye-maffiny",
+    "title": "Цельнозерновые банановые маффины",
+    "category": "Маффины",
+    "subtitle": "Сочные маффины на спелых бананах, с мёдом и корицей.",
+    "image": "banana.webp",
+    "servings": 12,
+    "servingUnit": "шт.",
+    "prepMinutes": 10,
+    "bakeMinutes": 25,
+    "ovenC": 165,
+    "sourceName": "Cookie and Kate",
+    "sourceUrl": "https://cookieandkate.com/healthy-banana-muffins-recipe/",
+    "tags": [
+      "Цельнозерновая",
+      "Без сливочного масла",
+      "Без белого сахара",
+      "С фруктами"
+    ],
+    "ingredients": [
+      {
+        "id": "oil",
+        "name": "кокосового или оливкового масла",
+        "amount": 80,
+        "unit": "ml"
+      },
+      {
+        "id": "honey",
+        "name": "мёда или кленового сиропа",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "id": "eggs",
+        "name": "яйца",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "id": "banana",
+        "name": "бананового пюре",
+        "amount": 240,
+        "unit": "ml"
+      },
+      {
+        "id": "milk",
+        "name": "молока или воды",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "id": "soda",
+        "name": "соды",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "id": "vanilla",
+        "name": "ванильного экстракта",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "id": "salt",
+        "name": "соли",
+        "amount": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "cinnamon",
+        "name": "корицы",
+        "amount": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "flour",
+        "name": "цельнозерновой муки",
+        "amount": 198,
+        "unit": "g",
+        "density": 0.47
+      },
+      {
+        "id": "oats",
+        "name": "овсяных хлопьев",
+        "amount": 33,
+        "unit": "g",
+        "density": 0.4,
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Разогрейте духовку до 165 °C. Соедините {{oil}} и {{honey}}.",
+      "Добавьте {{eggs}}, {{banana}}, {{milk}}, затем {{soda}}, {{vanilla}}, {{salt}} и {{cinnamon}}.",
+      "Всыпьте {{flour}} и, по желанию, {{oats}}. Перемешайте до объединения ингредиентов, не дольше.",
+      "Разложите по 12 формочкам. Выпекайте около 23–25 минут, пока шпажка не выходит без сырого теста."
+    ],
+    "tip": "Для этого рецепта нужны очень спелые бананы. Не перегревайте духовку: мёд быстрее темнеет.",
+    "reviewStatus": "source-checked"
+  },
+  {
+    "slug": "yablochnye-maffiny",
+    "title": "Яблочные маффины с корицей",
+    "category": "Маффины",
+    "subtitle": "Тёртое яблоко, кусочки яблок и яблочное пюре в одном тесте.",
+    "image": "apple.webp",
+    "servings": 12,
+    "servingUnit": "шт.",
+    "prepMinutes": 15,
+    "bakeMinutes": 16,
+    "ovenC": 220,
+    "sourceName": "Cookie and Kate",
+    "sourceUrl": "https://cookieandkate.com/healthy-apple-muffins-recipe/",
+    "tags": [
+      "Цельнозерновая",
+      "Без сливочного масла",
+      "Без белого сахара",
+      "С фруктами"
+    ],
+    "ingredients": [
+      {
+        "id": "flour",
+        "name": "цельнозерновой муки",
+        "amount": 198,
+        "unit": "g",
+        "density": 0.47
+      },
+      {
+        "id": "bp",
+        "name": "разрыхлителя",
+        "amount": 1.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "cinnamon",
+        "name": "корицы",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "id": "soda",
+        "name": "соды",
+        "amount": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "salt",
+        "name": "соли",
+        "amount": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "apple1",
+        "name": "тёртого яблока",
+        "amount": 240,
+        "unit": "ml"
+      },
+      {
+        "id": "apple2",
+        "name": "нарезанного яблока",
+        "amount": 240,
+        "unit": "ml"
+      },
+      {
+        "id": "oil",
+        "name": "оливкового или кокосового масла",
+        "amount": 80,
+        "unit": "ml"
+      },
+      {
+        "id": "syrup",
+        "name": "кленового сиропа",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "id": "eggs",
+        "name": "яйца",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "id": "yogurt",
+        "name": "греческого йогурта",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "id": "puree",
+        "name": "яблочного пюре без сахара",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "id": "vanilla",
+        "name": "ванильного экстракта",
+        "amount": 1,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "Разогрейте духовку до 220 °C. Смешайте {{flour}}, {{bp}}, {{cinnamon}}, {{soda}} и {{salt}}.",
+      "Добавьте {{apple1}} и {{apple2}}. Слишком сочное яблоко слегка отожмите.",
+      "В отдельной миске взбейте {{oil}}, {{syrup}}, {{eggs}}, {{yogurt}}, {{puree}} и {{vanilla}}.",
+      "Соедините смеси, распределите по 12 ячейкам формы и выпекайте 13–16 минут до готовности."
+    ],
+    "tip": "Оригинальный автор рекомендует снизить температуру до 165 °C и печь около 23–25 минут, если вместо кленового сиропа использовать мёд.",
+    "reviewStatus": "source-checked"
+  },
+  {
+    "slug": "chernichnye-maffiny",
+    "title": "Цельнозерновые маффины с черникой",
+    "category": "Маффины",
+    "subtitle": "Нежные маффины со свежими или замороженными ягодами.",
+    "image": "blueberry.webp",
+    "servings": 12,
+    "servingUnit": "шт.",
+    "prepMinutes": 10,
+    "bakeMinutes": 20,
+    "ovenC": 205,
+    "sourceName": "King Arthur Baking",
+    "sourceUrl": "https://www.kingarthurbaking.com/recipes/whole-wheat-blueberry-muffins-recipe",
+    "tags": [
+      "Цельнозерновая",
+      "Без сливочного масла",
+      "С фруктами"
+    ],
+    "ingredients": [
+      {
+        "id": "flour",
+        "name": "цельнозерновой муки",
+        "amount": 283,
+        "unit": "g",
+        "density": 0.47
+      },
+      {
+        "id": "sugar",
+        "name": "коричневого сахара",
+        "amount": 213,
+        "unit": "g",
+        "density": 0.84
+      },
+      {
+        "id": "salt",
+        "name": "соли",
+        "amount": 0.75,
+        "unit": "tsp"
+      },
+      {
+        "id": "bp",
+        "name": "разрыхлителя",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "id": "soda",
+        "name": "соды",
+        "amount": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "cinnamon",
+        "name": "корицы",
+        "amount": 0.5,
+        "unit": "tsp",
+        "optional": true
+      },
+      {
+        "id": "berries",
+        "name": "черники",
+        "amount": 128,
+        "unit": "g",
+        "density": 0.52
+      },
+      {
+        "id": "vanilla",
+        "name": "ванильного экстракта",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "id": "oil",
+        "name": "растительного масла",
+        "amount": 67,
+        "unit": "g",
+        "density": 0.92
+      },
+      {
+        "id": "yogurt",
+        "name": "пахты или натурального йогурта",
+        "amount": 340,
+        "unit": "g",
+        "density": 1
+      }
+    ],
+    "steps": [
+      "Разогрейте духовку до 205 °C. Смешайте {{flour}}, {{sugar}}, {{salt}}, {{bp}}, {{soda}} и {{cinnamon}}. Осторожно вмешайте {{berries}}.",
+      "Отдельно смешайте {{vanilla}}, {{oil}} и {{yogurt}}.",
+      "Влейте жидкие ингредиенты в сухие и быстро объедините. Распределите по 12 формочкам.",
+      "Выпекайте 18–20 минут, затем дайте постоять в форме 5 минут и перенесите на решётку."
+    ],
+    "tip": "Обратите внимание: это рецепт с коричневым сахаром, а не низкосахарная выпечка.",
+    "reviewStatus": "source-checked"
+  },
+  {
+    "slug": "tykvennye-maffiny",
+    "title": "Тыквенные маффины с овсяными хлопьями",
+    "category": "Маффины",
+    "subtitle": "Тыквенное пюре, пряности и цельные злаки — без сливочного масла.",
+    "image": "pumpkin.webp",
+    "servings": 12,
+    "servingUnit": "шт.",
+    "prepMinutes": 10,
+    "bakeMinutes": 23,
+    "ovenC": 165,
+    "sourceName": "Cookie and Kate",
+    "sourceUrl": "https://cookieandkate.com/healthy-maple-pumpkin-muffins/",
+    "tags": [
+      "Цельнозерновая",
+      "Без сливочного масла",
+      "Без белого сахара"
+    ],
+    "ingredients": [
+      {
+        "id": "oil",
+        "name": "кокосового или оливкового масла",
+        "amount": 80,
+        "unit": "ml"
+      },
+      {
+        "id": "syrup",
+        "name": "мёда или кленового сиропа",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "id": "eggs",
+        "name": "яйца",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "id": "pumpkin",
+        "name": "несладкого тыквенного пюре",
+        "amount": 240,
+        "unit": "ml"
+      },
+      {
+        "id": "milk",
+        "name": "молока",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "id": "spice",
+        "name": "смеси пряностей",
+        "amount": 2,
+        "unit": "tsp"
+      },
+      {
+        "id": "soda",
+        "name": "соды",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "id": "vanilla",
+        "name": "ванильного экстракта",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "id": "salt",
+        "name": "соли",
+        "amount": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "flour",
+        "name": "цельнозерновой муки",
+        "amount": 198,
+        "unit": "g",
+        "density": 0.47
+      },
+      {
+        "id": "oats",
+        "name": "овсяных хлопьев",
+        "amount": 33,
+        "unit": "g",
+        "density": 0.4
+      }
+    ],
+    "steps": [
+      "Разогрейте духовку до 165 °C. Размешайте {{oil}} и {{syrup}}.",
+      "Добавьте {{eggs}}, {{pumpkin}}, {{milk}}, {{spice}}, {{soda}}, {{vanilla}} и {{salt}}.",
+      "Всыпьте {{flour}} и {{oats}}; перемешайте до объединения.",
+      "Распределите по 12 формочкам и выпекайте приблизительно 22–25 минут."
+    ],
+    "tip": "Нужна обычная несладкая тыквенная мякоть в виде пюре, а не готовая сладкая начинка для пирога.",
+    "reviewStatus": "source-checked"
+  },
+  {
+    "slug": "maffiny-s-kabachkom",
+    "title": "Цельнозерновые маффины с кабачком",
+    "category": "Маффины",
+    "subtitle": "Кабачок делает тесто мягким; корица и мёд добавляют аромат.",
+    "image": "",
+    "servings": 12,
+    "servingUnit": "шт.",
+    "prepMinutes": 20,
+    "bakeMinutes": 19,
+    "ovenC": 205,
+    "sourceName": "Cookie and Kate",
+    "sourceUrl": "https://cookieandkate.com/healthy-zucchini-muffins-recipe/",
+    "tags": [
+      "Цельнозерновая",
+      "Без сливочного масла",
+      "Без белого сахара"
+    ],
+    "ingredients": [
+      {
+        "id": "nuts",
+        "name": "грецких орехов",
+        "amount": 80,
+        "unit": "g",
+        "density": 0.46,
+        "optional": true
+      },
+      {
+        "id": "oil",
+        "name": "оливкового масла",
+        "amount": 80,
+        "unit": "ml"
+      },
+      {
+        "id": "honey",
+        "name": "мёда",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "id": "eggs",
+        "name": "яйца",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "id": "kefir",
+        "name": "кефира или пахты",
+        "amount": 160,
+        "unit": "ml"
+      },
+      {
+        "id": "vanilla",
+        "name": "ванильного экстракта",
+        "amount": 2,
+        "unit": "tsp"
+      },
+      {
+        "id": "flour",
+        "name": "цельнозерновой муки",
+        "amount": 198,
+        "unit": "g",
+        "density": 0.47
+      },
+      {
+        "id": "cinnamon",
+        "name": "корицы",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "id": "bp",
+        "name": "разрыхлителя",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "id": "soda",
+        "name": "соды",
+        "amount": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "salt",
+        "name": "соли",
+        "amount": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "nutmeg",
+        "name": "мускатного ореха",
+        "amount": 0.25,
+        "unit": "tsp"
+      },
+      {
+        "id": "zucchini",
+        "name": "тёртого кабачка",
+        "amount": 360,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Разогрейте духовку до 205 °C. Если берёте {{nuts}}, подсушите их 4–5 минут.",
+      "Смешайте {{oil}}, {{honey}}, {{eggs}}, {{kefir}} и {{vanilla}}.",
+      "Отдельно соедините {{flour}}, {{cinnamon}}, {{bp}}, {{soda}}, {{salt}} и {{nutmeg}}.",
+      "Соедините обе смеси, добавьте слегка отжатые {{zucchini}} и орехи. Заполните 12 формочек.",
+      "Выпекайте 16–19 минут до сухой шпажки."
+    ],
+    "tip": "Кабачок слегка отожмите: избыток влаги меняет результат. Орехи — аллерген.",
+    "reviewStatus": "source-checked"
+  },
+  {
+    "slug": "zavtrak-maffiny",
+    "title": "Маффины с бананом, черникой и яблоком",
+    "category": "Маффины",
+    "subtitle": "Ягодно-фруктовый завтрак с овсяными хлопьями.",
+    "image": "blueberry.webp",
+    "servings": 12,
+    "servingUnit": "шт.",
+    "prepMinutes": 15,
+    "bakeMinutes": 30,
+    "ovenC": 180,
+    "sourceName": "BBC Good Food",
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/get-and-go-breakfast-muffins",
+    "tags": [
+      "Цельнозерновая",
+      "Без сливочного масла",
+      "Без белого сахара",
+      "С фруктами"
+    ],
+    "ingredients": [
+      {
+        "id": "eggs",
+        "name": "крупных яйца",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "id": "yogurt",
+        "name": "натурального йогурта",
+        "amount": 150,
+        "unit": "ml"
+      },
+      {
+        "id": "oil",
+        "name": "рапсового масла",
+        "amount": 50,
+        "unit": "ml"
+      },
+      {
+        "id": "apple",
+        "name": "яблочного пюре без сахара",
+        "amount": 100,
+        "unit": "g",
+        "density": 1
+      },
+      {
+        "id": "banana",
+        "name": "банан",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "id": "honey",
+        "name": "мёда",
+        "amount": 4,
+        "unit": "tbsp"
+      },
+      {
+        "id": "vanilla",
+        "name": "ванильного экстракта",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "id": "flour",
+        "name": "цельнозерновой муки",
+        "amount": 200,
+        "unit": "g",
+        "density": 0.47
+      },
+      {
+        "id": "oats",
+        "name": "овсяных хлопьев",
+        "amount": 50,
+        "unit": "g",
+        "density": 0.4
+      },
+      {
+        "id": "bp",
+        "name": "разрыхлителя",
+        "amount": 1.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "soda",
+        "name": "соды",
+        "amount": 1.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "cinnamon",
+        "name": "корицы",
+        "amount": 1.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "berries",
+        "name": "черники",
+        "amount": 100,
+        "unit": "g",
+        "density": 0.52
+      },
+      {
+        "id": "seeds",
+        "name": "смеси семечек",
+        "amount": 2,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      "Разогрейте духовку до 180 °C. Смешайте {{eggs}}, {{yogurt}}, {{oil}}, {{apple}}, размятый {{banana}}, {{honey}} и {{vanilla}}.",
+      "В другой миске смешайте {{flour}}, {{oats}}, {{bp}}, {{soda}} и {{cinnamon}}.",
+      "Соедините смеси, осторожно добавьте {{berries}}. Разложите по 12 формочкам и посыпьте {{seeds}}.",
+      "Выпекайте 25–30 минут, пока шпажка не станет выходить чистой."
+    ],
+    "tip": "Этот рецепт содержит мёд и натуральные сахара фруктов: «без белого сахара» не означает «без сахаров».",
+    "reviewStatus": "source-checked"
+  },
+  {
+    "slug": "bananovye-bez-yaic",
+    "title": "Банановые маффины без яиц и молока",
+    "category": "Маффины",
+    "subtitle": "Постная выпечка на растительном масле с сухофруктами.",
+    "image": "banana.webp",
+    "servings": 12,
+    "servingUnit": "шт.",
+    "prepMinutes": 10,
+    "bakeMinutes": 25,
+    "ovenC": 180,
+    "sourceName": "BBC Good Food",
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/vegan-banana-cupcakes",
+    "tags": [
+      "Без сливочного масла",
+      "Без яиц",
+      "Без молока",
+      "С фруктами"
+    ],
+    "ingredients": [
+      {
+        "id": "banana",
+        "name": "спелых бананов",
+        "amount": 225,
+        "unit": "g",
+        "density": 0.95
+      },
+      {
+        "id": "oil",
+        "name": "подсолнечного масла",
+        "amount": 50,
+        "unit": "ml"
+      },
+      {
+        "id": "sugar",
+        "name": "коричневого сахара",
+        "amount": 65,
+        "unit": "g",
+        "density": 0.84
+      },
+      {
+        "id": "flour",
+        "name": "обычной пшеничной муки",
+        "amount": 150,
+        "unit": "g",
+        "density": 0.5
+      },
+      {
+        "id": "bp",
+        "name": "разрыхлителя",
+        "amount": 2,
+        "unit": "tsp"
+      },
+      {
+        "id": "cinnamon",
+        "name": "корицы",
+        "amount": 2,
+        "unit": "tsp"
+      },
+      {
+        "id": "dried",
+        "name": "смеси сухофруктов и семян",
+        "amount": 50,
+        "unit": "g",
+        "density": 0.68
+      },
+      {
+        "id": "oats",
+        "name": "овсяных хлопьев",
+        "amount": 2,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      "Разогрейте духовку до 180 °C. Разомните {{banana}} и соедините с {{oil}} и {{sugar}}.",
+      "Всыпьте {{flour}}, {{bp}}, {{cinnamon}} и {{dried}}. Перемешайте до однородности.",
+      "Разложите по 10–12 формочкам, заполняя на три четверти; сверху добавьте {{oats}}.",
+      "Выпекайте примерно 25 минут до готовности середины."
+    ],
+    "tip": "В исходной версии обычная пшеничная мука. Не заменяйте её целиком на цельнозерновую без проверки.",
+    "reviewStatus": "source-checked"
+  },
+  {
+    "slug": "ovsyanoe-pechenye",
+    "title": "Овсяное печенье с ягодами и орехами",
+    "category": "Печенье",
+    "subtitle": "Мягкое печенье на миндальной пасте и овсяной муке, без яиц.",
+    "image": "oat.webp",
+    "servings": 12,
+    "servingUnit": "шт.",
+    "prepMinutes": 10,
+    "bakeMinutes": 24,
+    "ovenC": 175,
+    "sourceName": "Love and Lemons",
+    "sourceUrl": "https://www.loveandlemons.com/breakfast-cookies/",
+    "tags": [
+      "Без сливочного масла",
+      "Без яиц",
+      "Без молока",
+      "Без белого сахара",
+      "С фруктами"
+    ],
+    "ingredients": [
+      {
+        "id": "flax",
+        "name": "молотого льна",
+        "amount": 2,
+        "unit": "tbsp"
+      },
+      {
+        "id": "water",
+        "name": "тёплой воды",
+        "amount": 5,
+        "unit": "tbsp"
+      },
+      {
+        "id": "oatflour",
+        "name": "овсяной муки",
+        "amount": 120,
+        "unit": "g",
+        "density": 0.5
+      },
+      {
+        "id": "oats",
+        "name": "овсяных хлопьев",
+        "amount": 100,
+        "unit": "g",
+        "density": 0.4
+      },
+      {
+        "id": "almondflour",
+        "name": "миндальной муки",
+        "amount": 48,
+        "unit": "g",
+        "density": 0.4
+      },
+      {
+        "id": "lemon",
+        "name": "цедры лимона",
+        "amount": 0.5,
+        "unit": "tbsp"
+      },
+      {
+        "id": "bp",
+        "name": "разрыхлителя",
+        "amount": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "soda",
+        "name": "соды",
+        "amount": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "cinnamon",
+        "name": "корицы",
+        "amount": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "salt",
+        "name": "соли",
+        "amount": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "almondbutter",
+        "name": "миндальной пасты",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "id": "oil",
+        "name": "кокосового масла",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "id": "syrup",
+        "name": "кленового сиропа",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "id": "nuts",
+        "name": "грецких орехов",
+        "amount": 40,
+        "unit": "g",
+        "density": 0.46
+      },
+      {
+        "id": "berries",
+        "name": "ягод или изюма",
+        "amount": 100,
+        "unit": "g",
+        "density": 0.52
+      }
+    ],
+    "steps": [
+      "Разогрейте духовку до 175 °C. Смешайте {{flax}} и {{water}}, оставьте на 5 минут.",
+      "В отдельной миске соедините {{oatflour}}, {{oats}}, {{almondflour}}, {{lemon}}, {{bp}}, {{soda}}, {{cinnamon}} и {{salt}}.",
+      "Соедините {{almondbutter}}, {{oil}}, {{syrup}} и набухший лён. Вмешайте сухую смесь, затем {{nuts}} и {{berries}}.",
+      "Сформуйте 12 печений. Выпекайте 20–24 минуты; на противне остужайте не менее 10 минут."
+    ],
+    "tip": "Если есть аллергия на орехи, этот рецепт не подходит. Для безглютеновой версии требуются сертифицированные овсяные продукты.",
+    "reviewStatus": "source-checked"
+  },
+  {
+    "slug": "bananovyi-keks",
+    "title": "Банановый кекс с цельнозерновой мукой",
+    "category": "Кексы",
+    "subtitle": "Ароматный банановый кекс на растительном масле с корицей.",
+    "image": "bread.webp",
+    "servings": 10,
+    "servingUnit": "ломтиков",
+    "prepMinutes": 10,
+    "bakeMinutes": 75,
+    "ovenC": 175,
+    "sourceName": "King Arthur Baking",
+    "sourceUrl": "https://www.kingarthurbaking.com/recipes/whole-grain-banana-bread-recipe",
+    "tags": [
+      "Цельнозерновая",
+      "Без сливочного масла",
+      "С фруктами"
+    ],
+    "ingredients": [
+      {
+        "id": "banana",
+        "name": "бананового пюре",
+        "amount": 454,
+        "unit": "g",
+        "density": 0.95
+      },
+      {
+        "id": "oil",
+        "name": "растительного масла",
+        "amount": 99,
+        "unit": "g",
+        "density": 0.92
+      },
+      {
+        "id": "sugar",
+        "name": "коричневого сахара",
+        "amount": 213,
+        "unit": "g",
+        "density": 0.84
+      },
+      {
+        "id": "eggs",
+        "name": "яйца",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "id": "vanilla",
+        "name": "ванильного экстракта",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "id": "white",
+        "name": "пшеничной муки",
+        "amount": 120,
+        "unit": "g",
+        "density": 0.5
+      },
+      {
+        "id": "whole",
+        "name": "цельнозерновой муки",
+        "amount": 113,
+        "unit": "g",
+        "density": 0.47
+      },
+      {
+        "id": "soda",
+        "name": "соды",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "id": "bp",
+        "name": "разрыхлителя",
+        "amount": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "id": "salt",
+        "name": "соли",
+        "amount": 0.75,
+        "unit": "tsp"
+      },
+      {
+        "id": "cinnamon",
+        "name": "корицы",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "id": "nuts",
+        "name": "грецких орехов",
+        "amount": 57,
+        "unit": "g",
+        "density": 0.46,
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Разогрейте духовку до 175 °C. Смешайте {{banana}}, {{oil}}, {{sugar}}, {{eggs}} и {{vanilla}}.",
+      "Добавьте {{white}}, {{whole}}, {{soda}}, {{bp}}, {{salt}}, {{cinnamon}} и, по желанию, {{nuts}}.",
+      "Выложите в прямоугольную форму 23 × 13 см. Выпекайте 60–75 минут, при необходимости прикройте фольгой.",
+      "Остудите 15 минут в форме и полностью — на решётке перед нарезкой."
+    ],
+    "tip": "Коричневого сахара здесь немало: это не низкосахарный рецепт, а альтернатива кексу на сливочном масле.",
+    "reviewStatus": "source-checked"
+  },
+  {
+    "slug": "morkovnyi-pirog",
+    "title": "Морковный пряный пирог с бататом",
+    "category": "Пироги",
+    "subtitle": "Морковь, батат и изюм дают влажную структуру без сливочного масла.",
+    "image": "",
+    "servings": 12,
+    "servingUnit": "ломтиков",
+    "prepMinutes": 20,
+    "bakeMinutes": 30,
+    "ovenC": 180,
+    "sourceName": "BBC Good Food",
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/lighter-spiced-carrot-cake",
+    "tags": [
+      "Цельнозерновая",
+      "Без сливочного масла",
+      "С фруктами"
+    ],
+    "ingredients": [
+      {
+        "id": "oil",
+        "name": "рапсового масла",
+        "amount": 125,
+        "unit": "ml"
+      },
+      {
+        "id": "flour",
+        "name": "цельнозерновой муки",
+        "amount": 300,
+        "unit": "g",
+        "density": 0.47
+      },
+      {
+        "id": "bp",
+        "name": "разрыхлителя",
+        "amount": 2,
+        "unit": "tsp"
+      },
+      {
+        "id": "soda",
+        "name": "соды",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "id": "spice",
+        "name": "смеси пряностей",
+        "amount": 1,
+        "unit": "tbsp"
+      },
+      {
+        "id": "sugar",
+        "name": "коричневого сахара",
+        "amount": 100,
+        "unit": "g",
+        "density": 0.84
+      },
+      {
+        "id": "carrot",
+        "name": "тёртой моркови",
+        "amount": 140,
+        "unit": "g",
+        "density": 0.55
+      },
+      {
+        "id": "sweet",
+        "name": "тёртого батата",
+        "amount": 140,
+        "unit": "g",
+        "density": 0.6
+      },
+      {
+        "id": "raisins",
+        "name": "изюма",
+        "amount": 200,
+        "unit": "g",
+        "density": 0.7
+      },
+      {
+        "id": "eggs",
+        "name": "яйца",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "id": "agave",
+        "name": "сиропа агавы",
+        "amount": 4,
+        "unit": "tbsp"
+      },
+      {
+        "id": "juice",
+        "name": "сока двух апельсинов",
+        "amount": 120,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Разогрейте духовку до 180 °C. Смешайте {{flour}}, {{bp}}, {{soda}}, {{spice}} и {{sugar}}.",
+      "Добавьте {{carrot}}, {{sweet}} и {{raisins}}.",
+      "Отдельно взбейте {{eggs}}, {{oil}}, {{agave}} и {{juice:0.5}}. Влейте в тесто.",
+      "Переложите в форму 20 × 30 см. Выпекайте 25–30 минут. Проколите верх и полейте оставшимися {{juice:0.5}}."
+    ],
+    "tip": "В оригинальном рецепте также предлагается творожный крем; здесь опубликована только основа пирога. 120 мл сока — ориентир, количество сока из двух апельсинов меняется.",
+    "reviewStatus": "source-checked"
+  },
+  {
+    "slug": "apelsinovye-maffiny",
+    "title": "Апельсиново-банановые маффины",
+    "category": "Маффины",
+    "subtitle": "Цельнозерновая мука, отруби и аромат апельсина.",
+    "image": "banana.webp",
+    "servings": 12,
+    "servingUnit": "шт.",
+    "prepMinutes": 15,
+    "bakeMinutes": 25,
+    "ovenC": 205,
+    "sourceName": "Alberta Health Services",
+    "sourceUrl": "https://www.albertahealthservices.ca/assets/info/nutrition/if-nfs-orange-banana-muffins.pdf",
+    "tags": [
+      "Цельнозерновая",
+      "Без сливочного масла",
+      "С фруктами"
+    ],
+    "ingredients": [
+      {
+        "id": "whole",
+        "name": "цельнозерновой муки",
+        "amount": 113,
+        "unit": "g",
+        "density": 0.47
+      },
+      {
+        "id": "white",
+        "name": "пшеничной муки",
+        "amount": 120,
+        "unit": "g",
+        "density": 0.5
+      },
+      {
+        "id": "bran",
+        "name": "пшеничных отрубей",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "id": "soda",
+        "name": "соды",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "id": "bp",
+        "name": "разрыхлителя",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "id": "salt",
+        "name": "соли",
+        "amount": 0.25,
+        "unit": "tsp"
+      },
+      {
+        "id": "banana",
+        "name": "размятого банана",
+        "amount": 250,
+        "unit": "ml"
+      },
+      {
+        "id": "orange",
+        "name": "концентрата апельсинового сока",
+        "amount": 125,
+        "unit": "ml"
+      },
+      {
+        "id": "sugar",
+        "name": "коричневого сахара",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "id": "oil",
+        "name": "растительного масла",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "id": "milk",
+        "name": "молока",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "id": "egg",
+        "name": "яйцо",
+        "amount": 1,
+        "unit": "pcs"
+      }
+    ],
+    "steps": [
+      "Разогрейте духовку до 205 °C. Смешайте {{whole}}, {{white}}, {{bran}}, {{soda}}, {{bp}} и {{salt}}.",
+      "В другой миске соедините {{banana}}, {{orange}}, {{sugar}}, {{oil}}, {{milk}} и {{egg}}.",
+      "Соедините две смеси, разложите по 12 формочкам и выпекайте 20–25 минут до золотистой корочки."
+    ],
+    "tip": "Нужен именно концентрат апельсинового сока, не обычный сок; иначе меняется вкус и количество жидкости.",
+    "reviewStatus": "source-checked"
+  }
+]
