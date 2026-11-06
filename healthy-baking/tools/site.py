@@ -24,7 +24,7 @@ LIMIT = 32 * 1024 * 1024
 MAX_IMAGE = 2 * 1024 * 1024
 RECIPE_FIELDS = {'id', 'title', 'description', 'intro', 'kind', 'tags', 'servings', 'prep', 'bake', 'extra',
                  'temp', 'mode', 'pan', 'panSize', 'ingredients', 'steps', 'doneness', 'storage',
-                 'allergens', 'tips', 'imageAlt', 'sourceKey', 'tracks', 'difficulty', 'pantryExtra', 'timeNote'}
+                 'allergens', 'tips', 'imageAlt', 'sourceKey', 'tracks', 'difficulty', 'pantryExtra', 'timeNote', 'mealTypes', 'cookingMethod', 'cook'}
 INGREDIENT_FIELDS = {'id', 'label', 'product', 'amount', 'unit', 'density', 'optional', 'note'}
 
 
@@ -78,18 +78,32 @@ def validate_recipe(r):
     require('intro' not in r or clean_text(r['intro']), 'Проверьте вводный текст.')
     require(r.get('mode') is None or clean_text(r['mode']), 'Некорректный режим духовки.')
     require(r.get('timeNote') is None or clean_text(r['timeNote']), 'Некорректное пояснение о времени.')
-    require(isinstance(r.get('kind'), str) and r['kind'] in KINDS, 'Неизвестный вид выпечки.')
+    require(isinstance(r.get('kind'), str) and r['kind'] in KINDS, 'Неизвестный вид блюда.')
     tags = r.get('tags')
     require(string_list(tags) and len(tags) == len(set(tags)) and set(tags) <= TAG_NAMES.keys(), 'Неизвестные или повторяющиеся теги.')
     tracks = r.get('tracks')
     require(string_list(tracks, 1, 1) and tracks[0] in TRACKS, 'Укажите ровно одну группу: простые или необычные рецепты.')
     require(isinstance(r.get('difficulty'), str) and r['difficulty'] in DIFFICULTIES, 'Укажите сложность.')
     require(string_list(r.get('pantryExtra', []), 0, 8) and all(len(p) <= 100 for p in r.get('pantryExtra', [])), 'Проверьте дополнительные продукты.')
-    require(integer(r.get('servings'), 1, 240) and integer(r.get('temp'), 90, 290), 'Неверное число порций или температура.')
+    require(integer(r.get('servings'), 1, 240), 'Неверное число порций.')
     require(all(r.get(key) is None or integer(r[key], 1, 20000) for key in ('prep', 'extra')), 'Неверное время.')
-    bake = r.get('bake')
-    require(isinstance(bake, list) and len(bake) == 2 and all(integer(x, 1, 360) for x in bake)
-            and bake[0] <= bake[1], 'Неверный диапазон времени выпечки.')
+    meals = r.get('mealTypes', [])
+    require(string_list(meals, 0, 3) and len(meals) == len(set(meals))
+            and set(meals) <= {'breakfast', 'lunch', 'dinner'}, 'Некорректные приёмы пищи.')
+    method = r.get('cookingMethod', 'oven')
+    require(method in {'oven', 'hob', 'no-cook', 'microwave', 'mixed'}, 'Некорректный способ приготовления.')
+    def valid_duration(value):
+        return (isinstance(value, list) and len(value) == 2 and
+                all(integer(x, 1, 360) for x in value) and value[0] <= value[1])
+    if method == 'oven':
+        require(integer(r.get('temp'), 90, 290) and valid_duration(r.get('bake')),
+                'Для духовки нужны температура и время выпечки.')
+        require(r.get('cook') is None, 'Для духовки используйте bake, не cook.')
+    else:
+        require(r.get('temp') is None and r.get('bake') is None,
+                'У блюд без духовки не должно быть температуры и времени выпечки.')
+        require(r.get('cook') is None if method == 'no-cook' else valid_duration(r.get('cook')),
+                'Для приготовления укажите время, а для блюд без нагрева оставьте cook пустым.')
     if 'panSize' in r:
         shape = r['panSize']
         require(isinstance(shape, dict) and shape.get('kind') in ('round', 'rectangle'), 'Неверный тип формы.')
