@@ -350,13 +350,16 @@ def recipe(r, site, related, lunches):
               'recipeInstructions':[{'@type':'HowToStep','text':step_text(s)} for s in r['steps']]}
     if r.get('prep') is not None and not total_only:
         schema['prepTime'] = f'PT{r["prep"]}M'
-    # Google recommends cookTime together with prepTime. Never invent an
-    # unknown preparation duration solely to complete structured data.
-    if duration and r.get('prep') is not None:
+    # Yandex uses cookTime when totalTime is unavailable. A known cooking
+    # duration is valid even when preparation time has not been measured.
+    # Never invent missing prepTime or totalTime to complete structured data.
+    if duration:
         schema['cookTime'] = f'PT{duration[1]}M'
     if r.get('prep') is not None:
         schema['totalTime'] = f'PT{r["prep"] + (duration[1] if duration else 0) + (r.get("extra") or 0)}M'
     if site:
+        schema['@id'] = site+path+'#recipe'
+        schema['mainEntityOfPage'] = site+path
         schema['url'] = site+path
     return layout(r['title'] + ' — рецепт', r['description'], path, site, body, picture=f'/images/{r["id"]}.webp',
                   schema=schema, section='lunches' if lunch else '', lunches=lunches)

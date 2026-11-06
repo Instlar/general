@@ -235,13 +235,33 @@ class SiteTest(unittest.TestCase):
             schemas = [json.loads(v) for v in re.findall(r'<script type="application/ld\+json">([^<]*)</script>', page)]
             by_type = {schema['@type']: schema for schema in schemas}
             self.assertEqual(set(by_type), {'Recipe', 'BreadcrumbList'})
-            self.assertEqual(by_type['Recipe']['description'], description)
-            # An unknown preparation duration must not be fabricated in JSON-LD.
-            if (recipe.get('bake') or recipe.get('cook')) and recipe.get('prep') is not None:
-                self.assertIn('cookTime', by_type['Recipe'])
-                self.assertIn('prepTime', by_type['Recipe'])
+            marked = by_type['Recipe']
+            self.assertEqual(marked['description'], description)
+            canonical = 'https://example.com/recipes/' + recipe['id'] + '/'
+            self.assertEqual(marked['@id'], canonical + '#recipe')
+            self.assertEqual(marked['mainEntityOfPage'], canonical)
+            self.assertEqual(marked['url'], canonical)
+            self.assertEqual(marked['name'], recipe['title'])
+            self.assertEqual(marked['recipeYield'], str(recipe['servings']))
+            self.assertEqual(marked['image'], 'https://example.com/images/' + recipe['id'] + '.webp')
+            self.assertEqual(len(marked['recipeIngredient']), len(recipe['ingredients']))
+            self.assertEqual(len(marked['recipeInstructions']), len(recipe['steps']))
+            self.assertTrue(all(step.get('@type') == 'HowToStep' and step.get('text')
+                                for step in marked['recipeInstructions']))
+            self.assertNotIn('aggregateRating', marked)
+            self.assertNotIn('nutrition', marked)
+            # Publish known cooking time even when preparation time is unknown;
+            # do not invent prepTime or totalTime.
+            method = recipe.get('cookingMethod', 'oven')
+            duration = recipe.get('bake') if method == 'oven' else recipe.get('cook')
+            if duration:
+                self.assertEqual(marked['cookTime'], f'PT{duration[1]}M')
             else:
-                self.assertNotIn('cookTime', by_type['Recipe'])
+                self.assertNotIn('cookTime', marked)
+            if recipe.get('prep') is not None and (duration or method == 'no-cook'):
+                self.assertEqual(marked['prepTime'], f'PT{recipe["prep"]}M')
+            else:
+                self.assertNotIn('prepTime', marked)
             self.assertEqual(by_type['BreadcrumbList']['itemListElement'][-1]['item'],
                              'https://example.com/recipes/' + recipe['id'] + '/')
             if recipe.get('prep') is None:
