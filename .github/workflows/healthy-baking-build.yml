@@ -1,0 +1,49 @@
+name: Build healthy baking static pages
+
+on:
+  push:
+    branches:
+      - healthy-baking-v1
+    paths:
+      - 'healthy-baking/content/recipes.json'
+      - 'healthy-baking/content/seo-copy.json'
+      - 'healthy-baking/content/site.json'
+      - 'healthy-baking/content/images/**'
+      - 'healthy-baking/tools/**'
+      - 'healthy-baking/static/**'
+      - 'healthy-baking/tests/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: baking-build-healthy-baking-v1
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/healthy-baking-v1'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: healthy-baking-v1
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build static catalog
+        run: python healthy-baking/tools/site.py build
+      - name: Verify recipes and generated pages
+        run: python healthy-baking/tests/test_site.py
+      - name: Commit built static site
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A healthy-baking/public
+          if ! git diff --cached --quiet; then
+            git commit -m "build(baking): regenerate static recipe pages"
+            git push origin HEAD:healthy-baking-v1
+          fi
