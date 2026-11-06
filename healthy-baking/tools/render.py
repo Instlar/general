@@ -7,7 +7,7 @@ from pathlib import Path
 
 TITLE = 'Здоровая выпечка'
 KINDS = {'cake': 'Пироги', 'muffin': 'Маффины', 'cookie': 'Печенье', 'casserole': 'Запеканки', 'oats': 'Запечённая овсянка',
-         'bread': 'Кексы', 'bar': 'Батончики', 'crumble': 'Крамблы и коблеры'}
+         'bread': 'Кексы', 'scone': 'Сконы', 'bar': 'Батончики', 'crumble': 'Крамблы и коблеры'}
 TAGS = {
     'ingredient': ('По ингредиентам', {'whole-wheat': 'Цельнозерновая мука', 'oat': 'Овёс',
         'apple': 'Яблоки', 'banana': 'Бананы', 'berries': 'Ягоды', 'dates': 'Финики',
