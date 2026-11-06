@@ -85,6 +85,8 @@ class SiteTest(unittest.TestCase):
         for path, page in pages.items():
             self.assertNotIn('rel="canonical"', path.read_text(encoding='utf-8'))
             for url in page.links:
+                if url == 'https://api.tugarin-game.ru/api/site-analytics/tracker.js':
+                    continue  # The sole explicitly approved first-party analytics script.
                 parsed = urlsplit(url)
                 self.assertFalse(parsed.netloc or parsed.scheme, (path, url))
                 relative = parsed.path.lstrip('/')
