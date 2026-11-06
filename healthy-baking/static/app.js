@@ -27,6 +27,8 @@ function volumeText(ml, cup) {
 }
 
 function formatAmount(ingredient, factor, volume, cup) {
+  if (ingredient.unit === 'taste') return 'по вкусу';
+  if (ingredient.unit === 'as_needed') return 'по необходимости';
   const amount = ingredient.amount * factor;
   const unit = ingredient.unit;
   if (volume && (unit === 'ml' || (unit === 'g' && ingredient.density))) {

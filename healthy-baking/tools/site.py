@@ -127,7 +127,7 @@ def validate_recipe(r):
         require(isinstance(i, dict) and set(i) <= INGREDIENT_FIELDS and isinstance(i.get('id'), str)
                 and SLUG.fullmatch(i['id']) and i['id'] not in ids, 'Неверный или повторяющийся идентификатор ингредиента.')
         require(clean_text(i.get('label')) and isinstance(i.get('unit'), str) and i['unit'] in UNIT
-                and amount(i.get('amount'), 0.001, 100000), f'Проверьте количество и единицы {i["id"]}.')
+                and (amount(i.get('amount'), 0.001, 100000) if i['unit'] not in {'taste', 'as_needed'} else i.get('amount') is None), f'Проверьте количество и единицы {i["id"]}.')
         require(clean_text(i.get('product')) and len(i['product']) <= 100, f'Укажите название продукта для подбора: {i["id"]}.')
         require('density' not in i or (i['unit'] == 'g' and amount(i['density'], 0.02, 4)), f'Неверная плотность {i["id"]}.')
         require('optional' not in i or type(i['optional']) is bool, 'Некорректная пометка необязательного ингредиента.')
