@@ -1,0 +1,96 @@
+{
+  "batch": "2026-11-06-baking-02",
+  "publicationStatus": "editorial-pending-images",
+  "notes": "Original Russian adaptations and WebP images are prepared in a local import package. Do not place records in recipes.json without corresponding content/images/<id>.webp and public build. Source URLs are for internal attribution and duplication review. These recipes have not undergone kitchen testing.",
+  "imageStyle": "Photorealistic bright natural-window food photography, white plates and warm linen, matching composition and ingredients. AI illustrations are not kitchen test photos.",
+  "recipes": [
+    {
+      "id": "cranberry-orange-glazed-loaf",
+      "title": "Клюквенно-апельсиновый кекс с глазурью",
+      "sourceUrl": "https://www.kingarthurbaking.com/recipes/orange-cranberry-bread-recipe",
+      "author": "Molly Marzalek-Kelly / King Arthur Baking",
+      "sourceKey": "2c1c44985a",
+      "image": "cranberry-orange-glazed-loaf.webp"
+    },
+    {
+      "id": "pear-spelt-yogurt-cake",
+      "title": "Грушевый пирог из полбяной муки на йогурте",
+      "sourceUrl": "https://www.bbcgoodfood.com/recipes/pear-yogurt-spelt-cake",
+      "author": "Ailsa Burt / BBC Good Food",
+      "sourceKey": "2fe709769a",
+      "image": "pear-spelt-yogurt-cake.webp"
+    },
+    {
+      "id": "benne-sesame-crisps",
+      "title": "Тонкое хрустящее кунжутное печенье бенне",
+      "sourceUrl": "https://www.kingarthurbaking.com/recipes/benne-wafers-recipe",
+      "author": "King Arthur Test Kitchen",
+      "sourceKey": "4a7f17d2ac",
+      "image": "benne-sesame-crisps.webp"
+    },
+    {
+      "id": "four-ingredient-peanut-butter-cookies",
+      "title": "Арахисовое печенье из четырех ингредиентов",
+      "sourceUrl": "https://www.bbcgoodfood.com/recipes/peanut-butter-cookies",
+      "author": "Cassie Best / BBC Good Food",
+      "sourceKey": "0adad35ae3",
+      "image": "four-ingredient-peanut-butter-cookies.webp"
+    },
+    {
+      "id": "carrot-walnut-raisin-muffins",
+      "title": "Морковные маффины с изюмом и грецкими орехами",
+      "sourceUrl": "https://www.kingarthurbaking.com/recipes/carrot-muffins-recipe",
+      "author": "PJ Hamel / King Arthur Baking",
+      "sourceKey": "bdb730bf2f",
+      "image": "carrot-walnut-raisin-muffins.webp"
+    },
+    {
+      "id": "blood-orange-poppy-muffins",
+      "title": "Маффины с красным апельсином и маковой глазурью",
+      "sourceUrl": "https://www.bbcgoodfood.com/recipes/blood-orange-poppy-drizzle-muffins",
+      "author": "Sarah Cook / BBC Good Food",
+      "sourceKey": "63d9af40c8",
+      "image": "blood-orange-poppy-muffins.webp"
+    },
+    {
+      "id": "apple-pecan-semolina-galette",
+      "title": "Яблочная галета с пеканом на тесте с манкой",
+      "sourceUrl": "https://www.kingarthurbaking.com/recipes/apple-galette-recipe?pagewanted=all",
+      "author": "King Arthur Test Kitchen",
+      "sourceKey": "9b7115e33b",
+      "image": "apple-pecan-semolina-galette.webp"
+    },
+    {
+      "id": "lemon-blueberry-yogurt-scones",
+      "title": "Лимонные сконы с черникой на йогурте",
+      "sourceUrl": "https://www.kingarthurbaking.com/recipes/lemon-blueberry-scones-recipe",
+      "author": "King Arthur Test Kitchen",
+      "sourceKey": "a0fb0bb8d2",
+      "image": "lemon-blueberry-yogurt-scones.webp"
+    },
+    {
+      "id": "rhubarb-cinnamon-crumble-cake",
+      "title": "Пирог с ревенем и коричной крошкой",
+      "sourceUrl": "https://www.bbcgoodfood.com/recipes/2985677/rhubarb-crumble-cake",
+      "author": "Sarah Cook / BBC Good Food",
+      "sourceKey": "79acc62094",
+      "image": "rhubarb-cinnamon-crumble-cake.webp"
+    },
+    {
+      "id": "orange-dried-apricot-tea-loaf",
+      "title": "Апельсиновый кекс с курагой и сахарной глазурью",
+      "sourceUrl": "https://www.bbcgoodfoodme.com/recipes/orange-apricot-loaf-cake/",
+      "author": "Ann Turner / BBC Good Food",
+      "sourceKey": "f3c9c88d03",
+      "image": "orange-dried-apricot-tea-loaf.webp"
+    },
+    {
+      "id": "strawberry-almond-yogurt-muffins",
+      "title": "Клубничные маффины с миндалем на йогурте",
+      "sourceUrl": "https://www.bbcgoodfood.com/recipes/strawberry-almond-yogurt-muffins",
+      "author": "Cassie Best / BBC Good Food",
+      "sourceKey": "b6d456e8f5",
+      "image": "strawberry-almond-yogurt-muffins.webp"
+    }
+  ]
+}
