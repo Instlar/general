@@ -176,7 +176,10 @@ class SiteTest(unittest.TestCase):
             by_type = {schema['@type']: schema for schema in schemas}
             self.assertEqual(set(by_type), {'Recipe', 'BreadcrumbList'})
             self.assertEqual(by_type['Recipe']['description'], description)
-            self.assertIn('cookTime', by_type['Recipe'])
+            if recipe.get('cookingMethod', 'oven') != 'no-cook':
+                self.assertIn('cookTime', by_type['Recipe'])
+            else:
+                self.assertNotIn('cookTime', by_type['Recipe'])
             self.assertEqual(by_type['BreadcrumbList']['itemListElement'][-1]['item'],
                              'https://example.com/recipes/' + recipe['id'] + '/')
             if recipe.get('prep') is None:
