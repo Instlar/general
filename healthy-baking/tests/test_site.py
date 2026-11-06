@@ -245,6 +245,11 @@ class SiteTest(unittest.TestCase):
         self.assertIn('<dt>Приготовление</dt><dd>3 мин</dd>', recipe_page)
         self.assertNotIn('<dt>Духовка</dt>', recipe_page)
         self.assertIn('href="/breakfasts/"', recipe_page)
+        self.assertIn('href="/collections/make-ahead/"', breakfast)
+        make_ahead = (self.work / 'public' / 'collections' / 'make-ahead' / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('apple-banana-bircher-muesli', make_ahead)
+        self.assertIn('raspberry-peanut-overnight-oats', make_ahead)
+        self.assertNotIn('pear-walnut-yogurt-porridge', make_ahead)
 
 
 if __name__ == '__main__':

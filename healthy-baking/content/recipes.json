@@ -8661,7 +8661,8 @@
       "no-eggs",
       "no-added-sugar",
       "breakfast",
-      "no-mixer"
+      "no-mixer",
+      "make-ahead"
     ],
     "ingredients": [
       {
@@ -9091,7 +9092,8 @@
       "no-eggs",
       "breakfast",
       "small-batch",
-      "no-mixer"
+      "no-mixer",
+      "make-ahead"
     ],
     "ingredients": [
       {
