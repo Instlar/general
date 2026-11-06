@@ -167,6 +167,19 @@ def validate_domain(value):
 def build(content, public):
     recipes = json.loads((content / 'recipes.json').read_text(encoding='utf-8'))
     validate_catalog(recipes)
+    seo_file = content / 'seo-copy.json'
+    if seo_file.is_file():
+        seo_copy = json.loads(seo_file.read_text(encoding='utf-8'))
+        check(isinstance(seo_copy, dict) and set(seo_copy) == {'recipes'}, 'Некорректный формат SEO-описаний.')
+        descriptions = seo_copy['recipes']
+        check(isinstance(descriptions, dict), 'Описания должны быть объектом.')
+        ids = {recipe['id'] for recipe in recipes}
+        check(set(descriptions) <= ids, 'SEO-описание с неизвестным идентификатором.')
+        for recipe in recipes:
+            if recipe['id'] in descriptions:
+                desc = descriptions[recipe['id']]
+                check(isinstance(desc, str) and 80 <= len(desc) <= 230, 'Некорректная длина SEO-описания.')
+                recipe['description'] = desc
     config = json.loads((content / 'site.json').read_text(encoding='utf-8'))
     domain = validate_domain(config.get('siteUrl', ''))
     shutil.copytree(ROOT / 'static', public)

@@ -5,7 +5,7 @@ import json
 import re
 from pathlib import Path
 
-TITLE = 'Здоровая выпечка'
+TITLE = 'Пеки здорово'
 KINDS = {'cake': 'Пироги', 'muffin': 'Маффины', 'cookie': 'Печенье', 'oats': 'Запечённая овсянка',
          'bread': 'Кексы', 'bar': 'Батончики', 'crumble': 'Крамблы и коблеры'}
 TAGS = {
@@ -76,7 +76,18 @@ def layout(title, description, path, site, body, *, picture=None, schema=None, s
     if picture:
         meta += f'<meta property="og:image" content="{e(site + picture)}">'
     structured = f'<script type="application/ld+json">{script_json(schema)}</script>' if schema else ''
-    page_title = f'{title} · {TITLE}' if title != TITLE else f'{TITLE} — простые домашние рецепты'
+    if site and path != '/':
+        trail = [{'@type': 'ListItem', 'position': 1, 'name': TITLE, 'item': site + '/'}]
+        if path.startswith('/recipes/') and path != '/recipes/':
+            trail.append({'@type': 'ListItem', 'position': 2, 'name': 'Рецепты', 'item': site + '/recipes/'})
+        elif path.startswith('/collections/') and path != '/collections/':
+            trail.append({'@type': 'ListItem', 'position': 2, 'name': 'Подборки', 'item': site + '/collections/'})
+        elif path.startswith('/guides/') and path != '/guides/':
+            trail.append({'@type': 'ListItem', 'position': 2, 'name': 'Справочник', 'item': site + '/guides/'})
+        trail.append({'@type': 'ListItem', 'position': len(trail) + 1, 'name': title.removesuffix(' — рецепт'), 'item': site + path})
+        breadcrumbs = {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': trail}
+        structured += f'<script type="application/ld+json">{script_json(breadcrumbs)}</script>'
+    page_title = f'{title} · {TITLE}' if title != TITLE else f'{TITLE} — простые рецепты здоровой выпечки'
     nav = ''.join(f'<a href="{href}"'+(' aria-current="page"' if section == key else '')+f'>{label}</a>'
                   for key, href, label in [('catalog','/recipes/','Рецепты'),('collections','/collections/','Подборки'),('guides','/guides/','Справочник')])
     og_type = 'article' if schema and schema.get('@type') == 'Recipe' else 'website'
@@ -132,7 +143,7 @@ def home(recipes, collections, tracks, site):
 <section class="wrap block directions"><p class="eyebrow">Найдите свой рецепт</p><h2>Что хочется испечь?</h2>{track_cards(tracks)}</section>
 <section class="wrap block"><div class="section-head"><div><p class="eyebrow">Из каталога</p><h2>Что будем печь?</h2></div><a class="quiet" href="/recipes/">Весь каталог <span aria-hidden="true">→</span></a></div><div class="cards">{''.join(map(card,picks))}</div></section>
 <section class="wrap block"><p class="eyebrow">По продуктам и случаям</p><h2>Подборки</h2>{collection_grid(collections)}</section>'''
-    return layout(TITLE, 'Домашние рецепты пирогов, маффинов и печенья. Пошаговые инструкции и пересчёт ингредиентов на вашу форму и порции.', '/', site, body, picture=f'/images/{featured["id"]}.webp')
+    return layout(TITLE, 'Простые рецепты здоровой домашней выпечки: пироги, кексы и печенье из обычных продуктов и с особым составом. Пересчёт порций, форм и мер.', '/', site, body, picture=f'/images/{featured["id"]}.webp')
 
 
 def catalog(recipes, site):
@@ -157,7 +168,7 @@ def catalog(recipes, site):
 <label class="pantry-exact"><input id="pantry-exact" type="checkbox"> Только рецепты, для которых всё есть</label></fieldset></form>
 <div class="catalog-status"><p id="recipe-count" role="status">Всего рецептов: {len(recipes)}</p><button class="quiet" id="reset-filters" type="button" hidden>Сбросить фильтры</button></div>
 <div class="cards" id="catalog">{''.join(map(card,recipes))}</div><p id="empty" class="notice" hidden>По вашему запросу ничего не нашлось. Попробуйте изменить поиск или убрать фильтр.</p></section>'''
-    return layout('Рецепты домашней выпечки', 'Пироги, печенье, кексы и запечённая овсянка. Поиск по ингредиентам, виду выпечки и составу.', '/recipes/', site, body, section='catalog')
+    return layout('Рецепты домашней выпечки', 'Простые рецепты пирогов, печенья, кексов и здоровой домашней выпечки. Подберите блюдо по продуктам, виду теста и ограничениям состава.', '/recipes/', site, body, section='catalog')
 
 
 def recipe(r, site, related):
@@ -209,7 +220,9 @@ def recipe(r, site, related):
               'recipeInstructions':[{'@type':'HowToStep','text':step_text(s)} for s in r['steps']]}
     if r.get('prep') is not None:
         schema['prepTime'] = f'PT{r["prep"]}M'
-        schema['cookTime'] = f'PT{r["bake"][1]}M'
+    schema['cookTime'] = f'PT{r["bake"][1]}M'
+    if r.get('prep') is not None:
+        schema['totalTime'] = f'PT{r["prep"] + r["bake"][1] + (r.get("extra") or 0)}M'
     if site:
         schema['url'] = site+path
     return layout(r['title'] + ' — рецепт', r['description'], path, site, body, picture=f'/images/{r["id"]}.webp', schema=schema)
@@ -227,12 +240,12 @@ def guide_pages(site):
     measures = ''.join(f'<tr><th scope="row">{e(label)}</th><td>≈ {round(density * 200)} г</td><td>≈ {round(density * 250)} г</td></tr>' for label,density in MEASURES)
     options = ''.join(f'<option value="{density:.8f}">{e(label)}</option>' for label,density in MEASURES)
     return {
-        '/guides/': ('Кулинарный справочник', 'Меры, вес и размеры форм для выпечки.', '''<div class="collection-grid"><a class="collection-link" href="/guides/measures/">Меры и вес <b aria-hidden="true">↗</b></a><a class="collection-link" href="/guides/pans/">Пересчёт форм <b aria-hidden="true">↗</b></a></div>'''),
-        '/guides/measures/': ('Стаканы, ложки и граммы', 'Объёмные меры и перевод веса в объём для пяти продуктов.', f'''<h2>Сколько продукта в стакане</h2><p>Цифры относятся к указанному продукту. Насыпная плотность зависит от помола и наполнения. Насыпайте муку без утрамбовывания и снимайте горку.</p>
+        '/guides/': ('Кулинарный справочник', 'Кулинарные калькуляторы для выпечки: сколько муки в стакане, как переводить граммы в ложки и рассчитывать ингредиенты для другой формы.', '''<div class="collection-grid"><a class="collection-link" href="/guides/measures/">Меры и вес <b aria-hidden="true">↗</b></a><a class="collection-link" href="/guides/pans/">Пересчёт форм <b aria-hidden="true">↗</b></a></div>'''),
+        '/guides/measures/': ('Стаканы, ложки и граммы', 'Сколько граммов муки, сахара и овсяных хлопьев в стакане 200 или 250 мл. Таблица мер, ложек и простой калькулятор продуктов для выпечки.', f'''<h2>Сколько продукта в стакане</h2><p>Цифры относятся к указанному продукту. Насыпная плотность зависит от помола и наполнения. Насыпайте муку без утрамбовывания и снимайте горку.</p>
 <table><thead><tr><th scope="col">Продукт</th><th scope="col">200 мл</th><th scope="col">250 мл</th></tr></thead><tbody>{measures}</tbody></table>
 <form id="measure-guide" class="notice" hidden><h2>Перевести граммы в объём</h2><div class="control-grid"><label>Продукт<select id="guide-product">{options}</select></label><label>Вес, г<input id="guide-grams" type="number" min="1" max="10000" step="any" value="150"></label><label>Стакан<select id="guide-cup"><option value="200">200 мл</option><option value="250">250 мл</option></select></label></div><p><output id="guide-result" aria-live="polite"></output></p></form>
 <p>В калькуляторах сайта чайная ложка соответствует 5 мл, столовая — 15 мл. Для небольших количеств разрыхлителя и соды особенно важно точно отмерять указанную меру.</p>'''),
-        '/guides/pans/': ('Как пересчитать рецепт на другую форму', 'Сравните площадь круглой или прямоугольной формы и пересчитайте количество теста.', f'''<p>Измерьте дно каждой формы изнутри. Коэффициент — площадь новой формы, делённая на площадь исходной. Для прямоугольной формы умножьте длину на ширину, для круглой — число π на квадрат половины диаметра.</p>
+        '/guides/pans/': ('Как пересчитать рецепт на другую форму', 'Как пересчитать рецепт пирога на другую форму: круглую или прямоугольную. Калькулятор размеров противня и количества ингредиентов для выпечки.', f'''<p>Измерьте дно каждой формы изнутри. Коэффициент — площадь новой формы, делённая на площадь исходной. Для прямоугольной формы умножьте длину на ширину, для круглой — число π на квадрат половины диаметра.</p>
 <form id="pan-guide" class="notice" hidden><h2>Калькулятор формы</h2>{shape_fields('original','Исходная форма')}{shape_fields('target','Новая форма')}<p><output id="guide-area" aria-live="polite"></output></p></form>
 <p>Умножьте на коэффициент все ингредиенты. Такой расчёт рассчитан на сходную толщину слоя и не учитывает наклон стенок, материал или глубину формы. При изменении формы ориентируйтесь на признаки готовности из рецепта. Температуру и время нужно уточнять отдельно.</p><p>Для маффинов и отдельных кексов удобнее сохранить размер ячеек и выпекать нужное число изделий партиями.</p>''')
     }

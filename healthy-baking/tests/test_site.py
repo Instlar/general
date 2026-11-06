@@ -1,4 +1,5 @@
 import hashlib
+import re
 import json
 import shutil
 import subprocess
@@ -123,6 +124,34 @@ class SiteTest(unittest.TestCase):
                 self.bundle(**option)
                 self.cli('import',self.package_file,succeeds=False)
                 self.assertEqual(before,(digest(self.recipe_file),digest(self.work / 'public' / 'index.html')))
+
+    def test_seo_copy_and_structured_data(self):
+        self.cli('build', '--site-url', 'https://example.com')
+        public = self.work / 'public'
+        homepage = (public / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('Пеки здорово', homepage)
+        self.assertIn('Простые рецепты здоровой домашней выпечки', homepage)
+
+        seo = json.loads((self.work / 'content' / 'seo-copy.json').read_text(encoding='utf-8'))['recipes']
+        for recipe in self.recipes:
+            page = (public / 'recipes' / recipe['id'] / 'index.html').read_text(encoding='utf-8')
+            self.assertIn(seo[recipe['id']], page)
+            self.assertIn('rel="canonical"', page)
+            schemas = [json.loads(v) for v in re.findall(r'<script type="application/ld\+json">([^<]*)</script>', page)]
+            by_type = {schema['@type']: schema for schema in schemas}
+            self.assertEqual(set(by_type), {'Recipe', 'BreadcrumbList'})
+            self.assertEqual(by_type['Recipe']['description'], seo[recipe['id']])
+            self.assertIn('cookTime', by_type['Recipe'])
+            self.assertEqual(by_type['BreadcrumbList']['itemListElement'][-1]['item'],
+                             'https://example.com/recipes/' + recipe['id'] + '/')
+            if recipe.get('prep') is None:
+                self.assertNotIn('totalTime', by_type['Recipe'])
+            else:
+                self.assertIn('totalTime', by_type['Recipe'])
+
+        self.assertTrue((public / 'sitemap.xml').is_file())
+        self.assertIn('Sitemap: https://example.com/sitemap.xml',
+                      (public / 'robots.txt').read_text(encoding='utf-8'))
 
 
 if __name__ == '__main__':
