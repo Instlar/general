@@ -1,0 +1,1038 @@
+{
+  "batch": "2026-11-06-breakfast-01",
+  "visibility": "editorial-staging-only",
+  "notes": "Adapted from linked primary sources. Not kitchen-tested. Do not publish without matching WebP images and build verification.",
+  "recipes": [
+    {
+      "id": "pear-walnut-yogurt-porridge",
+      "title": "Овсяная каша с грушей, йогуртом и грецкими орехами",
+      "kind": "porridge",
+      "description": "Быстрая овсяная каша на воде с натуральным йогуртом, свежей грушей и грецкими орехами. Завтрак на одного человека без добавленного сахара.",
+      "intro": "За несколько минут овсяные хлопья загустеют на плите, а натуральный йогурт сделает готовую кашу более кремовой. Груша и корица добавляются уже при подаче.",
+      "servings": 1,
+      "prep": 6,
+      "tags": [
+        "oat",
+        "no-butter",
+        "no-eggs",
+        "no-added-sugar",
+        "breakfast",
+        "small-batch",
+        "quick"
+      ],
+      "ingredients": [
+        {
+          "id": "oats",
+          "label": "Овсяные хлопья",
+          "amount": 25,
+          "unit": "g",
+          "product": "Овсяные хлопья"
+        },
+        {
+          "id": "water",
+          "label": "Вода",
+          "amount": 200,
+          "unit": "ml",
+          "product": "Вода"
+        },
+        {
+          "id": "yogurt",
+          "label": "Натуральный йогурт без сахара",
+          "amount": 150,
+          "unit": "g",
+          "product": "Натуральный йогурт"
+        },
+        {
+          "id": "pear",
+          "label": "Спелая груша",
+          "amount": 1,
+          "unit": "each",
+          "product": "Груши"
+        },
+        {
+          "id": "walnuts",
+          "label": "Половинки грецкого ореха",
+          "amount": 4,
+          "unit": "each",
+          "product": "Грецкие орехи"
+        },
+        {
+          "id": "cinnamon",
+          "label": "Корица",
+          "amount": 2,
+          "unit": "pinch",
+          "product": "Корица"
+        }
+      ],
+      "steps": [
+        "В небольшой кастрюле смешайте {{water}} воды и {{oats}} овсяных хлопьев, варите на слабом огне около 3 минут, пока каша не загустеет.",
+        "Снимите с плиты и вмешайте {{yogurt}} натурального йогурта. Можно оставить часть для подачи.",
+        "Нарежьте {{pear}} грушу тонкими ломтиками, положите на кашу вместе с {{walnuts}} половинками грецкого ореха и посыпьте {{cinnamon}} корицы."
+      ],
+      "doneness": "Каша должна загустеть; йогурт добавляют после снятия с нагрева.",
+      "storage": "Лучше съесть свежеприготовленной. Скоропортящиеся остатки быстро охладите и уберите в холодильник.",
+      "allergens": [
+        "Молоко",
+        "Орехи (грецкие)",
+        "Овёс"
+      ],
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "mealTypes": [
+        "breakfast"
+      ],
+      "cookingMethod": "hob",
+      "pan": "Небольшая кастрюля",
+      "imageAlt": "Керамическая миска овсяной каши с ломтиками груши и орехами",
+      "cook": [
+        3,
+        3
+      ],
+      "mode": "Приготовление на плите",
+      "sourceKey": "88c02cadc42ed3706f25a4fa5f0bb829c5d35e0076c36f9bf367618a8d0512aa",
+      "editorialSource": {
+        "url": "https://www.bbcgoodfood.com/recipes/creamy-yogurt-porridge-pear-walnut-cinnamon-topping",
+        "title": "Creamy yogurt porridge with pear, walnut & cinnamon topping",
+        "author": "Sara Buenfeld",
+        "status": "source-checked",
+        "reviewed": "2026-11-06",
+        "kitchenTested": false
+      }
+    },
+    {
+      "id": "apple-banana-bircher-muesli",
+      "title": "Мюсли Бирхер с яблоком, бананом и йогуртом",
+      "kind": "muesli",
+      "description": "Ночные мюсли с яблоком, бананом, овсяными хлопьями, семечками и натуральным йогуртом. Две порции завтрака готовятся с вечера без плиты.",
+      "intro": "Мюсли Бирхер набухают в холодильнике несколько часов. К утру остается разложить их по мискам и дополнить бананом, орехами и изюмом.",
+      "servings": 2,
+      "prep": 5,
+      "tags": [
+        "oat",
+        "apple",
+        "banana",
+        "no-butter",
+        "no-eggs",
+        "no-added-sugar",
+        "breakfast",
+        "no-mixer"
+      ],
+      "ingredients": [
+        {
+          "id": "apple",
+          "label": "Яблоко",
+          "amount": 1,
+          "unit": "each",
+          "product": "Яблоки"
+        },
+        {
+          "id": "oats",
+          "label": "Крупные овсяные хлопья",
+          "amount": 50,
+          "unit": "g",
+          "product": "Овсяные хлопья"
+        },
+        {
+          "id": "seeds",
+          "label": "Смесь семян",
+          "amount": 25,
+          "unit": "g",
+          "product": "Смесь семян"
+        },
+        {
+          "id": "nuts",
+          "label": "Смесь орехов",
+          "amount": 25,
+          "unit": "g",
+          "product": "Смесь орехов"
+        },
+        {
+          "id": "cinnamon",
+          "label": "Корица",
+          "amount": 0.25,
+          "unit": "tsp",
+          "product": "Корица"
+        },
+        {
+          "id": "yogurt",
+          "label": "Натуральный йогурт",
+          "amount": 100,
+          "unit": "g",
+          "product": "Натуральный йогурт"
+        },
+        {
+          "id": "water",
+          "label": "Холодная вода",
+          "amount": 100,
+          "unit": "ml",
+          "product": "Вода"
+        },
+        {
+          "id": "banana",
+          "label": "Банан",
+          "amount": 1,
+          "unit": "each",
+          "product": "Бананы"
+        },
+        {
+          "id": "raisins",
+          "label": "Изюм без косточек",
+          "amount": 25,
+          "unit": "g",
+          "product": "Изюм"
+        }
+      ],
+      "steps": [
+        "Натрите {{apple}} яблоко на крупной тёрке и смешайте с {{oats}} овсяных хлопьев, {{seeds}} семян, половиной из {{nuts}} смеси орехов и {{cinnamon}} корицы.",
+        "Вмешайте {{yogurt}} йогурта и {{water}} холодной воды. Накройте и уберите в холодильник на несколько часов или на ночь.",
+        "Перед подачей разделите мюсли между двумя мисками. Нарежьте {{banana}} банан, добавьте {{raisins}} изюма и оставшуюся половину орехов."
+      ],
+      "doneness": "Хлопья должны набухнуть и стать мягче, без сухих участков.",
+      "storage": "Настаивайте в холодильнике и храните там же. Банан лучше нарезать непосредственно перед подачей.",
+      "allergens": [
+        "Овёс",
+        "Молоко",
+        "Орехи",
+        "Семена"
+      ],
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "mealTypes": [
+        "breakfast"
+      ],
+      "cookingMethod": "no-cook",
+      "pan": "Миска с крышкой или контейнер для холодильника",
+      "imageAlt": "Ночные мюсли в миске с тёртым яблоком, бананом и орехами",
+      "mode": "Без тепловой обработки",
+      "timeNote": "Дополнительно нужно несколько часов охлаждения (лучше всю ночь).",
+      "sourceKey": "bdda5553941c5250839e61e720fa6f1cc38686f0bb47c4c5eb037237092a446e",
+      "editorialSource": {
+        "url": "https://www.bbcgoodfood.com/recipes/bircher-muesli-apple-banana",
+        "title": "Bircher muesli with apple & banana",
+        "author": "Justine Pattison",
+        "status": "source-checked",
+        "reviewed": "2026-11-06",
+        "kitchenTested": false
+      }
+    },
+    {
+      "id": "raspberry-peanut-overnight-oats",
+      "title": "Ночная овсянка с малиной и арахисовой пастой",
+      "kind": "porridge",
+      "description": "Овсянка с замороженной малиной и арахисовой пастой без варки. Удобный завтрак в банке из четырех основных продуктов на одну порцию.",
+      "intro": "Вечером смешайте малину и хлопья с водой, утром добавьте немного сиропа и ореховую пасту. Никакой духовки или плиты не потребуется.",
+      "servings": 1,
+      "prep": 5,
+      "tags": [
+        "oat",
+        "berries",
+        "no-butter",
+        "no-eggs",
+        "breakfast",
+        "small-batch",
+        "no-mixer"
+      ],
+      "ingredients": [
+        {
+          "id": "raspberry",
+          "label": "Замороженная малина",
+          "amount": 80,
+          "unit": "g",
+          "product": "Малина"
+        },
+        {
+          "id": "oats",
+          "label": "Овсяные хлопья",
+          "amount": 50,
+          "unit": "g",
+          "product": "Овсяные хлопья"
+        },
+        {
+          "id": "water",
+          "label": "Вода",
+          "amount": 150,
+          "unit": "ml",
+          "product": "Вода"
+        },
+        {
+          "id": "syrup",
+          "label": "Кленовый сироп",
+          "amount": 1,
+          "unit": "tsp",
+          "product": "Кленовый сироп"
+        },
+        {
+          "id": "peanut",
+          "label": "Арахисовая паста",
+          "amount": 1,
+          "unit": "tbsp",
+          "product": "Арахисовая паста"
+        }
+      ],
+      "steps": [
+        "Смешайте {{raspberry}} замороженной малины, {{oats}} овсяных хлопьев и {{water}} воды, накройте и поставьте на ночь в холодильник.",
+        "Утром перемешайте с {{syrup}} кленового сиропа и выложите сверху {{peanut}} арахисовой пасты."
+      ],
+      "doneness": "Овсяные хлопья набухли, малина разморозилась в холодильнике.",
+      "storage": "Храните в холодильнике. Подавайте холодной, не оставляйте готовую овсянку надолго при комнатной температуре.",
+      "allergens": [
+        "Овёс",
+        "Арахис"
+      ],
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "mealTypes": [
+        "breakfast"
+      ],
+      "cookingMethod": "no-cook",
+      "pan": "Стеклянная банка с крышкой или миска",
+      "imageAlt": "Миска ночной овсянки с красной малиной и арахисовой пастой",
+      "mode": "Без тепловой обработки",
+      "timeNote": "Необходимо ночное настаивание в холодильнике.",
+      "sourceKey": "eb0d96018478b9baf84459bfc5d7e35d8a833991856821ed9d99bbf7318840d4",
+      "editorialSource": {
+        "url": "https://www.bbcgoodfood.com/recipes/pbj-overnight-oats",
+        "title": "Peanut butter overnight oats",
+        "author": "Sophie Godwin",
+        "status": "source-checked",
+        "reviewed": "2026-11-06",
+        "kitchenTested": false
+      }
+    },
+    {
+      "id": "banana-almond-overnight-oats",
+      "title": "Ночная овсянка с бананом, миндалем и корицей",
+      "kind": "porridge",
+      "description": "Завтрак с бананом, овсяными хлопьями, молоком и ореховой пастой готовится с вечера. Две порции с миндалем и корицей без варки.",
+      "intro": "На ночь овсяные хлопья заливают молоком с размятым бананом. Утром остается добавить нарезанный второй банан, миндаль и йогурт по желанию.",
+      "servings": 2,
+      "prep": 5,
+      "tags": [
+        "oat",
+        "banana",
+        "no-butter",
+        "no-eggs",
+        "breakfast",
+        "no-mixer"
+      ],
+      "ingredients": [
+        {
+          "id": "banana-base",
+          "label": "Банан для основы",
+          "amount": 1,
+          "unit": "each",
+          "product": "Бананы"
+        },
+        {
+          "id": "oats",
+          "label": "Овсяные хлопья",
+          "amount": 100,
+          "unit": "g",
+          "product": "Овсяные хлопья"
+        },
+        {
+          "id": "cinnamon",
+          "label": "Молотая корица",
+          "amount": 0.25,
+          "unit": "tsp",
+          "product": "Корица"
+        },
+        {
+          "id": "syrup",
+          "label": "Кленовый сироп",
+          "amount": 1,
+          "unit": "tbsp",
+          "product": "Кленовый сироп"
+        },
+        {
+          "id": "milk",
+          "label": "Молоко",
+          "amount": 300,
+          "unit": "ml",
+          "product": "Молоко"
+        },
+        {
+          "id": "peanut",
+          "label": "Арахисовая паста",
+          "amount": 2,
+          "unit": "tbsp",
+          "product": "Арахисовая паста"
+        },
+        {
+          "id": "banana-top",
+          "label": "Банан для подачи",
+          "amount": 1,
+          "unit": "each",
+          "product": "Бананы"
+        },
+        {
+          "id": "almonds",
+          "label": "Миндальные лепестки",
+          "amount": 2,
+          "unit": "tbsp",
+          "product": "Миндаль"
+        },
+        {
+          "id": "yogurt",
+          "label": "Натуральный йогурт для подачи",
+          "amount": 2,
+          "unit": "tbsp",
+          "product": "Натуральный йогурт",
+          "optional": true
+        }
+      ],
+      "steps": [
+        "Разомните {{banana-base}} банан и перемешайте с {{oats}} овсяных хлопьев, {{cinnamon}} корицы, {{syrup}} сиропа, {{milk}} молока и {{peanut}} арахисовой пасты.",
+        "Накройте и уберите смесь в холодильник на ночь.",
+        "Утром разделите на две порции, добавьте нарезанный {{banana-top}} банан, {{almonds}} миндальных лепестков и по желанию {{yogurt}} йогурта."
+      ],
+      "doneness": "Смесь стала густой и однородной, хлопья размягчились.",
+      "storage": "Держите в холодильнике. Фрукты для подачи добавляйте непосредственно перед едой.",
+      "allergens": [
+        "Овёс",
+        "Молоко",
+        "Арахис",
+        "Орехи (миндаль)"
+      ],
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "mealTypes": [
+        "breakfast"
+      ],
+      "cookingMethod": "no-cook",
+      "pan": "Миска или два контейнера с крышками",
+      "imageAlt": "Ночная овсянка с бананом, миндалем и ореховой пастой",
+      "mode": "Без тепловой обработки",
+      "timeNote": "Нужно ночное настаивание; без тепловой обработки.",
+      "sourceKey": "aed5e412fda099e974eab4396995b901a7b137a17d03e884a247164ecc08a121",
+      "editorialSource": {
+        "url": "https://www.bbcgoodfood.com/recipes/banana-overnight-oats",
+        "title": "Banana overnight oats",
+        "author": "Anna Glover",
+        "status": "source-checked",
+        "reviewed": "2026-11-06",
+        "kitchenTested": false
+      }
+    },
+    {
+      "id": "spinach-tomato-baked-eggs",
+      "title": "Яйца со шпинатом и томатами в духовке",
+      "kind": "eggs",
+      "description": "Простой завтрак из яиц, шпината и консервированных томатов. Четыре порционные формочки, немного перца чили и 15 минут в духовке.",
+      "intro": "Четыре простых ингредиента позволяют быстро приготовить порционные яйца с овощами. Листья шпината предварительно ошпариваются, а яйца запекаются прямо в томатной основе.",
+      "servings": 4,
+      "prep": 5,
+      "tags": [
+        "no-butter",
+        "no-added-sugar",
+        "breakfast",
+        "family",
+        "quick"
+      ],
+      "ingredients": [
+        {
+          "id": "spinach",
+          "label": "Свежий шпинат",
+          "amount": 100,
+          "unit": "g",
+          "product": "Шпинат"
+        },
+        {
+          "id": "tomatoes",
+          "label": "Рубленые консервированные томаты",
+          "amount": 400,
+          "unit": "g",
+          "product": "Томаты консервированные"
+        },
+        {
+          "id": "chilli",
+          "label": "Хлопья перца чили",
+          "amount": 1,
+          "unit": "tsp",
+          "product": "Перец чили"
+        },
+        {
+          "id": "eggs",
+          "label": "Яйца",
+          "amount": 4,
+          "unit": "each",
+          "product": "Яйца"
+        }
+      ],
+      "steps": [
+        "Разогрейте духовку до 200 °C (или 180 °C с конвекцией). Ошпарьте {{spinach}} свежего шпината кипятком в дуршлаге и тщательно отожмите. Разделите между четырьмя формочками.",
+        "Смешайте {{tomatoes}} томатов с {{chilli}} чили и приправьте по вкусу. Разложите поверх шпината.",
+        "Сделайте углубления и разбейте {{eggs}} яйца — по одному в каждую формочку. Запекайте 12–15 минут или дольше, пока белок не станет плотным. Подавайте горячими."
+      ],
+      "doneness": "Белок полностью схватился, а желток имеет желаемую степень готовности.",
+      "storage": "Лучше подавать сразу; остатки с яйцом быстро охладите и храните в холодильнике.",
+      "allergens": [
+        "Яйца"
+      ],
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "mealTypes": [
+        "breakfast"
+      ],
+      "cookingMethod": "oven",
+      "pan": "Четыре небольшие жаропрочные порционные формы",
+      "imageAlt": "Порционные запеченные яйца на шпинате и красных томатах",
+      "temp": 200,
+      "bake": [
+        12,
+        15
+      ],
+      "mode": "Верх и низ 200 °C или конвекция 180 °C",
+      "sourceKey": "8e7617001671ddd0db4938bb816060028724219fca0b9cc6a267564acd28bba4",
+      "editorialSource": {
+        "url": "https://www.bbcgoodfood.com/recipes/baked-eggs-spinach-tomato",
+        "title": "Baked eggs with spinach & tomato",
+        "author": "Good Food team",
+        "status": "source-checked",
+        "reviewed": "2026-11-06",
+        "kitchenTested": false
+      }
+    },
+    {
+      "id": "cheese-omelette",
+      "title": "Классический омлет с сыром на сковороде",
+      "kind": "eggs",
+      "description": "Быстрый омлет из двух яиц с тертым твердым сыром, сливочным и оливковым маслом. Завтрак на одного человека примерно за десять минут.",
+      "intro": "Для омлета не нужны сложные приборы. Смесь слегка загущают на сковороде, а сыр добавляют перед складыванием омлета.",
+      "servings": 1,
+      "prep": 5,
+      "tags": [
+        "no-added-sugar",
+        "breakfast",
+        "small-batch",
+        "quick"
+      ],
+      "ingredients": [
+        {
+          "id": "eggs",
+          "label": "Яйца",
+          "amount": 2,
+          "unit": "each",
+          "product": "Яйца"
+        },
+        {
+          "id": "olive",
+          "label": "Оливковое масло",
+          "amount": 0.5,
+          "unit": "tbsp",
+          "product": "Оливковое масло"
+        },
+        {
+          "id": "butter",
+          "label": "Сливочное масло",
+          "amount": 1,
+          "unit": "tbsp",
+          "product": "Сливочное масло"
+        },
+        {
+          "id": "cheese",
+          "label": "Выдержанный чеддер, натертый",
+          "amount": 15,
+          "unit": "g",
+          "product": "Сыр чеддер"
+        }
+      ],
+      "steps": [
+        "Взбейте вилкой {{eggs}} яйца до однородности. По желанию добавьте немного соли.",
+        "На сковороде с антипригарным покрытием разогрейте {{olive}} оливкового масла и {{butter}} сливочного масла на умеренно слабом огне.",
+        "Вылейте яйца, слегка подтягивайте схватывающиеся края к центру. Через 2–3 минуты посыпьте {{cheese}} сыра и сложите омлет пополам. Выключите нагрев и дайте сыру расплавиться около минуты."
+      ],
+      "doneness": "Белок полностью приготовился, серединка остается нежной; сыр расплавился.",
+      "storage": "Омлет лучше есть сразу после приготовления.",
+      "allergens": [
+        "Яйца",
+        "Молоко"
+      ],
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "mealTypes": [
+        "breakfast"
+      ],
+      "cookingMethod": "hob",
+      "pan": "Небольшая сковорода с антипригарным покрытием",
+      "imageAlt": "Сложенный золотистый омлет с расплавленным сыром на белой тарелке",
+      "cook": [
+        5,
+        5
+      ],
+      "mode": "Приготовление на плите",
+      "sourceKey": "",
+      "editorialSource": {
+        "url": "https://www.bbcgoodfood.com/recipes/cheese-omelette",
+        "title": "Cheese omelette",
+        "author": "Ailsa Burt",
+        "status": "source-checked",
+        "reviewed": "2026-11-06",
+        "kitchenTested": false
+      }
+    },
+    {
+      "id": "cottage-cheese-oat-pancakes",
+      "title": "Овсяные оладьи с зернистым творогом",
+      "kind": "pancake",
+      "description": "Домашние оладьи с зернистым творогом и овсяными хлопьями, яйцами и молоком. Завтрак на двоих, тесто готовится в блендере.",
+      "intro": "Овсяные хлопья и зернистый творог смешиваются в блендере до однородности. Небольшие оладьи подрумяниваются на сковороде, рецепт подходит и для несладкой подачи.",
+      "servings": 2,
+      "prep": 10,
+      "tags": [
+        "oat",
+        "cottage-cheese",
+        "no-butter",
+        "breakfast",
+        "quick"
+      ],
+      "ingredients": [
+        {
+          "id": "cheese",
+          "label": "Зернистый творог (cottage cheese)",
+          "amount": 100,
+          "unit": "g",
+          "product": "Зернистый творог"
+        },
+        {
+          "id": "oats",
+          "label": "Овсяные хлопья",
+          "amount": 150,
+          "unit": "g",
+          "product": "Овсяные хлопья"
+        },
+        {
+          "id": "eggs",
+          "label": "Яйца",
+          "amount": 2,
+          "unit": "each",
+          "product": "Яйца"
+        },
+        {
+          "id": "milk",
+          "label": "Молоко",
+          "amount": 50,
+          "unit": "ml",
+          "product": "Молоко"
+        },
+        {
+          "id": "powder",
+          "label": "Разрыхлитель",
+          "amount": 0.5,
+          "unit": "tsp",
+          "product": "Разрыхлитель"
+        },
+        {
+          "id": "vanilla",
+          "label": "Ванильный экстракт",
+          "amount": 1,
+          "unit": "tsp",
+          "product": "Ванильный экстракт",
+          "optional": true
+        },
+        {
+          "id": "syrup",
+          "label": "Кленовый сироп для сладкого варианта",
+          "amount": 2,
+          "unit": "tsp",
+          "product": "Кленовый сироп",
+          "optional": true
+        },
+        {
+          "id": "oil",
+          "label": "Растительное масло для жарки",
+          "amount": 2,
+          "unit": "tsp",
+          "product": "Растительное масло"
+        }
+      ],
+      "steps": [
+        "Пробейте в блендере {{cheese}} зернистого творога, {{oats}} овсяных хлопьев, {{eggs}} яйца, {{milk}} молока и {{powder}} разрыхлителя. Для сладкого варианта добавьте {{vanilla}} ванильного экстракта и {{syrup}} сиропа.",
+        "Разогрейте сковороду с частью из {{oil}} растительного масла. Выкладывайте небольшие порции теста, готовьте партиями.",
+        "Жарьте примерно 2–3 минуты до появления пузырьков, переверните и готовьте еще 1–2 минуты до золотистой поверхности. Повторите с оставшимся тестом и маслом."
+      ],
+      "doneness": "Каждый оладушек подрумянился с обеих сторон, середина без сырого теста.",
+      "storage": "Подавайте горячими. Остатки быстро охладите и храните в холодильнике.",
+      "allergens": [
+        "Овёс",
+        "Молоко",
+        "Яйца"
+      ],
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "mealTypes": [
+        "breakfast"
+      ],
+      "cookingMethod": "hob",
+      "pan": "Блендер и сковорода",
+      "imageAlt": "Несколько оладий с золотистыми краями на светлой тарелке",
+      "cook": [
+        10,
+        10
+      ],
+      "mode": "Приготовление на плите",
+      "sourceKey": "031276ccaa069b28e02a1f87c66de82f06822d1ba589f1986149cc009ff21268",
+      "editorialSource": {
+        "url": "https://www.bbcgoodfood.com/recipes/cottage-cheese-pancakes",
+        "title": "Cottage cheese pancakes",
+        "author": "Anna Glover",
+        "status": "source-checked",
+        "reviewed": "2026-11-06",
+        "kitchenTested": false
+      }
+    },
+    {
+      "id": "avocado-feta-poached-egg-toasts",
+      "title": "Тосты с авокадо, фетой и яйцом пашот",
+      "kind": "toast",
+      "description": "Два тоста с авокадо, сыром фета и яйцом пашот для сытного завтрака. На хлебе на закваске — свежая намазка с лимоном и чили.",
+      "intro": "В этом завтраке сочетаются хрустящий хлеб, авокадо и фета, а сверху кладется яйцо пашот. Для приготовления достаточно кастрюли и тостера.",
+      "servings": 2,
+      "prep": 5,
+      "tags": [
+        "no-butter",
+        "breakfast",
+        "quick"
+      ],
+      "ingredients": [
+        {
+          "id": "vinegar",
+          "label": "Белый винный уксус",
+          "amount": 2,
+          "unit": "tbsp",
+          "product": "Белый винный уксус"
+        },
+        {
+          "id": "eggs",
+          "label": "Яйца",
+          "amount": 2,
+          "unit": "each",
+          "product": "Яйца"
+        },
+        {
+          "id": "avocado",
+          "label": "Спелый авокадо",
+          "amount": 1,
+          "unit": "each",
+          "product": "Авокадо"
+        },
+        {
+          "id": "feta",
+          "label": "Сыр фета",
+          "amount": 50,
+          "unit": "g",
+          "product": "Сыр фета"
+        },
+        {
+          "id": "chilli",
+          "label": "Хлопья чили",
+          "amount": 1,
+          "unit": "tsp",
+          "product": "Перец чили"
+        },
+        {
+          "id": "lemon",
+          "label": "Лимон для сока",
+          "amount": 0.5,
+          "unit": "each",
+          "product": "Лимоны"
+        },
+        {
+          "id": "bread",
+          "label": "Ломтики хлеба на закваске",
+          "amount": 2,
+          "unit": "each",
+          "product": "Хлеб на закваске"
+        }
+      ],
+      "steps": [
+        "В кастрюле вскипятите воду, добавьте {{vinegar}} белого винного уксуса и убавьте нагрев до слабого кипения. Размешайте воду, создавая воронку, и аккуратно опустите {{eggs}} яйца. Варите около 2,5 минуты, пока белки не схватятся.",
+        "Разомните {{avocado}} авокадо с {{feta}} феты, {{chilli}} чили и соком {{lemon}} лимона.",
+        "Подрумяньте {{bread}} ломтика хлеба и распределите на них намазку, сверху уложите яйца пашот. Подавайте сразу."
+      ],
+      "doneness": "Яичные белки плотные; желтки можно оставить мягкими по источнику.",
+      "storage": "Блюдо рассчитано на немедленную подачу; яйца пашот и тосты не следует хранить при комнатной температуре.",
+      "allergens": [
+        "Пшеница (глютен)",
+        "Молоко",
+        "Яйца"
+      ],
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "mealTypes": [
+        "breakfast"
+      ],
+      "cookingMethod": "hob",
+      "pan": "Кастрюля, миска и тостер",
+      "imageAlt": "Два тоста с авокадо и фетой, сверху яйца пашот",
+      "cook": [
+        5,
+        5
+      ],
+      "mode": "Приготовление на плите",
+      "sourceKey": "7d1df38afa7e5fba7007f3dff9cba93aa33dbee98e96909a3f4191e589082194",
+      "editorialSource": {
+        "url": "https://www.bbcgoodfood.com/recipes/poached-eggs-avocado-feta-toast",
+        "title": "Poached eggs on avocado & feta toast",
+        "author": "Jamie Cullum",
+        "status": "source-checked",
+        "reviewed": "2026-11-06",
+        "kitchenTested": false
+      }
+    },
+    {
+      "id": "oat-yogurt-breakfast-pancakes",
+      "title": "Панкейки на йогурте и овсяной муке",
+      "kind": "pancake",
+      "description": "Пышные панкейки на натуральном йогурте с овсяной и пшеничной мукой. Американский завтрак на сковороде, без сложной техники.",
+      "intro": "Йогурт помогает сохранить нежную текстуру. Тесту дают несколько минут постоять, после чего небольшие панкейки жарят до румяности с каждой стороны.",
+      "servings": 4,
+      "prep": 10,
+      "tags": [
+        "oat",
+        "yogurt",
+        "no-butter",
+        "breakfast"
+      ],
+      "ingredients": [
+        {
+          "id": "eggs",
+          "label": "Яйца",
+          "amount": 2,
+          "unit": "each",
+          "product": "Яйца"
+        },
+        {
+          "id": "oil",
+          "label": "Растительное масло",
+          "amount": 39,
+          "unit": "g",
+          "product": "Растительное масло"
+        },
+        {
+          "id": "yogurt",
+          "label": "Натуральный йогурт",
+          "amount": 283,
+          "unit": "g",
+          "product": "Натуральный йогурт"
+        },
+        {
+          "id": "flour",
+          "label": "Пшеничная мука",
+          "amount": 150,
+          "unit": "g",
+          "product": "Пшеничная мука"
+        },
+        {
+          "id": "oat-flour",
+          "label": "Овсяная мука",
+          "amount": 45,
+          "unit": "g",
+          "product": "Овсяная мука"
+        },
+        {
+          "id": "salt",
+          "label": "Столовая соль",
+          "amount": 0.75,
+          "unit": "tsp",
+          "product": "Соль"
+        },
+        {
+          "id": "soda",
+          "label": "Пищевая сода",
+          "amount": 1,
+          "unit": "tsp",
+          "product": "Пищевая сода"
+        },
+        {
+          "id": "powder",
+          "label": "Разрыхлитель",
+          "amount": 0.5,
+          "unit": "tsp",
+          "product": "Разрыхлитель"
+        },
+        {
+          "id": "sugar",
+          "label": "Сахар",
+          "amount": 25,
+          "unit": "g",
+          "product": "Сахар"
+        },
+        {
+          "id": "milk",
+          "label": "Молоко для консистенции",
+          "amount": 28,
+          "unit": "g",
+          "product": "Молоко"
+        }
+      ],
+      "steps": [
+        "Взбейте {{eggs}} яйца с {{oil}} растительного масла и {{yogurt}} натурального йогурта.",
+        "В другой миске соедините {{flour}} пшеничной муки, {{oat-flour}} овсяной муки, {{salt}} соли, {{soda}} соды, {{powder}} разрыхлителя и {{sugar}} сахара.",
+        "Смешайте сухие продукты с йогуртовой основой и оставьте тесто на 5 минут. Введите {{milk}} молока; если тесто густое, источник допускает еще немного молока для нужной консистенции.",
+        "Разогрейте сковороду на среднем огне и выкладывайте примерно по 60 мл теста на панкейк. Когда сверху появятся пузырьки, переверните и дожарьте до золотистой поверхности."
+      ],
+      "doneness": "С обеих сторон золотистая корочка, внутри нет сырого теста.",
+      "storage": "Остатки можно заморозить на несколько недель и разогревать в тостере, как рекомендует источник.",
+      "allergens": [
+        "Пшеница (глютен)",
+        "Овёс",
+        "Молоко",
+        "Яйца"
+      ],
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "mealTypes": [
+        "breakfast"
+      ],
+      "cookingMethod": "hob",
+      "pan": "Сковорода с антипригарным покрытием",
+      "imageAlt": "Небольшая стопка золотистых панкейков с мягкой серединой",
+      "cook": [
+        20,
+        20
+      ],
+      "mode": "Приготовление на плите",
+      "timeNote": "Выход по источнику — около 14 небольших панкейков.",
+      "sourceKey": "6dddb34147808b5a0ce121a7ffa9e30b89e107b60c6254335594a77af6f0858a",
+      "editorialSource": {
+        "url": "https://www.kingarthurbaking.com/recipes/oat-and-yogurt-pancakes-recipe",
+        "title": "Oat and Yogurt Pancakes",
+        "author": "King Arthur Test Kitchen",
+        "status": "source-checked",
+        "reviewed": "2026-11-06",
+        "kitchenTested": false
+      }
+    },
+    {
+      "id": "nut-seed-orange-granola",
+      "title": "Домашняя гранола с орехами, семечками и апельсином",
+      "kind": "granola",
+      "description": "Хрустящая гранола из овсяных хлопьев, орехов, семян и апельсиновой цедры. Готовится на противне и хранится в закрытой банке.",
+      "intro": "Гранола подходит для завтрака с молоком или йогуртом. Для равномерного подрумянивания смесь несколько раз перемешивают во время запекания.",
+      "servings": 16,
+      "prep": 10,
+      "tags": [
+        "oat",
+        "no-butter",
+        "no-eggs",
+        "breakfast",
+        "family"
+      ],
+      "ingredients": [
+        {
+          "id": "oats",
+          "label": "Овсяные хлопья",
+          "amount": 200,
+          "unit": "g",
+          "product": "Овсяные хлопья"
+        },
+        {
+          "id": "nuts",
+          "label": "Смесь орехов",
+          "amount": 150,
+          "unit": "g",
+          "product": "Смесь орехов"
+        },
+        {
+          "id": "seeds",
+          "label": "Смесь семян",
+          "amount": 150,
+          "unit": "g",
+          "product": "Смесь семян"
+        },
+        {
+          "id": "orange",
+          "label": "Апельсин для цедры",
+          "amount": 1,
+          "unit": "each",
+          "product": "Апельсины"
+        },
+        {
+          "id": "spices",
+          "label": "Смесь специй для сладкой выпечки",
+          "amount": 2,
+          "unit": "tsp",
+          "product": "Смесь специй"
+        },
+        {
+          "id": "cinnamon",
+          "label": "Корица",
+          "amount": 2,
+          "unit": "tsp",
+          "product": "Корица"
+        },
+        {
+          "id": "oil",
+          "label": "Рапсовое масло",
+          "amount": 2,
+          "unit": "tbsp",
+          "product": "Рапсовое масло"
+        },
+        {
+          "id": "syrup",
+          "label": "Кленовый сироп",
+          "amount": 1.5,
+          "unit": "tbsp",
+          "product": "Кленовый сироп"
+        }
+      ],
+      "steps": [
+        "Разогрейте духовку до 160 °C (с конвекцией 140 °C). Смешайте {{oats}} овсяных хлопьев, {{nuts}} орехов, {{seeds}} семян, цедру {{orange}} апельсина, {{spices}} пряной смеси и {{cinnamon}} корицы.",
+        "Добавьте {{oil}} рапсового масла и {{syrup}} кленового сиропа, тщательно перемешайте, разложите по противню ровным слоем.",
+        "Запекайте 30–35 минут до золотистого цвета, за это время дважды перемешайте. Полностью остудите, прежде чем убирать в банку."
+      ],
+      "doneness": "Гранола сухая, подрумянилась, стала хрустящей после остывания.",
+      "storage": "Храните полностью охлажденную гранолу в герметичной банке до месяца по источнику.",
+      "allergens": [
+        "Овёс",
+        "Орехи",
+        "Семена"
+      ],
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "mealTypes": [
+        "breakfast"
+      ],
+      "cookingMethod": "oven",
+      "pan": "Широкий противень, пергамент",
+      "imageAlt": "Хрустящая гранола с крупными орехами, семенами и цедрой в керамической миске",
+      "temp": 160,
+      "bake": [
+        30,
+        35
+      ],
+      "mode": "Верх и низ 160 °C или конвекция 140 °C",
+      "timeNote": "Исходный выход — около 500 г гранолы; 16 порций примерно по 30 г.",
+      "sourceKey": "28b1c1bf31e76235629feadbbb9db935d45e256babe0c48a1da97fd4b6b71cb8",
+      "editorialSource": {
+        "url": "https://www.bbcgoodfood.com/recipes/low-sugar-granola",
+        "title": "Low-sugar granola",
+        "author": "Good Food team",
+        "status": "source-checked",
+        "reviewed": "2026-11-06",
+        "kitchenTested": false
+      }
+    }
+  ]
+}
