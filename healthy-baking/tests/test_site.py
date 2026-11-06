@@ -71,7 +71,7 @@ class SiteTest(unittest.TestCase):
                 archive.writestr('../test.txt', 'blocked')
 
     def test_all_html_links_and_no_public_sources(self):
-        self.cli('build')
+        self.cli('build', '--site-url', '')
         public = self.work / 'public'
         pages = {p:Page(p.read_text(encoding='utf-8')) for p in public.rglob('index.html')}
         self.assertTrue(public.joinpath('index.html').is_file())
