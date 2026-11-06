@@ -161,7 +161,7 @@ def home(recipes, collections, tracks, site):
 <figure class="hero-photo"><a href="/recipes/{featured['id']}/">{image(featured, True)}</a><figcaption><span>Иллюстрация к рецепту</span><a href="/recipes/{featured['id']}/">{e(featured['title'])} ↗</a></figcaption></figure></section>
 <section class="band"><div class="wrap band-inner"><span><b>01</b> Порции и размер формы</span><span><b>02</b> Граммы, стаканы и ложки</span><span><b>03</b> Сколько взять каждого продукта — указано в шагах</span></div></section>
 <section class="wrap block directions"><p class="eyebrow">Найдите свой рецепт</p><h2>Простые или необычные рецепты?</h2>{track_cards(tracks)}</section>
-<section class="wrap block"><p class="eyebrow">Отдельный раздел</p><h2>Здоровые завтраки</h2><p class="lead">Каши, яйца, панкейки, мюсли и завтраки, которые удобно приготовить с вечера.</p><a class="quiet" href="/breakfasts/">Смотреть завтраки <span aria-hidden="true">→</span></a></section>
+<section class="wrap block"><p class="eyebrow">Отдельный раздел</p><h2>Здоровые завтраки</h2><p class="lead">Каши, яйца, панкейки, мюсли и завтраки, которые удобно заготовить заранее — с вечера.</p><a class="quiet" href="/breakfasts/">Смотреть завтраки <span aria-hidden="true">→</span></a></section>
 <section class="wrap block"><div class="section-head"><div><p class="eyebrow">Из каталога</p><h2>Что будем печь?</h2></div><a class="quiet" href="/recipes/">Весь каталог <span aria-hidden="true">→</span></a></div><div class="cards">{''.join(map(card,picks))}</div></section>
 <section class="wrap block"><p class="eyebrow">По продуктам и случаям</p><h2>Подборки</h2>{collection_grid(collections)}</section>'''
     return layout(TITLE, 'Здоровая выпечка: простые и необычные домашние рецепты, подборки по составу, завтраки и меню на неделю. Подбор по продуктам и пересчёт порций.', '/', site, body, picture=f'/images/{featured["id"]}.webp')
@@ -301,7 +301,7 @@ def pages(recipes, site):
             f'<div class="cards">{"".join(map(card, members))}</div></section>'
             for kind, members in groups.items())
         intro = ('Рецепты полезных домашних завтраков: каши, блюда из яиц, '
-                 'панкейки, мюсли, тосты и гранола. Поиск и пересчёт порций.')
+                 'панкейки, мюсли, тосты, гранола и завтраки, которые удобно заготовить заранее — с вечера. Поиск и пересчёт порций.')
         yield '/breakfasts/', layout('Здоровые завтраки', intro, '/breakfasts/', site,
             f'<section class="wrap block top-block">{crumbs()}<p class="eyebrow">На каждый день</p>'
             f'<h1>Здоровые завтраки</h1><p class="lead">{e(intro)}</p></section>'
