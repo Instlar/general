@@ -24,7 +24,7 @@
   window.ym = ym;
   const tag = document.createElement('script');
   tag.async = true;
-  tag.src = 'https://mc.yandex.ru/metrika/tag.js';
+  tag.src = 'https://mc.yandex.ru/metrika/tag.js?id=' + counterId;
   tag.referrerPolicy = 'strict-origin-when-cross-origin';
   document.head.appendChild(tag);
   ym(counterId, 'init', {

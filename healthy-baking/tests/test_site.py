@@ -97,9 +97,28 @@ class SiteTest(unittest.TestCase):
                 if parsed.fragment:
                     self.assertIn(parsed.fragment, pages[target].ids)
 
+    def test_active_yandex_counter_on_all_public_page_types(self):
+        self.cli('build')
+        public = self.work / 'public'
+        for page in (
+            public / 'index.html',
+            public / 'breakfasts' / 'index.html',
+            public / 'recipes' / self.recipes[0]['id'] / 'index.html',
+        ):
+            html = page.read_text(encoding='utf-8')
+            self.assertEqual(html.count('data-counter="114111830"'), 1, page)
+            self.assertEqual(html.count('src="/yandex-metrika.js"'), 1, page)
+            self.assertNotIn('metrika/tag.js?id=114111830', html)
+        js = (public / 'yandex-metrika.js').read_text(encoding='utf-8')
+        self.assertIn("tag.js?id=' + counterId", js)
+        self.assertIn('webvisor: false', js)
+
     def test_yandex_settings_are_opt_in_and_validated(self):
-        # No account-specific codes have been supplied. Do not make live requests
-        # or show fake ownership verification on the deployed site.
+        # Explicitly disable for the negative check: production has an active ID.
+        config_path = self.work / 'content' / 'site.json'
+        config = json.loads(config_path.read_text(encoding='utf-8'))
+        config['yandex'] = {'metrikaCounterId': None, 'webmasterVerification': None}
+        config_path.write_text(json.dumps(config, ensure_ascii=False), encoding='utf-8')
         self.cli('build')
         public = self.work / 'public'
         homepage = (public / 'index.html').read_text(encoding='utf-8')
@@ -109,8 +128,6 @@ class SiteTest(unittest.TestCase):
         self.assertNotIn('data-counter=', recipe)
         self.assertTrue((public / 'yandex-metrika.js').is_file())
 
-        config_path = self.work / 'content' / 'site.json'
-        config = json.loads(config_path.read_text(encoding='utf-8'))
         config['yandex'] = {'metrikaCounterId': 12345678, 'webmasterVerification': 'a1b2c3d4e5f6a7b8'}
         config_path.write_text(json.dumps(config, ensure_ascii=False), encoding='utf-8')
         self.cli('build')
