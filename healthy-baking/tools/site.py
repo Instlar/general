@@ -81,7 +81,7 @@ def validate_recipe(r):
     tags = r.get('tags')
     require(string_list(tags) and len(tags) == len(set(tags)) and set(tags) <= TAG_NAMES.keys(), 'Неизвестные или повторяющиеся теги.')
     tracks = r.get('tracks')
-    require(string_list(tracks, 0, 2) and len(tracks) == len(set(tracks)) and set(tracks) <= TRACKS.keys(), 'Неизвестные или повторяющиеся направления.')
+    require(string_list(tracks, 1, 1) and tracks[0] in TRACKS, 'Укажите ровно одну группу: простые или необычные рецепты.')
     require(isinstance(r.get('difficulty'), str) and r['difficulty'] in DIFFICULTIES, 'Укажите сложность.')
     require(string_list(r.get('pantryExtra', []), 0, 8) and all(len(p) <= 100 for p in r.get('pantryExtra', [])), 'Проверьте дополнительные продукты.')
     require(integer(r.get('servings'), 1, 240) and integer(r.get('temp'), 90, 290), 'Неверное число порций или температура.')

@@ -125,6 +125,26 @@ class SiteTest(unittest.TestCase):
                 self.cli('import',self.package_file,succeeds=False)
                 self.assertEqual(before,(digest(self.recipe_file),digest(self.work / 'public' / 'index.html')))
 
+    def test_disjoint_simple_and_unusual_groups(self):
+        self.assertEqual(len(self.recipes), 23)
+        self.assertTrue(all(len(r.get('tracks', [])) == 1 for r in self.recipes))
+        self.cli('build', '--site-url', 'https://example.com')
+        public = self.work / 'public'
+        expected = [('everyday', 'Простые рецепты', 4),
+                    ('special', 'Необычные рецепты', 19)]
+        home = (public / 'index.html').read_text(encoding='utf-8')
+        for category, title, count in expected:
+            self.assertIn(title, home)
+            page = (public / category / 'index.html').read_text(encoding='utf-8')
+            self.assertIn(f'<h1>{title}</h1>', page)
+            self.assertEqual(page.count('<article class="card"'), count)
+            members = [r for r in self.recipes if r['tracks'] == [category]]
+            self.assertEqual(len(members), count)
+            for r in members:
+                self.assertIn(f'href="/recipes/{r["id"]}/"', page)
+                recipe_page = (public / 'recipes' / r['id'] / 'index.html').read_text(encoding='utf-8')
+                self.assertIn(f'<a href="/{category}/">{title}</a>', recipe_page)
+
     def test_seo_copy_and_structured_data(self):
         self.cli('build', '--site-url', 'https://example.com')
         public = self.work / 'public'

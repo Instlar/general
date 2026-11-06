@@ -19,8 +19,8 @@ TAGS = {
 }
 TAG_NAMES = {key: title for _, choices in TAGS.values() for key, title in choices.items()}
 TRACKS = {
-    'everyday': ('Из обычных продуктов', 'Простые рецепты из того, что легко найти в обычном магазине. Список ингредиентов и шаги подойдут для первой самостоятельной выпечки.', 'Для этой подборки подходят доступные продукты и обычные кухонные принадлежности. Смотрите время в карточке: простой состав может требовать долгой выпечки.', 'simple-apple-cake'),
-    'special': ('Выпечка с особым составом', 'Рецепты для конкретных запросов: без яиц или сливочного масла, с цельнозерновой мукой, финиками и необычными сочетаниями.', 'Один рецепт может подходить и для повседневной выпечки. При пищевой аллергии сверяйтесь с составом и маркировкой каждого продукта.', 'rye-blueberry-bars')
+    'everyday': ('Простые рецепты', 'Простая домашняя выпечка из привычных продуктов: яблочные пироги, кексы на кефире, овсяное печенье и завтраки без сложных техник.', 'В этом разделе рецепты с доступными ингредиентами и понятными шагами. Время приготовления может различаться — смотрите его в каждой карточке.', 'simple-apple-cake'),
+    'special': ('Необычные рецепты', 'Необычная выпечка: интересные сочетания продуктов, цельнозерновая и ржаная мука, финики, ягоды и нестандартные варианты теста.', 'Здесь встречаются редкие ингредиенты или непривычные сочетания. Перед приготовлением проверьте полный список продуктов и особенности рецепта.', 'rye-blueberry-bars')
 }
 DIFFICULTIES = {'easy': 'Легко', 'some-technique': 'Несколько этапов'}
 PANTRY_TOP = ['Пшеничная мука', 'Цельнозерновая мука', 'Яйца', 'Кефир', 'Творог', 'Бананы', 'Яблоки', 'Овсяные хлопья', 'Молоко', 'Растительное масло', 'Сахар', 'Разрыхлитель']
@@ -140,10 +140,10 @@ def home(recipes, collections, tracks, site):
 <div class="actions"><a class="button primary" href="/recipes/">Смотреть рецепты <span aria-hidden="true">↗</span></a><a class="quiet" href="/guides/">Меры и формы <span aria-hidden="true">→</span></a></div></div>
 <figure class="hero-photo"><a href="/recipes/{featured['id']}/">{image(featured, True)}</a><figcaption><span>Иллюстрация к рецепту</span><a href="/recipes/{featured['id']}/">{e(featured['title'])} ↗</a></figcaption></figure></section>
 <section class="band"><div class="wrap band-inner"><span><b>01</b> Порции и размер формы</span><span><b>02</b> Граммы, стаканы и ложки</span><span><b>03</b> Количества прямо в шагах</span></div></section>
-<section class="wrap block directions"><p class="eyebrow">Найдите свой рецепт</p><h2>Что хочется испечь?</h2>{track_cards(tracks)}</section>
+<section class="wrap block directions"><p class="eyebrow">Найдите свой рецепт</p><h2>Простые или необычные рецепты?</h2>{track_cards(tracks)}</section>
 <section class="wrap block"><div class="section-head"><div><p class="eyebrow">Из каталога</p><h2>Что будем печь?</h2></div><a class="quiet" href="/recipes/">Весь каталог <span aria-hidden="true">→</span></a></div><div class="cards">{''.join(map(card,picks))}</div></section>
 <section class="wrap block"><p class="eyebrow">По продуктам и случаям</p><h2>Подборки</h2>{collection_grid(collections)}</section>'''
-    return layout(TITLE, 'Простые рецепты здоровой домашней выпечки: пироги, кексы и печенье из обычных продуктов и с особым составом. Пересчёт порций, форм и мер.', '/', site, body, picture=f'/images/{featured["id"]}.webp')
+    return layout(TITLE, 'Здоровая выпечка: простые и необычные рецепты пирогов, кексов и печенья. Поиск по продуктам, пересчёт порций, форм и мер.', '/', site, body, picture=f'/images/{featured["id"]}.webp')
 
 
 def catalog(recipes, site):
@@ -162,13 +162,13 @@ def catalog(recipes, site):
         return ''.join(f'<label class="pantry-chip"><input type="checkbox" value="{e(product)}" data-pantry-product> <span>{e(product)}</span></label>' for product in products)
     body = f'''<section class="wrap block top-block">{crumbs()}<p class="eyebrow">Книга рецептов</p><h1>Рецепты выпечки</h1><p class="lead">Ищите по названию, продукту или виду выпечки. Фильтры можно сочетать.</p>
 <form id="filters" class="filterbox" hidden><label class="search-label">Поиск по рецептам<input id="search" type="search" placeholder="Например, яблоко или овсянка"></label>
-<div class="filter-grid">{select('kind','Вид выпечки',kinds)}{groups}{select('track','Направление',{key: row[0] for key,row in TRACKS.items()})}{select('difficulty','Приготовление',DIFFICULTIES)}</div>
+<div class="filter-grid">{select('kind','Вид выпечки',kinds)}{groups}{select('track','Тип рецепта',{key: row[0] for key,row in TRACKS.items()})}{select('difficulty','Приготовление',DIFFICULTIES)}</div>
 <fieldset class="pantry"><legend>Что есть дома?</legend><p>Отметьте продукты. Подберём рецепты и покажем, чего не хватает. Вода считается доступной.</p><div class="pantry-options">{checkboxes(primary)}</div>
 <details><summary>Другие продукты</summary><label>Найти продукт<input type="search" id="pantry-search" placeholder="Например, сода"></label><div class="pantry-options">{checkboxes(secondary)}</div><p id="pantry-none" hidden>Такого продукта в этом списке нет.</p></details>
 <label class="pantry-exact"><input id="pantry-exact" type="checkbox"> Только рецепты, для которых всё есть</label></fieldset></form>
 <div class="catalog-status"><p id="recipe-count" role="status">Всего рецептов: {len(recipes)}</p><button class="quiet" id="reset-filters" type="button" hidden>Сбросить фильтры</button></div>
 <div class="cards" id="catalog">{''.join(map(card,recipes))}</div><p id="empty" class="notice" hidden>По вашему запросу ничего не нашлось. Попробуйте изменить поиск или убрать фильтр.</p></section>'''
-    return layout('Рецепты домашней выпечки', 'Простые рецепты пирогов, печенья, кексов и здоровой домашней выпечки. Подберите блюдо по продуктам, виду теста и ограничениям состава.', '/recipes/', site, body, section='catalog')
+    return layout('Рецепты домашней выпечки', 'Простые и необычные рецепты здоровой выпечки: пироги, печенье и кексы. Выбирайте по ингредиентам, виду теста и составу.', '/recipes/', site, body, section='catalog')
 
 
 def recipe(r, site, related):
@@ -189,7 +189,8 @@ def recipe(r, site, related):
                    + f'</span><strong data-amount="{i["id"]}">{e(quantity(i))}</strong></label></li>' for i in ingredients.values())
     steps = ''.join(f'<li><div>{step_text(s, True)}</div></li>' for s in r['steps'])
     tips = ''.join(f'<p>{e(tip)}</p>' for tip in r.get('tips', []))
-    tag_links = ''.join(f'<a href="/collections/{tag}/">{e(TAG_NAMES[tag])}</a>' for tag in r['tags'] if tag in related['collections'])
+    track_link = f'<a href="/{r["tracks"][0]}/">{e(TRACKS[r["tracks"][0]][0])}</a>'
+    tag_links = track_link + ''.join(f'<a href="/collections/{tag}/">{e(TAG_NAMES[tag])}</a>' for tag in r['tags'] if tag in related['collections'])
     prep = f'<div><dt>Подготовка</dt><dd>{r["prep"]} мин</dd></div>' if r.get('prep') is not None else ''
     extra = f'<div><dt>Дополнительно</dt><dd>{r["extra"]} мин</dd></div>' if r.get('extra') else ''
     time_note = f'<p class="pan-line">{e(r["timeNote"])}</p>' if r.get('timeNote') else ''
@@ -261,7 +262,7 @@ def pages(recipes, site):
     for key, members in tracks.items():
         title, desc, tip, _ = TRACKS[key]
         path = f'/{key}/'
-        yield path, layout(title, desc, path, site, f'<section class="wrap block top-block">{crumbs()}<p class="eyebrow">Рецепты по составу</p><h1>{e(title)}</h1><p class="lead">{e(desc)}</p><p class="notice">{e(tip)}</p><div class="cards">{"".join(map(card,members))}</div></section>',
+        yield path, layout(title, desc, path, site, f'<section class="wrap block top-block">{crumbs()}<p class="eyebrow">Выберите рецепт</p><h1>{e(title)}</h1><p class="lead">{e(desc)}</p><p class="notice">{e(tip)}</p><div class="cards">{"".join(map(card,members))}</div></section>',
                            picture=f'/images/{members[0]["id"]}.webp', section='catalog')
     yield '/collections/', layout('Подборки рецептов', 'Домашняя выпечка по продуктам, составу и случаю.', '/collections/', site,
         f'<section class="wrap block top-block">{crumbs()}<p class="eyebrow">Выберите по случаю</p><h1>Подборки</h1>{track_cards(tracks)}{collection_grid(collections)}</section>',section='collections')
