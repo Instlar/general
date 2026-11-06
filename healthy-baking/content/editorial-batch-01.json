@@ -1,7 +1,7 @@
 {
   "batch": "2026-11-06-baking-01",
   "visibility": "editorial-staging-only",
-  "notes": "11 source-checked, not kitchen-tested original Russian adaptations. Do not add to live recipes.json until matching independent WebP images exist and full format validation passes. These are editorial drafts; review oven temperatures, portion sizes, and all text against primary sources before publishing.",
+  "notes": "Editorial records: first recipe published; other draft recipes remain staging until each illustration matches its source.",
   "recipes": [
     {
       "id": "finnish-blueberry-custard-pie",
@@ -121,7 +121,7 @@
       ],
       "imageAlt": "Круглый черничный пирог со светлой сметанной заливкой и вынутым куском на белой тарелке",
       "editorial": {
-        "status": "source-checked-unbaked",
+        "status": "published-source-checked-unbaked",
         "photography": "required",
         "source": {
           "title": "Finnish Mustikkapiirakka (Blueberry Pie)",
@@ -131,7 +131,7 @@
         },
         "reviewedAt": "2026-11-06",
         "imagePrompt": "Photorealistic home-baked food editorial photograph, match approved reference: strong food close-up, soft natural sunlight from right-hand kitchen window, off-white minimalist kitchen, simple white plate on textured light linen, 3/2 landscape, shallow depth of field, subtle imperfect crumbs, no hands, no people, no text, no watermark, no artificial over-styling. The pictured dish MUST match the ingredient list and actual recipe, do not add visible ingredients absent from recipe. Dish: Round Finnish blueberry custard tart with a golden soft crust, creamy pale sour cream filling densely studded with dark blueberries, one pulled-out wedge revealing the berry and custard layers, white ceramic plate.",
-        "imageStatus": "not-committed"
+        "imageStatus": "committed-and-published"
       }
     },
     {
