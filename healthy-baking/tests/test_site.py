@@ -15,3 +15,13 @@ class BakingTest(unittest.TestCase):
  def test_static(self):
   self.assertTrue((ROOT/'public/index.html').exists());self.assertTrue((ROOT/'public/app.js').exists())
   self.assertLess(sum(p.stat().st_size for p in (ROOT/'public/assets').glob('*.webp')),500_000)
+
+ def test_yandex_webmaster_verification(self):
+  verification = '<meta name="yandex-verification" content="68cdd4d21d14995c">'
+  self.assertIn(verification, (ROOT/'scripts/build.py').read_text())
+  pages = list((ROOT/'public').rglob('index.html'))
+  self.assertEqual(len(pages), 14)
+  for page in pages:
+   content = page.read_text()
+   self.assertEqual(content.count(verification), 1, str(page))
+   self.assertLess(content.index(verification), content.index('</head>'), str(page))
