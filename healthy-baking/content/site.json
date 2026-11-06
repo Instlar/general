@@ -1,3 +1,7 @@
 {
-  "siteUrl": "https://pekizdorovo.ru"
+  "siteUrl": "https://pekizdorovo.ru",
+  "yandex": {
+    "metrikaCounterId": null,
+    "webmasterVerification": null
+  }
 }

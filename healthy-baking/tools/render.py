@@ -6,6 +6,17 @@ import re
 from pathlib import Path
 
 TITLE = 'Здоровая выпечка'
+# Public Yandex IDs are set by the owner in content/site.json after account setup.
+# Missing IDs mean no calls to Yandex and no fake verification tags.
+YANDEX_METRIKA_ID = None
+YANDEX_WEBMASTER_VERIFICATION = None
+
+
+def configure_yandex(metrika_id=None, verification=None):
+    global YANDEX_METRIKA_ID, YANDEX_WEBMASTER_VERIFICATION
+    YANDEX_METRIKA_ID = metrika_id
+    YANDEX_WEBMASTER_VERIFICATION = verification
+
 KINDS = {'cake': 'Пироги', 'muffin': 'Маффины', 'cookie': 'Печенье', 'casserole': 'Запеканки', 'oats': 'Запечённая овсянка',
          'bread': 'Кексы', 'scone': 'Сконы', 'bar': 'Батончики', 'crumble': 'Крамблы и коблеры',
          'porridge': 'Каши', 'eggs': 'Блюда из яиц', 'pancake': 'Оладьи и панкейки',
@@ -116,6 +127,10 @@ def layout(title, description, path, site, body, *, picture=None, schema=None, s
     meta = f'<link rel="canonical" href="{e(canonical)}"><meta property="og:url" content="{e(canonical)}">' if canonical else ''
     if picture:
         meta += f'<meta property="og:image" content="{e(site + picture)}">'
+    if path == '/' and YANDEX_WEBMASTER_VERIFICATION:
+        meta += f'<meta name="yandex-verification" content="{e(YANDEX_WEBMASTER_VERIFICATION)}">'
+    yandex_script = (f'<script defer src="/yandex-metrika.js" data-counter="{YANDEX_METRIKA_ID}"></script>'
+                     if YANDEX_METRIKA_ID else '')
     structured = f'<script type="application/ld+json">{script_json(schema)}</script>' if schema else ''
     if site and path != '/':
         trail = [{'@type': 'ListItem', 'position': 1, 'name': TITLE, 'item': site + '/'}]
@@ -135,7 +150,7 @@ def layout(title, description, path, site, body, *, picture=None, schema=None, s
     return f'''<!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#ffffff">
 <title>{e(page_title)}</title><meta name="description" content="{e(description)}"><meta property="og:site_name" content="{TITLE}"><meta property="og:locale" content="ru_RU"><meta property="og:type" content="{og_type}"><meta property="og:title" content="{e(page_title)}"><meta property="og:description" content="{e(description)}">{meta}
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script>{structured}</head>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script>{yandex_script}{structured}</head>
 <body><a class="skip" href="#main">К содержанию</a><header class="top"><div class="wrap top-inner"><a href="/" class="brand"><img src="/favicon.svg" width="33" height="33" alt="">{TITLE}</a><nav aria-label="Основная навигация">{nav}</nav></div></header>
 <main id="main">{body}</main><footer class="footer"><div class="wrap foot"><a href="/" class="brand"><img src="/favicon.svg" width="29" height="29" alt="">{TITLE}</a><span>Домашняя выпечка и завтраки по опубликованным рецептурам</span><a href="/about/">О проекте</a><a href="/privacy/">Конфиденциальность</a></div></footer><script defer src="https://api.tugarin-game.ru/api/site-analytics/tracker.js" data-site="baking"></script></body></html>'''
 

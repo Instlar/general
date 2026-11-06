@@ -14,6 +14,7 @@ from pathlib import Path, PurePosixPath
 from urllib.parse import urlsplit
 from xml.sax.saxutils import escape
 
+import render
 from render import DIFFICULTIES, KINDS, TAG_NAMES, TOKEN, TRACKS, UNIT, write_pages
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -202,6 +203,17 @@ def build(content, public):
                 recipe['description'] = desc
     config = json.loads((content / 'site.json').read_text(encoding='utf-8'))
     domain = validate_domain(config.get('siteUrl', ''))
+    yandex = config.get('yandex', {})
+    check(isinstance(yandex, dict) and set(yandex) <= {'metrikaCounterId', 'webmasterVerification'},
+          'Некорректный раздел Яндекса в настройках сайта.')
+    metrika = yandex.get('metrikaCounterId')
+    verification = yandex.get('webmasterVerification')
+    check(metrika is None or (type(metrika) is int and 1 <= metrika <= 9999999999),
+          'Идентификатор Метрики должен быть положительным числом.')
+    check(verification is None or (isinstance(verification, str) and
+          re.fullmatch(r'[A-Za-z0-9]{8,100}', verification)),
+          'Неверный код подтверждения Яндекс Вебмастера.')
+    render.configure_yandex(metrika, verification)
     shutil.copytree(ROOT / 'static', public)
     (public / 'images').mkdir()
     for r in recipes:
