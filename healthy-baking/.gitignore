@@ -1,0 +1,5 @@
+/editorial-sources.local.json
+/.site-build.lock
+/.site-*/
+/tests/.site-*/
+__pycache__/
