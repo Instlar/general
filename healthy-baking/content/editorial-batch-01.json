@@ -794,7 +794,7 @@
       ],
       "imageAlt": "Квадратные овсяные батончики с яркой малиновой прослойкой на белой тарелке",
       "editorial": {
-        "status": "source-checked-unbaked",
+        "status": "published-source-checked-unbaked",
         "photography": "required",
         "source": {
           "title": "Raspberry oat traybake",
@@ -804,7 +804,7 @@
         },
         "reviewedAt": "2026-11-06",
         "imagePrompt": "Photorealistic home-baked food editorial photograph, match approved reference: strong food close-up, soft natural sunlight from right-hand kitchen window, off-white minimalist kitchen, simple white plate on textured light linen, 3/2 landscape, shallow depth of field, subtle imperfect crumbs, no hands, no people, no text, no watermark, no artificial over-styling. The pictured dish MUST match the ingredient list and actual recipe, do not add visible ingredients absent from recipe. Dish: Four square baked oat bars with distinct crushed raspberry red filling sandwiched between golden oat-almond crust layers, a few oat crumbs on white ceramic plate.",
-        "imageStatus": "not-committed"
+        "imageStatus": "committed-and-published"
       }
     },
     {
