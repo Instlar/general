@@ -201,9 +201,7 @@ class SiteTest(unittest.TestCase):
         self.assertEqual(len({r['sourceKey'] for r in drafts}), len(drafts))
         for draft in drafts:
             self.assertEqual(draft['mealTypes'], ['breakfast'])
-            self.assertRegex(draft['sourceKey'], r'^[0-9a-f]{64}
-    unittest.main()
-)
+            self.assertRegex(draft['sourceKey'], r'^[0-9a-f]{64}$')
             self.assertTrue(draft['editorialSource']['url'].startswith('https://'))
             ingredient_ids = {i['id'] for i in draft['ingredients']}
             step_ids = set(re.findall(r'\{\{([a-z0-9-]+)\}\}', '\n'.join(draft['steps'])))
