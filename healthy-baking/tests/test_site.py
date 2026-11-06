@@ -192,11 +192,11 @@ class SiteTest(unittest.TestCase):
         pp_baking = (public / 'collections' / 'pp-baking' / 'index.html').read_text(encoding='utf-8')
         pp_pies = (public / 'collections' / 'pp-pies' / 'index.html').read_text(encoding='utf-8')
         self.assertIn('<h1>ПП выпечка', pp_baking)
-        self.assertIn('Цельнозерновый', pp_pies) if 'Цельнозерновый' in pp_pies else self.assertIn('пирог', pp_pies.lower())
+        self.assertIn('пирог', pp_pies.lower())
         self.assertIn('ПП выпечка', homepage)
         self.assertIn('Рецепты по ингредиентам', (public / 'recipes' / 'index.html').read_text(encoding='utf-8'))
         self.assertIn('Полезные завтраки', (public / 'breakfasts' / 'index.html').read_text(encoding='utf-8'))
-                self.assertTrue((public / 'sitemap.xml').is_file())
+        self.assertTrue((public / 'sitemap.xml').is_file())
         self.assertIn('Sitemap: https://example.com/sitemap.xml',
                       (public / 'robots.txt').read_text(encoding='utf-8'))
 
