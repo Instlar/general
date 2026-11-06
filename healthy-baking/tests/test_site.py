@@ -149,7 +149,8 @@ class SiteTest(unittest.TestCase):
         self.cli('build', '--site-url', 'https://example.com')
         public = self.work / 'public'
         homepage = (public / 'index.html').read_text(encoding='utf-8')
-        self.assertIn('Пеки здорово', homepage)
+        self.assertIn('Здоровая выпечка', homepage)
+        self.assertNotIn('Пеки здорово', homepage)
         self.assertIn('Простые рецепты здоровой домашней выпечки', homepage)
 
         seo = json.loads((self.work / 'content' / 'seo-copy.json').read_text(encoding='utf-8'))['recipes']

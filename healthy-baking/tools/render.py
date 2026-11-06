@@ -5,7 +5,7 @@ import json
 import re
 from pathlib import Path
 
-TITLE = 'Пеки здорово'
+TITLE = 'Здоровая выпечка'
 KINDS = {'cake': 'Пироги', 'muffin': 'Маффины', 'cookie': 'Печенье', 'oats': 'Запечённая овсянка',
          'bread': 'Кексы', 'bar': 'Батончики', 'crumble': 'Крамблы и коблеры'}
 TAGS = {
@@ -87,7 +87,7 @@ def layout(title, description, path, site, body, *, picture=None, schema=None, s
         trail.append({'@type': 'ListItem', 'position': len(trail) + 1, 'name': title.removesuffix(' — рецепт'), 'item': site + path})
         breadcrumbs = {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': trail}
         structured += f'<script type="application/ld+json">{script_json(breadcrumbs)}</script>'
-    page_title = f'{title} · {TITLE}' if title != TITLE else f'{TITLE} — простые рецепты здоровой выпечки'
+    page_title = f'{title} · {TITLE}' if title != TITLE else f'{TITLE} — простые и необычные рецепты'
     nav = ''.join(f'<a href="{href}"'+(' aria-current="page"' if section == key else '')+f'>{label}</a>'
                   for key, href, label in [('catalog','/recipes/','Рецепты'),('collections','/collections/','Подборки'),('guides','/guides/','Справочник')])
     og_type = 'article' if schema and schema.get('@type') == 'Recipe' else 'website'
