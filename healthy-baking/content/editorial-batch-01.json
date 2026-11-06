@@ -1,0 +1,1457 @@
+{
+  "batch": "2026-11-06-baking-01",
+  "visibility": "editorial-staging-only",
+  "notes": "11 source-checked, not kitchen-tested original Russian adaptations. Do not add to live recipes.json until matching independent WebP images exist and full format validation passes. These are editorial drafts; review oven temperatures, portion sizes, and all text against primary sources before publishing.",
+  "recipes": [
+    {
+      "id": "finnish-blueberry-custard-pie",
+      "title": "Финский черничный пирог со сметанной заливкой",
+      "description": "Финский черничный пирог со сметанной заливкой и мягкой песочной основой. Простой домашний рецепт на восемь порций: подойдет свежая или замороженная черника.",
+      "intro": "Финский пирог мустиккапийракка готовят с черникой и сметанной заливкой. Для круглой формы 24 см понадобятся обычная пшеничная мука, яйца и сливочное масло; замороженные ягоды предварительно размораживать не нужно.",
+      "kind": "cake",
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "berries",
+        "family"
+      ],
+      "servings": 8,
+      "prep": 25,
+      "bake": [
+        35,
+        40
+      ],
+      "temp": 200,
+      "mode": "верх-низ",
+      "pan": "Круглая форма для пирога, диаметр 24 см",
+      "panSize": {
+        "kind": "round",
+        "diameter": 24
+      },
+      "ingredients": [
+        {
+          "id": "butter",
+          "label": "Сливочное масло, мягкое",
+          "amount": 100,
+          "unit": "g",
+          "product": "Сливочное масло"
+        },
+        {
+          "id": "sugar-base",
+          "label": "Сахар для основы",
+          "amount": 85,
+          "unit": "g",
+          "product": "Сахар"
+        },
+        {
+          "id": "egg-base",
+          "label": "Яйцо в основу",
+          "amount": 1,
+          "unit": "each",
+          "product": "Яйца"
+        },
+        {
+          "id": "flour",
+          "label": "Пшеничная мука",
+          "amount": 180,
+          "unit": "g",
+          "product": "Пшеничная мука"
+        },
+        {
+          "id": "baking-powder",
+          "label": "Разрыхлитель",
+          "amount": 1,
+          "unit": "tsp",
+          "product": "Разрыхлитель"
+        },
+        {
+          "id": "sour-cream",
+          "label": "Сметана",
+          "amount": 200,
+          "unit": "ml",
+          "product": "Сметана"
+        },
+        {
+          "id": "egg-fill",
+          "label": "Яйцо для заливки",
+          "amount": 1,
+          "unit": "each",
+          "product": "Яйца"
+        },
+        {
+          "id": "vanilla",
+          "label": "Ванильный экстракт",
+          "amount": 1,
+          "unit": "tsp",
+          "product": "Ванильный экстракт"
+        },
+        {
+          "id": "sugar-fill",
+          "label": "Сахар для заливки",
+          "amount": 60,
+          "unit": "g",
+          "product": "Сахар"
+        },
+        {
+          "id": "blueberries",
+          "label": "Черника",
+          "amount": 200,
+          "unit": "g",
+          "product": "Черника"
+        }
+      ],
+      "steps": [
+        "Нагрейте духовку до 200 °C. Смажьте круглую форму диаметром 24 см. Разотрите {{butter}} и {{sugar-base}} до однородности.",
+        "Вмешайте в основу {{egg-base}}, затем добавьте {{flour}} и {{baking-powder}}. Соберите мягкое тесто и распределите по дну и бортикам формы.",
+        "В отдельной миске взбейте {{sour-cream}}, {{egg-fill}}, {{vanilla}} и {{sugar-fill}} до однородной заливки.",
+        "Разложите {{blueberries}} по сырому тесту и аккуратно распределите сверху сметанную смесь.",
+        "Пеките 35–40 минут, пока заливка не схватится, а края не станут золотистыми. Полностью остудите перед нарезкой."
+      ],
+      "doneness": "Заливка держит форму, края золотистые; пирог полностью остужен перед нарезкой.",
+      "storage": "Источник рекомендует полностью остудить; точный срок хранения не указан. Пирог с молочной и яичной заливкой после остывания держите в холодильнике.",
+      "allergens": [
+        "Пшеница (глютен)",
+        "Молоко",
+        "Яйца"
+      ],
+      "tips": [
+        "Замороженную чернику по рецепту источника можно использовать без размораживания."
+      ],
+      "imageAlt": "Круглый черничный пирог со светлой сметанной заливкой и вынутым куском на белой тарелке",
+      "editorial": {
+        "status": "source-checked-unbaked",
+        "photography": "required",
+        "source": {
+          "title": "Finnish Mustikkapiirakka (Blueberry Pie)",
+          "author": "Wei Ling",
+          "url": "https://bakingheritage.com/recipes/finnish-mustikkapiirakka-blueberry-pie",
+          "origin": "Finland"
+        },
+        "reviewedAt": "2026-11-06"
+      }
+    },
+    {
+      "id": "lemon-poppy-seed-olive-oil-cake",
+      "title": "Лимонный кекс с маком на растительном масле",
+      "description": "Лимонный кекс с маком на растительном масле — домашняя выпечка без сливочного масла. Ароматный кекс к чаю готовят с лимонным соком, цедрой и молоком.",
+      "intro": "В кексе сочетаются лимонный сок, цедра и заметное количество мака. По рецепту King Arthur Baking он выпекается в прямоугольной форме или кольцевой форме и не требует обязательной глазури.",
+      "kind": "bread",
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "no-butter",
+        "family"
+      ],
+      "servings": 10,
+      "prep": 15,
+      "bake": [
+        45,
+        55
+      ],
+      "temp": 177,
+      "mode": "верх-низ",
+      "pan": "Прямоугольная форма 23 × 13 см или кольцевая форма на 10 чашек",
+      "panSize": {
+        "kind": "rectangle",
+        "width": 23,
+        "length": 13
+      },
+      "ingredients": [
+        {
+          "id": "flour",
+          "label": "Пшеничная мука",
+          "amount": 240,
+          "unit": "g",
+          "product": "Пшеничная мука"
+        },
+        {
+          "id": "powder",
+          "label": "Разрыхлитель",
+          "amount": 2.5,
+          "unit": "tsp",
+          "product": "Разрыхлитель"
+        },
+        {
+          "id": "salt",
+          "label": "Соль",
+          "amount": 1,
+          "unit": "tsp",
+          "product": "Соль"
+        },
+        {
+          "id": "poppy",
+          "label": "Мак",
+          "amount": 35,
+          "unit": "g",
+          "product": "Мак"
+        },
+        {
+          "id": "oil",
+          "label": "Растительное масло",
+          "amount": 131,
+          "unit": "g",
+          "product": "Растительное масло"
+        },
+        {
+          "id": "sugar",
+          "label": "Сахар",
+          "amount": 149,
+          "unit": "g",
+          "product": "Сахар"
+        },
+        {
+          "id": "eggs",
+          "label": "Яйца",
+          "amount": 2,
+          "unit": "each",
+          "product": "Яйца"
+        },
+        {
+          "id": "milk",
+          "label": "Молоко",
+          "amount": 170,
+          "unit": "g",
+          "product": "Молоко"
+        },
+        {
+          "id": "lemon-juice",
+          "label": "Лимонный сок",
+          "amount": 57,
+          "unit": "g",
+          "product": "Лимонный сок"
+        },
+        {
+          "id": "vanilla",
+          "label": "Ванильный экстракт",
+          "amount": 2,
+          "unit": "tsp",
+          "product": "Ванильный экстракт"
+        },
+        {
+          "id": "lemon-zest",
+          "label": "Лимонная цедра",
+          "amount": 2,
+          "unit": "tsp",
+          "product": "Лимонная цедра"
+        }
+      ],
+      "steps": [
+        "Разогрейте духовку до 177 °C, подготовьте форму. Соедините {{flour}}, {{powder}}, {{salt}} и {{poppy}}.",
+        "В другой посуде смешайте {{oil}} и {{sugar}}; добавьте {{eggs}} и взбивайте около 3 минут до светлой смеси.",
+        "Вмешайте сухую смесь, затем {{milk}}, {{lemon-juice}}, {{vanilla}} и {{lemon-zest}}. Переложите тесто в подготовленную форму.",
+        "Выпекайте около 45 минут в кольцевой форме или 45–55 минут в форме для кекса: шпажка из центра должна выходить без сырого теста. Остудите 5–10 минут в форме, затем на решетке."
+      ],
+      "doneness": "Шпажка выходит чистой, края слегка отходят от стенок.",
+      "storage": "Храните полностью остывший кекс плотно закрытым; конкретный срок в проверенной части источника не указан.",
+      "allergens": [
+        "Пшеница (глютен)",
+        "Молоко",
+        "Яйца"
+      ],
+      "tips": [
+        "Время зависит от формы: сверяйтесь с указаниями источника для кольцевой и прямоугольной форм."
+      ],
+      "imageAlt": "Лимонный кекс с мелкими черными зернами мака в разрезе на светлой тарелке",
+      "editorial": {
+        "status": "source-checked-unbaked",
+        "photography": "required",
+        "source": {
+          "title": "Lemon Poppy Seed Cake",
+          "author": "King Arthur Baking",
+          "url": "https://www.kingarthurbaking.com/recipes/lemon-poppy-seed-cake-recipe",
+          "origin": "USA"
+        },
+        "reviewedAt": "2026-11-06"
+      }
+    },
+    {
+      "id": "zucchini-cinnamon-loaf",
+      "title": "Кекс с кабачком и корицей",
+      "description": "Домашний кекс с тертым кабачком, яблочным пюре и корицей. Простой рецепт без сливочного масла в узкой форме; кабачок делает мякиш влажным.",
+      "intro": "Американский zucchini bread — сладкий кекс с кабачком и пряностями. Тертый кабачок не нужно отжимать; немного яблочного пюре и растительное масло сохраняют влажность.",
+      "kind": "bread",
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "no-butter",
+        "family"
+      ],
+      "servings": 10,
+      "prep": 10,
+      "bake": [
+        55,
+        70
+      ],
+      "temp": 177,
+      "mode": "верх-низ",
+      "pan": "Прямоугольная форма примерно 23 × 13 см",
+      "panSize": {
+        "kind": "rectangle",
+        "width": 23,
+        "length": 13
+      },
+      "ingredients": [
+        {
+          "id": "flour",
+          "label": "Пшеничная мука",
+          "amount": 220,
+          "unit": "g",
+          "product": "Пшеничная мука"
+        },
+        {
+          "id": "powder",
+          "label": "Разрыхлитель",
+          "amount": 1,
+          "unit": "tsp",
+          "product": "Разрыхлитель"
+        },
+        {
+          "id": "soda",
+          "label": "Пищевая сода",
+          "amount": 0.5,
+          "unit": "tsp",
+          "product": "Пищевая сода"
+        },
+        {
+          "id": "salt",
+          "label": "Соль",
+          "amount": 0.5,
+          "unit": "tsp",
+          "product": "Соль"
+        },
+        {
+          "id": "cinnamon",
+          "label": "Корица",
+          "amount": 1.5,
+          "unit": "tsp",
+          "product": "Корица"
+        },
+        {
+          "id": "nutmeg",
+          "label": "Мускатный орех",
+          "amount": 0.25,
+          "unit": "tsp",
+          "product": "Мускатный орех"
+        },
+        {
+          "id": "oil",
+          "label": "Растительное масло",
+          "amount": 120,
+          "unit": "ml",
+          "product": "Растительное масло"
+        },
+        {
+          "id": "brown-sugar",
+          "label": "Коричневый сахар",
+          "amount": 100,
+          "unit": "g",
+          "product": "Коричневый сахар"
+        },
+        {
+          "id": "sugar",
+          "label": "Белый сахар",
+          "amount": 100,
+          "unit": "g",
+          "product": "Сахар"
+        },
+        {
+          "id": "eggs",
+          "label": "Яйца",
+          "amount": 2,
+          "unit": "each",
+          "product": "Яйца"
+        },
+        {
+          "id": "applesauce",
+          "label": "Яблочное пюре без сахара",
+          "amount": 60,
+          "unit": "g",
+          "product": "Яблочное пюре"
+        },
+        {
+          "id": "vanilla",
+          "label": "Ванильный экстракт",
+          "amount": 2,
+          "unit": "tsp",
+          "product": "Ванильный экстракт"
+        },
+        {
+          "id": "zucchini",
+          "label": "Тертый кабачок",
+          "amount": 180,
+          "unit": "g",
+          "product": "Кабачки"
+        }
+      ],
+      "steps": [
+        "Разогрейте духовку до 177 °C и подготовьте форму. В миске соедините {{flour}}, {{powder}}, {{soda}}, {{salt}}, {{cinnamon}} и {{nutmeg}}.",
+        "Отдельно смешайте {{oil}}, {{brown-sugar}}, {{sugar}}, {{eggs}}, {{applesauce}} и {{vanilla}}. Вмешайте {{zucchini}}, не отжимая его.",
+        "Соедините жидкую и сухую смеси, размешайте только до исчезновения сухой муки. Переложите густое тесто в форму.",
+        "Выпекайте 55–70 минут до шпажки без сырого теста; если верх сильно румянится, неплотно прикройте фольгой. Остужайте 1 час в форме, затем на решетке."
+      ],
+      "doneness": "Шпажка в центре выходит почти чистой, без сырого теста.",
+      "storage": "Под крышкой при комнатной температуре 3–4 дня или в холодильнике до недели; заморозка до 3 месяцев — по источнику.",
+      "allergens": [
+        "Пшеница (глютен)",
+        "Яйца"
+      ],
+      "tips": [
+        "Не отжимайте кабачок: в исходном рецепте эта влага предусмотрена.",
+        "Не сокращайте сахар и масло произвольно: автор предупреждает об изменении структуры."
+      ],
+      "imageAlt": "Продолговатый домашний кекс с корицей и мелкими зелеными вкраплениями кабачка в разрезе",
+      "editorial": {
+        "status": "source-checked-unbaked",
+        "photography": "required",
+        "source": {
+          "title": "Zucchini Bread (Better Than Ever!)",
+          "author": "Sally McKenney",
+          "url": "https://sallysbakingaddiction.com/zucchini-bread/",
+          "origin": "USA"
+        },
+        "reviewedAt": "2026-11-06"
+      }
+    },
+    {
+      "id": "italian-ricotta-lemon-bundt",
+      "title": "Итальянский лимонный кекс с рикоттой",
+      "description": "Итальянский кекс с рикоттой и лимонной цедрой в кольцевой форме. Домашняя выпечка к семейному чаепитию с нежным творожным мякишем.",
+      "intro": "Этот кольцевой кекс по итальянскому рецепту GialloZafferano готовится на рикотте, сливочном масле и лимонной цедре. На восемь порций понадобится форма с отверстием в центре.",
+      "kind": "bread",
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "family",
+        "cottage-cheese"
+      ],
+      "servings": 8,
+      "prep": 20,
+      "bake": [
+        50,
+        55
+      ],
+      "temp": 180,
+      "mode": "верх-низ",
+      "pan": "Кольцевая форма 23 см в диаметре с высокими бортиками",
+      "ingredients": [
+        {
+          "id": "ricotta",
+          "label": "Рикотта",
+          "amount": 375,
+          "unit": "g",
+          "product": "Рикотта"
+        },
+        {
+          "id": "lemon",
+          "label": "Лимон для цедры",
+          "amount": 1,
+          "unit": "each",
+          "product": "Лимоны"
+        },
+        {
+          "id": "flour",
+          "label": "Пшеничная мука типа 00",
+          "amount": 300,
+          "unit": "g",
+          "product": "Пшеничная мука"
+        },
+        {
+          "id": "eggs",
+          "label": "Яйца",
+          "amount": 3,
+          "unit": "each",
+          "product": "Яйца"
+        },
+        {
+          "id": "sugar",
+          "label": "Коричневый сахар",
+          "amount": 255,
+          "unit": "g",
+          "product": "Коричневый сахар"
+        },
+        {
+          "id": "powder",
+          "label": "Разрыхлитель",
+          "amount": 16,
+          "unit": "g",
+          "product": "Разрыхлитель"
+        },
+        {
+          "id": "butter",
+          "label": "Сливочное масло, растопленное",
+          "amount": 180,
+          "unit": "g",
+          "product": "Сливочное масло"
+        },
+        {
+          "id": "salt",
+          "label": "Соль",
+          "amount": 1,
+          "unit": "pinch",
+          "product": "Соль"
+        }
+      ],
+      "steps": [
+        "Разогрейте духовку до 180 °C. Слегка взбейте {{eggs}} с {{sugar}} и {{salt}}.",
+        "Влейте остывшее {{butter}}, затем перемешайте с {{ricotta}} до однородности.",
+        "Снимите цедру с {{lemon}} и вмешайте ее. Просейте {{flour}} вместе с {{powder}}, размешайте до гладкого теста.",
+        "Переложите тесто в смазанную и присыпанную мукой кольцевую форму диаметром 23 см. Выпекайте 50–55 минут, остудите, затем выньте из формы."
+      ],
+      "doneness": "Кекс поднялся, середина пропеклась; выньте после охлаждения.",
+      "storage": "Под куполом при комнатной температуре до 3 дней; можно заморозить, как указано у автора.",
+      "allergens": [
+        "Пшеница (глютен)",
+        "Молоко",
+        "Яйца"
+      ],
+      "tips": [
+        "Не заменяйте рикотту обычным творогом без отдельного проверенного рецепта."
+      ],
+      "imageAlt": "Кольцевой лимонный кекс с рикоттой, один отрезанный кусок показывает светлый влажный мякиш",
+      "editorial": {
+        "status": "source-checked-unbaked",
+        "photography": "required",
+        "source": {
+          "title": "Ricotta and lemon bundt cake",
+          "author": "GialloZafferano",
+          "url": "https://www.giallozafferano.com/recipes/Ricotta-and-lemon-bundt-cake.html",
+          "origin": "Italy"
+        },
+        "reviewedAt": "2026-11-06"
+      }
+    },
+    {
+      "id": "wholegrain-banana-blueberry-seed-muffins",
+      "title": "Цельнозерновые маффины с бананом, черникой и семечками",
+      "description": "Цельнозерновые маффины с бананом, черникой и овсяными хлопьями для завтрака. Вместо белого сахара используется мед; удобно готовить сразу 12 штук.",
+      "intro": "Британский рецепт маффинов с бананом, яблочным пюре, натуральным йогуртом, черникой и семенами. Подходит для завтрака и перекуса; разрыхлитель и сода дают подъем без сложного замеса.",
+      "kind": "muffin",
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "whole-wheat",
+        "oat",
+        "banana",
+        "berries",
+        "breakfast",
+        "no-butter"
+      ],
+      "servings": 12,
+      "prep": 15,
+      "bake": [
+        25,
+        30
+      ],
+      "temp": 180,
+      "mode": "верх-низ",
+      "pan": "Форма на 12 стандартных маффинов",
+      "ingredients": [
+        {
+          "id": "eggs",
+          "label": "Яйца",
+          "amount": 2,
+          "unit": "each",
+          "product": "Яйца"
+        },
+        {
+          "id": "yogurt",
+          "label": "Натуральный нежирный йогурт",
+          "amount": 150,
+          "unit": "ml",
+          "product": "Натуральный йогурт"
+        },
+        {
+          "id": "oil",
+          "label": "Рапсовое масло",
+          "amount": 50,
+          "unit": "ml",
+          "product": "Рапсовое масло"
+        },
+        {
+          "id": "applesauce",
+          "label": "Яблочное пюре без сахара",
+          "amount": 100,
+          "unit": "g",
+          "product": "Яблочное пюре"
+        },
+        {
+          "id": "banana",
+          "label": "Спелый банан",
+          "amount": 1,
+          "unit": "each",
+          "product": "Бананы"
+        },
+        {
+          "id": "honey",
+          "label": "Мед",
+          "amount": 4,
+          "unit": "tbsp",
+          "product": "Мед"
+        },
+        {
+          "id": "vanilla",
+          "label": "Ванильный экстракт",
+          "amount": 1,
+          "unit": "tsp",
+          "product": "Ванильный экстракт"
+        },
+        {
+          "id": "flour",
+          "label": "Цельнозерновая пшеничная мука",
+          "amount": 200,
+          "unit": "g",
+          "product": "Цельнозерновая мука"
+        },
+        {
+          "id": "oats",
+          "label": "Овсяные хлопья",
+          "amount": 50,
+          "unit": "g",
+          "product": "Овсяные хлопья"
+        },
+        {
+          "id": "powder",
+          "label": "Разрыхлитель",
+          "amount": 1.5,
+          "unit": "tsp",
+          "product": "Разрыхлитель"
+        },
+        {
+          "id": "soda",
+          "label": "Пищевая сода",
+          "amount": 1.5,
+          "unit": "tsp",
+          "product": "Пищевая сода"
+        },
+        {
+          "id": "cinnamon",
+          "label": "Корица",
+          "amount": 1.5,
+          "unit": "tsp",
+          "product": "Корица"
+        },
+        {
+          "id": "blueberries",
+          "label": "Черника",
+          "amount": 100,
+          "unit": "g",
+          "product": "Черника"
+        },
+        {
+          "id": "seeds",
+          "label": "Смесь семечек",
+          "amount": 2,
+          "unit": "tbsp",
+          "product": "Семечки"
+        }
+      ],
+      "steps": [
+        "Разогрейте духовку до 180 °C. Соедините {{eggs}}, {{yogurt}}, {{oil}}, {{applesauce}}, размятый {{banana}}, {{honey}} и {{vanilla}}.",
+        "Смешайте в другой миске {{flour}}, {{oats}}, {{powder}}, {{soda}} и {{cinnamon}}. Вмешайте {{blueberries}}.",
+        "Быстро соедините жидкую и сухую смеси; не вымешивайте слишком долго. Разложите по 12 формочкам, посыпьте {{seeds}}.",
+        "Пеките 25–30 минут до сухой шпажки, затем переложите маффины на решетку и остудите."
+      ],
+      "doneness": "Маффины поднялись и стали золотистыми; шпажка выходит без сырого теста.",
+      "storage": "В закрытом контейнере до 3 дней, как указано у источника.",
+      "allergens": [
+        "Пшеница (глютен)",
+        "Молоко",
+        "Яйца",
+        "Мед"
+      ],
+      "tips": [
+        "Мед — тоже добавленный сахар; рецепт не относится к категории «без добавленного сахара»."
+      ],
+      "imageAlt": "Цельнозерновые маффины с видимой черникой и семечками на светлой тарелке",
+      "editorial": {
+        "status": "source-checked-unbaked",
+        "photography": "required",
+        "source": {
+          "title": "Healthy banana muffins / Get-and-go breakfast muffins",
+          "author": "Cassie Best / BBC Good Food",
+          "url": "https://www.bbcgoodfood.com/recipes/get-and-go-breakfast-muffins",
+          "origin": "UK"
+        },
+        "reviewedAt": "2026-11-06"
+      }
+    },
+    {
+      "id": "raspberry-honey-oat-bars",
+      "title": "Овсяные батончики с малиной и медом",
+      "description": "Овсяные батончики с малиной, миндалем и медом без белого сахара. Домашняя выпечка на противне: сразу 16 небольших кусочков для перекуса.",
+      "intro": "Быстрые малиновые овсяные квадратики готовятся из пяти основных продуктов. Малину кладут между двумя слоями овсяной смеси, затем выпекают в квадратной форме.",
+      "kind": "bar",
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "oat",
+        "berries",
+        "no-eggs",
+        "no-mixer"
+      ],
+      "servings": 16,
+      "prep": 15,
+      "bake": [
+        10,
+        12
+      ],
+      "temp": 220,
+      "mode": "верх-низ",
+      "pan": "Квадратная форма 20 × 20 см",
+      "panSize": {
+        "kind": "rectangle",
+        "width": 20,
+        "length": 20
+      },
+      "ingredients": [
+        {
+          "id": "raspberries",
+          "label": "Малина",
+          "amount": 150,
+          "unit": "g",
+          "product": "Малина"
+        },
+        {
+          "id": "butter",
+          "label": "Сливочное масло",
+          "amount": 50,
+          "unit": "g",
+          "product": "Сливочное масло"
+        },
+        {
+          "id": "honey",
+          "label": "Мед",
+          "amount": 75,
+          "unit": "g",
+          "product": "Мед"
+        },
+        {
+          "id": "oats",
+          "label": "Овсяные хлопья",
+          "amount": 200,
+          "unit": "g",
+          "product": "Овсяные хлопья"
+        },
+        {
+          "id": "almonds",
+          "label": "Молотый миндаль",
+          "amount": 50,
+          "unit": "g",
+          "product": "Миндаль"
+        },
+        {
+          "id": "extract",
+          "label": "Миндальный экстракт",
+          "amount": 0.5,
+          "unit": "tsp",
+          "product": "Миндальный экстракт"
+        },
+        {
+          "id": "salt",
+          "label": "Соль",
+          "amount": 1,
+          "unit": "pinch",
+          "product": "Соль"
+        }
+      ],
+      "steps": [
+        "Разогрейте духовку до 220 °C, смажьте квадратную форму 20 × 20 см. Слегка разомните {{raspberries}} вилкой.",
+        "В маленькой кастрюле растопите {{butter}} с {{honey}} и {{salt}}. Снимите с огня, вмешайте {{oats}}, {{almonds}} и {{extract}}.",
+        "Плотно распределите половину овсяной смеси в форме, сверху выложите малину и накройте оставшимися овсяными хлопьями.",
+        "Выпекайте 10–12 минут до золотистого цвета. Полностью остудите и разрежьте на 16 квадратов."
+      ],
+      "doneness": "Верх золотистый, масса держится после полного остывания.",
+      "storage": "Точный срок хранения в проверенном источнике не указан; храните в закрытом контейнере, для длительного хранения используйте охлаждение.",
+      "allergens": [
+        "Молоко",
+        "Орехи (миндаль)",
+        "Мед"
+      ],
+      "tips": [
+        "Рецепт без белого сахара, но с медом: не относить к «без добавленного сахара»."
+      ],
+      "imageAlt": "Квадратные овсяные батончики с яркой малиновой прослойкой на белой тарелке",
+      "editorial": {
+        "status": "source-checked-unbaked",
+        "photography": "required",
+        "source": {
+          "title": "Raspberry oat traybake",
+          "author": "BBC Good Food team",
+          "url": "https://www.bbcgoodfood.com/recipes/raspberry-oat-traybake",
+          "origin": "UK"
+        },
+        "reviewedAt": "2026-11-06"
+      }
+    },
+    {
+      "id": "courgette-feta-savoury-muffins",
+      "title": "Несладкие маффины с кабачком и фетой",
+      "description": "Несладкие маффины с кабачком и сыром фета, без добавленного сахара. Для сытного перекуса, завтрака или ланч-бокса; выпекаются порционно.",
+      "intro": "В маффинах сочетаются тертый кабачок, фета, пахта и щепотка тмина. По британскому рецепту они выпекаются небольшими порциями, подходят для пикника и перекуса.",
+      "kind": "muffin",
+      "tracks": [
+        "special"
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "no-added-sugar",
+        "no-butter",
+        "breakfast"
+      ],
+      "servings": 9,
+      "prep": 15,
+      "bake": [
+        18,
+        20
+      ],
+      "temp": 200,
+      "mode": "верх-низ",
+      "pan": "Форма на 9 стандартных маффинов",
+      "ingredients": [
+        {
+          "id": "flour",
+          "label": "Самоподнимающаяся пшеничная мука",
+          "amount": 200,
+          "unit": "g",
+          "product": "Самоподнимающаяся мука"
+        },
+        {
+          "id": "powder",
+          "label": "Разрыхлитель",
+          "amount": 1,
+          "unit": "tsp",
+          "product": "Разрыхлитель"
+        },
+        {
+          "id": "soda",
+          "label": "Пищевая сода",
+          "amount": 0.5,
+          "unit": "tsp",
+          "product": "Пищевая сода"
+        },
+        {
+          "id": "caraway",
+          "label": "Семена тмина",
+          "amount": 0.5,
+          "unit": "tsp",
+          "product": "Тмин"
+        },
+        {
+          "id": "salt",
+          "label": "Соль",
+          "amount": 0.25,
+          "unit": "tsp",
+          "product": "Соль"
+        },
+        {
+          "id": "egg",
+          "label": "Яйцо",
+          "amount": 1,
+          "unit": "each",
+          "product": "Яйца"
+        },
+        {
+          "id": "buttermilk",
+          "label": "Пахта",
+          "amount": 150,
+          "unit": "ml",
+          "product": "Пахта"
+        },
+        {
+          "id": "oil",
+          "label": "Подсолнечное масло",
+          "amount": 5,
+          "unit": "tbsp",
+          "product": "Подсолнечное масло"
+        },
+        {
+          "id": "zucchini",
+          "label": "Кабачок, натертый и отжатый",
+          "amount": 140,
+          "unit": "g",
+          "product": "Кабачки"
+        },
+        {
+          "id": "feta",
+          "label": "Сыр фета",
+          "amount": 100,
+          "unit": "g",
+          "product": "Сыр фета"
+        }
+      ],
+      "steps": [
+        "Разогрейте духовку до 200 °C и подготовьте 9 формочек. Смешайте {{flour}}, {{powder}}, {{soda}}, {{caraway}} и {{salt}}.",
+        "Отдельно соедините {{egg}}, {{buttermilk}} и {{oil}}. Влейте к сухой смеси, вмешайте {{zucchini}} и половину {{feta}}.",
+        "Разложите тесто по формочкам и посыпьте оставшейся фетой. Пеките 18–20 минут до золотистой корочки и сухой шпажки. Остудите на решетке."
+      ],
+      "doneness": "Маффины поднялись и имеют золотистый верх; шпажка выходит без сырого теста.",
+      "storage": "До 2 дней в герметичном контейнере по источнику; из-за сыра и овощей предпочтительнее холодильник.",
+      "allergens": [
+        "Пшеница (глютен)",
+        "Молоко",
+        "Яйца"
+      ],
+      "tips": [
+        "Источник использует самоподнимающуюся муку и пахту; не заменяйте их произвольно, пока замены не подтверждены."
+      ],
+      "imageAlt": "Несладкие золотистые маффины с зеленым кабачком и белыми кусочками сыра фета",
+      "editorial": {
+        "status": "source-checked-unbaked",
+        "photography": "required",
+        "source": {
+          "title": "Courgette & feta muffins",
+          "author": "Cassie Best / BBC Good Food",
+          "url": "https://www.bbcgoodfood.com/recipes/courgette-feta-muffins",
+          "origin": "UK"
+        },
+        "reviewedAt": "2026-11-06"
+      }
+    },
+    {
+      "id": "cocoa-cherry-baked-oats",
+      "title": "Запеченная овсянка с вишней, какао и фундуком",
+      "description": "Запеченная овсяная каша с сушеной вишней, какао и фундуком без яиц и добавленного сахара. Порционный завтрак на растительном молоке.",
+      "intro": "Сладость этой овсянке придает сушеная вишня, а какао и фундук делают вкус более насыщенным. Рецепт рассчитан на шесть порций и готовится в одной форме.",
+      "kind": "oats",
+      "tracks": [
+        "special"
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "oat",
+        "no-eggs",
+        "no-butter",
+        "no-added-sugar",
+        "breakfast",
+        "family"
+      ],
+      "servings": 6,
+      "prep": 15,
+      "bake": [
+        25,
+        30
+      ],
+      "temp": 200,
+      "mode": "верх-низ",
+      "pan": "Жаропрочная форма объемом около 2 л",
+      "ingredients": [
+        {
+          "id": "cherries",
+          "label": "Сушеная вишня без добавленного сахара",
+          "amount": 75,
+          "unit": "g",
+          "product": "Сушеная вишня"
+        },
+        {
+          "id": "chia",
+          "label": "Семена чиа",
+          "amount": 1,
+          "unit": "tbsp",
+          "product": "Семена чиа"
+        },
+        {
+          "id": "water",
+          "label": "Теплая вода для чиа",
+          "amount": 3,
+          "unit": "tbsp",
+          "product": "Вода"
+        },
+        {
+          "id": "milk",
+          "label": "Фундучное молоко без сахара",
+          "amount": 500,
+          "unit": "ml",
+          "product": "Фундучное молоко"
+        },
+        {
+          "id": "oats",
+          "label": "Крупные овсяные хлопья",
+          "amount": 200,
+          "unit": "g",
+          "product": "Овсяные хлопья"
+        },
+        {
+          "id": "cocoa",
+          "label": "Какао-порошок",
+          "amount": 3,
+          "unit": "tbsp",
+          "product": "Какао"
+        },
+        {
+          "id": "nibs",
+          "label": "Какао-крупка",
+          "amount": 1,
+          "unit": "tbsp",
+          "product": "Какао-крупка"
+        },
+        {
+          "id": "powder",
+          "label": "Разрыхлитель",
+          "amount": 1,
+          "unit": "tsp",
+          "product": "Разрыхлитель"
+        },
+        {
+          "id": "vanilla",
+          "label": "Ванильный экстракт",
+          "amount": 1,
+          "unit": "tsp",
+          "product": "Ванильный экстракт"
+        },
+        {
+          "id": "hazelnuts",
+          "label": "Очищенный фундук",
+          "amount": 50,
+          "unit": "g",
+          "product": "Фундук"
+        }
+      ],
+      "steps": [
+        "Разогрейте духовку до 200 °C. Залейте {{cherries}} кипятком на 10 минут (кипяток для замачивания не входит в тесто). В отдельной миске соедините {{chia}} и {{water}} на время набухания.",
+        "Слейте воду с вишни. Соедините ее с чиа, влейте {{milk}}, добавьте {{oats}}, {{cocoa}}, {{nibs}}, {{powder}} и {{vanilla}}.",
+        "Переложите смесь в жаропрочную форму примерно на 2 л, посыпьте {{hazelnuts}}. Запекайте 25–30 минут до горячей и схватившейся середины."
+      ],
+      "doneness": "Центр прогрет и овсяная масса схватилась.",
+      "storage": "Точный срок хранения в источнике не приведен; готовую овсянку с растительным молоком после остывания храните в холодильнике.",
+      "allergens": [
+        "Орехи (фундук)",
+        "Овес"
+      ],
+      "tips": [
+        "Для категории «без добавленного сахара» выбирайте вишню и растительное молоко без добавленного сахара."
+      ],
+      "imageAlt": "Теплая шоколадная запеченная овсянка с темными вишнями и дробленым фундуком в светлой форме",
+      "editorial": {
+        "status": "source-checked-unbaked",
+        "photography": "required",
+        "source": {
+          "title": "Cocoa & cherry oat bake",
+          "author": "Myles Williamson / BBC Good Food",
+          "url": "https://www.bbcgoodfood.com/recipes/cocoa-cherry-oat-bake",
+          "origin": "UK"
+        },
+        "reviewedAt": "2026-11-06"
+      }
+    },
+    {
+      "id": "apple-carrot-wholegrain-yogurt-muffins",
+      "title": "Цельнозерновые маффины с яблоком, морковью и йогуртом",
+      "description": "Маффины из цельнозерновой и пшеничной муки с морковью, яблоком, йогуртом и овсяными хлопьями. Без сливочного масла, с медом вместо сахара.",
+      "intro": "Домашние маффины с тертыми морковью и яблоком замешиваются на греческом йогурте. Рецепт My Fussy Eater подходит для завтрака и перекуса, готовится без сложных действий.",
+      "kind": "muffin",
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "whole-wheat",
+        "oat",
+        "apple",
+        "no-butter",
+        "breakfast"
+      ],
+      "servings": 12,
+      "prep": 15,
+      "bake": [
+        20,
+        22
+      ],
+      "temp": 180,
+      "mode": "верх-низ",
+      "pan": "Форма на 12 стандартных маффинов",
+      "ingredients": [
+        {
+          "id": "ww-flour",
+          "label": "Цельнозерновая пшеничная мука",
+          "amount": 100,
+          "unit": "g",
+          "product": "Цельнозерновая мука"
+        },
+        {
+          "id": "flour",
+          "label": "Пшеничная мука",
+          "amount": 100,
+          "unit": "g",
+          "product": "Пшеничная мука"
+        },
+        {
+          "id": "oats",
+          "label": "Овсяные хлопья",
+          "amount": 50,
+          "unit": "g",
+          "product": "Овсяные хлопья"
+        },
+        {
+          "id": "powder",
+          "label": "Разрыхлитель",
+          "amount": 1.5,
+          "unit": "tsp",
+          "product": "Разрыхлитель"
+        },
+        {
+          "id": "soda",
+          "label": "Сода",
+          "amount": 0.5,
+          "unit": "tsp",
+          "product": "Пищевая сода"
+        },
+        {
+          "id": "cinnamon",
+          "label": "Корица",
+          "amount": 0.5,
+          "unit": "tsp",
+          "product": "Корица"
+        },
+        {
+          "id": "apple",
+          "label": "Яблоко",
+          "amount": 1,
+          "unit": "each",
+          "product": "Яблоки"
+        },
+        {
+          "id": "carrots",
+          "label": "Небольшая морковь",
+          "amount": 2,
+          "unit": "each",
+          "product": "Морковь"
+        },
+        {
+          "id": "yogurt",
+          "label": "Греческий йогурт",
+          "amount": 200,
+          "unit": "g",
+          "product": "Греческий йогурт"
+        },
+        {
+          "id": "milk",
+          "label": "Молоко",
+          "amount": 50,
+          "unit": "ml",
+          "product": "Молоко"
+        },
+        {
+          "id": "egg",
+          "label": "Яйцо",
+          "amount": 1,
+          "unit": "each",
+          "product": "Яйца"
+        },
+        {
+          "id": "honey",
+          "label": "Мед",
+          "amount": 3,
+          "unit": "tbsp",
+          "product": "Мед"
+        },
+        {
+          "id": "vanilla",
+          "label": "Ванильный экстракт",
+          "amount": 1,
+          "unit": "tsp",
+          "product": "Ванильный экстракт"
+        }
+      ],
+      "steps": [
+        "Разогрейте духовку до 180 °C. Соедините {{ww-flour}}, {{flour}}, {{oats}}, {{powder}}, {{soda}} и {{cinnamon}}.",
+        "Натрите {{apple}} и {{carrots}}, добавьте к сухим продуктам.",
+        "В отдельной миске смешайте {{yogurt}}, {{milk}}, {{egg}}, {{honey}} и {{vanilla}}. Соедините с мучной смесью, не вымешивайте долго.",
+        "Разложите по 12 формочкам; выпекайте 20–22 минуты до сухой шпажки. Остудите на решетке."
+      ],
+      "doneness": "Шпажка выходит без сырого теста, верх упругий.",
+      "storage": "Маффины можно замораживать, как указано у автора; точные сроки зависят от условий хранения.",
+      "allergens": [
+        "Пшеница (глютен)",
+        "Овес",
+        "Молоко",
+        "Яйца",
+        "Мед"
+      ],
+      "tips": [
+        "Мед — добавленный подсластитель, не маркируйте рецепт как «без добавленного сахара»."
+      ],
+      "imageAlt": "Светлые маффины с морковью и яблоком, заметные овсяные хлопья в мякише",
+      "editorial": {
+        "status": "source-checked-unbaked",
+        "photography": "required",
+        "source": {
+          "title": "Apple & Carrot Greek Yogurt Muffins",
+          "author": "My Fussy Eater",
+          "url": "https://www.myfussyeater.com/apple-carrot-greek-yogurt-muffins/",
+          "origin": "UK"
+        },
+        "reviewedAt": "2026-11-06"
+      }
+    },
+    {
+      "id": "strawberry-sour-cream-cake",
+      "title": "Простой пирог с клубникой на сметане",
+      "description": "Простой домашний пирог с клубникой на сметане в круглой форме. Из обычной муки, яиц и свежей клубники — для семейного чаепития.",
+      "intro": "Американский клубничный пирог King Arthur Baking выпекается с ягодами на поверхности и мягким сметанным тестом. Клубника до выпечки слегка пересыпается сахаром.",
+      "kind": "cake",
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "berries",
+        "family"
+      ],
+      "servings": 8,
+      "prep": 15,
+      "bake": [
+        40,
+        45
+      ],
+      "temp": 177,
+      "mode": "верх-низ",
+      "pan": "Круглая форма диаметром 23 см",
+      "panSize": {
+        "kind": "round",
+        "diameter": 23
+      },
+      "ingredients": [
+        {
+          "id": "strawberries",
+          "label": "Клубника",
+          "amount": 334,
+          "unit": "g",
+          "product": "Клубника"
+        },
+        {
+          "id": "sugar-top",
+          "label": "Сахар для клубники",
+          "amount": 25,
+          "unit": "g",
+          "product": "Сахар"
+        },
+        {
+          "id": "salt-top",
+          "label": "Соль для клубники",
+          "amount": 1,
+          "unit": "pinch",
+          "product": "Соль"
+        },
+        {
+          "id": "flour",
+          "label": "Пшеничная мука",
+          "amount": 150,
+          "unit": "g",
+          "product": "Пшеничная мука"
+        },
+        {
+          "id": "powder",
+          "label": "Разрыхлитель",
+          "amount": 1.75,
+          "unit": "tsp",
+          "product": "Разрыхлитель"
+        },
+        {
+          "id": "salt",
+          "label": "Соль для теста",
+          "amount": 0.5,
+          "unit": "tsp",
+          "product": "Соль"
+        },
+        {
+          "id": "butter",
+          "label": "Сливочное масло",
+          "amount": 85,
+          "unit": "g",
+          "product": "Сливочное масло"
+        },
+        {
+          "id": "sugar",
+          "label": "Сахар в тесто",
+          "amount": 198,
+          "unit": "g",
+          "product": "Сахар"
+        },
+        {
+          "id": "lemon",
+          "label": "Лимон для цедры",
+          "amount": 1,
+          "unit": "each",
+          "product": "Лимоны"
+        },
+        {
+          "id": "nutmeg",
+          "label": "Мускатный орех",
+          "amount": 0.25,
+          "unit": "tsp",
+          "product": "Мускатный орех"
+        },
+        {
+          "id": "eggs",
+          "label": "Яйца",
+          "amount": 2,
+          "unit": "each",
+          "product": "Яйца"
+        },
+        {
+          "id": "sour-cream",
+          "label": "Сметана",
+          "amount": 113,
+          "unit": "g",
+          "product": "Сметана"
+        },
+        {
+          "id": "vanilla",
+          "label": "Ванильный экстракт",
+          "amount": 1,
+          "unit": "tsp",
+          "product": "Ванильный экстракт"
+        }
+      ],
+      "steps": [
+        "Разогрейте духовку до 177 °C, подготовьте круглую форму 23 см. Нарежьте {{strawberries}}, смешайте с {{sugar-top}} и {{salt-top}}, оставьте на время замеса.",
+        "В отдельной миске смешайте {{flour}}, {{powder}} и {{salt}}.",
+        "Разотрите {{butter}} с {{sugar}}, добавьте мелко натертую цедру {{lemon}} и {{nutmeg}}, затем вбейте {{eggs}}.",
+        "Добавьте {{sour-cream}} и {{vanilla}}; вмешайте мучную смесь без длительного взбивания. Переложите тесто в форму и распределите сверху клубнику.",
+        "Выпекайте 40–45 минут до сухой шпажки и золотистого края. Остудите пирог прежде, чем нарезать."
+      ],
+      "doneness": "В центре нет жидкого теста, край золотистый.",
+      "storage": "Точный срок в источнике зависит от подачи со сметанным кремом; при подаче без крема лучше хранить накрытым в прохладном месте и не оставлять надолго.",
+      "allergens": [
+        "Пшеница (глютен)",
+        "Молоко",
+        "Яйца"
+      ],
+      "tips": [
+        "В оригинале предлагается сметанный крем для подачи, но он необязателен; в данной версии пирог подается без крема."
+      ],
+      "imageAlt": "Простой круглый клубничный пирог с ягодами сверху и одним отрезанным куском",
+      "editorial": {
+        "status": "source-checked-unbaked",
+        "photography": "required",
+        "source": {
+          "title": "Super-Simple Strawberry Cake",
+          "author": "Sarah Jampel / King Arthur Baking",
+          "url": "https://www.kingarthurbaking.com/recipes/super-simple-strawberry-cake-recipe",
+          "origin": "USA"
+        },
+        "reviewedAt": "2026-11-06"
+      }
+    },
+    {
+      "id": "pumpkin-cinnamon-muffins",
+      "title": "Тыквенные маффины с корицей",
+      "description": "Тыквенные маффины с корицей из пюре тыквы и обычной пшеничной муки. Простая порционная выпечка для осени и домашнего чаепития.",
+      "intro": "В этом британском рецепте используется готовое пюре тыквы и растопленное сливочное масло. Все ингредиенты доступны в обычном магазине, а маффины выпекаются около 15 минут.",
+      "kind": "muffin",
+      "tracks": [
+        "everyday"
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "family"
+      ],
+      "servings": 12,
+      "prep": 15,
+      "bake": [
+        15,
+        15
+      ],
+      "temp": 200,
+      "mode": "верх-низ",
+      "pan": "Форма на 12 маффинов",
+      "ingredients": [
+        {
+          "id": "flour",
+          "label": "Пшеничная мука",
+          "amount": 225,
+          "unit": "g",
+          "product": "Пшеничная мука"
+        },
+        {
+          "id": "powder",
+          "label": "Разрыхлитель",
+          "amount": 2,
+          "unit": "tsp",
+          "product": "Разрыхлитель"
+        },
+        {
+          "id": "cinnamon",
+          "label": "Молотая корица",
+          "amount": 1,
+          "unit": "tbsp",
+          "product": "Корица"
+        },
+        {
+          "id": "sugar",
+          "label": "Белый сахар",
+          "amount": 100,
+          "unit": "g",
+          "product": "Сахар"
+        },
+        {
+          "id": "brown-sugar",
+          "label": "Мягкий коричневый сахар",
+          "amount": 50,
+          "unit": "g",
+          "product": "Коричневый сахар"
+        },
+        {
+          "id": "pumpkin",
+          "label": "Тыквенное пюре без сахара",
+          "amount": 200,
+          "unit": "g",
+          "product": "Тыквенное пюре"
+        },
+        {
+          "id": "eggs",
+          "label": "Яйца",
+          "amount": 2,
+          "unit": "each",
+          "product": "Яйца"
+        },
+        {
+          "id": "butter",
+          "label": "Слегка подсоленное сливочное масло, растопленное",
+          "amount": 125,
+          "unit": "g",
+          "product": "Сливочное масло"
+        }
+      ],
+      "steps": [
+        "Разогрейте духовку до 200 °C и поставьте 12 бумажных формочек. Смешайте {{flour}}, {{powder}}, {{cinnamon}}, {{sugar}} и {{brown-sugar}}.",
+        "В отдельной миске перемешайте {{pumpkin}} и {{eggs}}. Введите жидкую смесь в сухую, влейте {{butter}}, коротко перемешайте без сильного взбивания.",
+        "Разделите тесто на 12 формочек и выпекайте 15 минут до поднявшихся маффинов и сухой шпажки. Остудите на решетке."
+      ],
+      "doneness": "Маффины поднялись, поверхность золотистая, шпажка чистая.",
+      "storage": "В герметичном контейнере до 3 дней по рецепту источника.",
+      "allergens": [
+        "Пшеница (глютен)",
+        "Молоко",
+        "Яйца"
+      ],
+      "tips": [
+        "Используйте именно 200 г готового пюре. Не подменяйте его сырыми кусками тыквы."
+      ],
+      "imageAlt": "Золотистые тыквенные маффины с корицей на белой тарелке",
+      "editorial": {
+        "status": "source-checked-unbaked",
+        "photography": "required",
+        "source": {
+          "title": "Pumpkin muffins",
+          "author": "Katy Gilhooly / BBC Good Food",
+          "url": "https://www.bbcgoodfoodme.com/recipes/pumpkin-muffins/",
+          "origin": "UK"
+        },
+        "reviewedAt": "2026-11-06"
+      }
+    }
+  ]
+}
