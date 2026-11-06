@@ -7,7 +7,9 @@ from pathlib import Path
 
 TITLE = 'Здоровая выпечка'
 KINDS = {'cake': 'Пироги', 'muffin': 'Маффины', 'cookie': 'Печенье', 'casserole': 'Запеканки', 'oats': 'Запечённая овсянка',
-         'bread': 'Кексы', 'scone': 'Сконы', 'bar': 'Батончики', 'crumble': 'Крамблы и коблеры'}
+         'bread': 'Кексы', 'scone': 'Сконы', 'bar': 'Батончики', 'crumble': 'Крамблы и коблеры',
+         'porridge': 'Каши', 'eggs': 'Блюда из яиц', 'pancake': 'Оладьи и панкейки',
+         'muesli': 'Мюсли', 'granola': 'Гранола', 'toast': 'Тосты'}
 TAGS = {
     'ingredient': ('По ингредиентам', {'whole-wheat': 'Цельнозерновая мука', 'oat': 'Овёс',
         'apple': 'Яблоки', 'banana': 'Бананы', 'berries': 'Ягоды', 'dates': 'Финики',
@@ -94,14 +96,14 @@ def layout(title, description, path, site, body, *, picture=None, schema=None, s
         structured += f'<script type="application/ld+json">{script_json(breadcrumbs)}</script>'
     page_title = f'{title} · {TITLE}' if title != TITLE else f'{TITLE} — простые и необычные рецепты'
     nav = ''.join(f'<a href="{href}"'+(' aria-current="page"' if section == key else '')+f'>{label}</a>'
-                  for key, href, label in [('catalog','/recipes/','Рецепты'),('collections','/collections/','Подборки'),('guides','/guides/','Справочник')])
+                  for key, href, label in [('catalog','/recipes/','Рецепты'),('breakfasts','/breakfasts/','Завтраки'),('collections','/collections/','Подборки'),('guides','/guides/','Справочник')])
     og_type = 'article' if schema and schema.get('@type') == 'Recipe' else 'website'
     return f'''<!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#ffffff">
 <title>{e(page_title)}</title><meta name="description" content="{e(description)}"><meta property="og:site_name" content="{TITLE}"><meta property="og:locale" content="ru_RU"><meta property="og:type" content="{og_type}"><meta property="og:title" content="{e(page_title)}"><meta property="og:description" content="{e(description)}">{meta}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script>{structured}</head>
 <body><a class="skip" href="#main">К содержанию</a><header class="top"><div class="wrap top-inner"><a href="/" class="brand"><img src="/favicon.svg" width="33" height="33" alt="">{TITLE}</a><nav aria-label="Основная навигация">{nav}</nav></div></header>
-<main id="main">{body}</main><footer class="footer"><div class="wrap foot"><a href="/" class="brand"><img src="/favicon.svg" width="29" height="29" alt="">{TITLE}</a><span>Простые рецепты для домашней духовки</span><a href="/about/">О проекте</a><a href="/privacy/">Конфиденциальность</a></div></footer></body></html>'''
+<main id="main">{body}</main><footer class="footer"><div class="wrap foot"><a href="/" class="brand"><img src="/favicon.svg" width="29" height="29" alt="">{TITLE}</a><span>Домашняя выпечка и завтраки по опубликованным рецептурам</span><a href="/about/">О проекте</a><a href="/privacy/">Конфиденциальность</a></div></footer></body></html>'''
 
 
 def crumbs(*links):
@@ -124,7 +126,8 @@ def card(r):
     tags = recipe_tags(r)
     keys = ' '.join([r['title'], r['description'], KINDS[r['kind']]] + [TAG_NAMES[t] for t in tags]
                     + [i['label'] for i in r['ingredients']])
-    time = f'{min_range(r["bake"])} мин выпечки'
+    duration = r.get('bake') if r.get('cookingMethod', 'oven') == 'oven' else r.get('cook')
+    time = (f'{min_range(duration)} мин ' + ('выпечки' if r.get('cookingMethod', 'oven') == 'oven' else 'приготовления')) if duration else 'Без нагрева'
     pantry = sorted(({i['product'] for i in r['ingredients'] if not i.get('optional')} | set(r.get('pantryExtra', []))) - {'Вода'})
     return f'''<article class="card" data-kind="{r['kind']}" data-tags="{' '.join(tags)}" data-track="{' '.join(r['tracks'])}" data-difficulty="{r['difficulty']}" data-pantry="{e(script_json(pantry))}" data-search="{e(keys)}">
 <a class="card-photo" href="{path}" tabindex="-1" aria-hidden="true">{image(r)}</a>
@@ -158,6 +161,7 @@ def home(recipes, collections, tracks, site):
 <figure class="hero-photo"><a href="/recipes/{featured['id']}/">{image(featured, True)}</a><figcaption><span>Иллюстрация к рецепту</span><a href="/recipes/{featured['id']}/">{e(featured['title'])} ↗</a></figcaption></figure></section>
 <section class="band"><div class="wrap band-inner"><span><b>01</b> Порции и размер формы</span><span><b>02</b> Граммы, стаканы и ложки</span><span><b>03</b> Сколько взять каждого продукта — указано в шагах</span></div></section>
 <section class="wrap block directions"><p class="eyebrow">Найдите свой рецепт</p><h2>Простые или необычные рецепты?</h2>{track_cards(tracks)}</section>
+<section class="wrap block"><p class="eyebrow">Отдельный раздел</p><h2>Здоровые завтраки</h2><p class="lead">Каши, яйца, панкейки, мюсли и завтраки, которые удобно приготовить с вечера.</p><a class="quiet" href="/breakfasts/">Смотреть завтраки <span aria-hidden="true">→</span></a></section>
 <section class="wrap block"><div class="section-head"><div><p class="eyebrow">Из каталога</p><h2>Что будем печь?</h2></div><a class="quiet" href="/recipes/">Весь каталог <span aria-hidden="true">→</span></a></div><div class="cards">{''.join(map(card,picks))}</div></section>
 <section class="wrap block"><p class="eyebrow">По продуктам и случаям</p><h2>Подборки</h2>{collection_grid(collections)}</section>'''
     return layout(TITLE, 'Здоровая выпечка: простые и необычные домашние рецепты, подборки по составу, завтраки и меню на неделю. Подбор по продуктам и пересчёт порций.', '/', site, body, picture=f'/images/{featured["id"]}.webp')
@@ -212,7 +216,16 @@ def recipe(r, site, related):
     prep = f'<div><dt>Подготовка</dt><dd>{r["prep"]} мин</dd></div>' if r.get('prep') is not None else ''
     extra = f'<div><dt>Дополнительно</dt><dd>{r["extra"]} мин</dd></div>' if r.get('extra') else ''
     time_note = f'<p class="pan-line">{e(r["timeNote"])}</p>' if r.get('timeNote') else ''
-    oven = r.get('mode') or 'Режим в источнике не указан'
+    method = r.get('cookingMethod', 'oven')
+    duration = r.get('bake') if method == 'oven' else r.get('cook')
+    cooking_info = {'oven':'В духовке','hob':'На плите','no-cook':'Без нагрева',
+                    'microwave':'В микроволновке','mixed':'Комбинированный способ'}[method]
+    duration_fact = (f'<div><dt>{"Выпечка" if method == "oven" else "Приготовление"}</dt>'
+                     f'<dd>{min_range(duration)} мин</dd></div>') if duration else ''
+    oven_fact = f'<div><dt>Духовка</dt><dd>{r["temp"]} °C</dd></div>' if method == 'oven' else ''
+    oven = r.get('mode') or ('Режим в источнике не указан' if method == 'oven' else cooking_info)
+    equipment = (f'<p class="pan-line"><strong>{"Форма" if method == "oven" else "Посуда"}.</strong> {e(r["pan"])}'
+                 f'<br><strong>{"Нагрев" if method == "oven" else "Способ"}.</strong> {e(oven)}</p>')
     pan = f'''<details class="pan-details" id="recipe-pan"><summary>Пересчитать на свою форму</summary>
 <p>Сохраняйте примерно ту же высоту теста. Время и температура относятся к исходной форме и автоматически не пересчитываются.</p>{shape_fields('target','Ваша форма')}
 <button class="button primary" type="button" id="apply-pan">Применить размер формы</button><p id="pan-status" role="status"></p></details>''' if r.get('panSize') else ''
@@ -224,8 +237,8 @@ def recipe(r, site, related):
 {pan}<div class="cook-actions"><button id="reset-recipe" class="quiet" type="button">Исходные количества</button><button id="copy-list" class="quiet" type="button">Скопировать покупки</button><button id="print-recipe" class="quiet" type="button">Печать</button></div><p id="cook-status" role="status" hidden></p></div>'''
     body = f'''<article class="wrap recipe top-block">{crumbs(('/recipes/','Рецепты'))}
 <div class="recipe-head"><div class="recipe-intro"><p class="eyebrow">{e(KINDS[r['kind']])}</p><h1>{e(r['title'])}</h1><p class="lead">{e(intro)}</p><div class="chips">{tag_links}</div>
-<dl class="facts">{prep}<div><dt>Выпечка</dt><dd>{min_range(r['bake'])} мин</dd></div>{extra}<div><dt>Духовка</dt><dd>{r['temp']} °C</dd></div><div><dt>Исходный выход</dt><dd>{r['servings']} порц.</dd></div></dl>{time_note}
-<p class="pan-line"><strong>Форма.</strong> {e(r['pan'])}<br><strong>Нагрев.</strong> {e(oven)}</p><a class="button primary jump" href="#ingredients">К ингредиентам <span aria-hidden="true">↓</span></a></div>
+<dl class="facts">{prep}{duration_fact}{extra}{oven_fact}<div><dt>Исходный выход</dt><dd>{r['servings']} порц.</dd></div></dl>{time_note}
+{equipment}<a class="button primary jump" href="#ingredients">К ингредиентам <span aria-hidden="true">↓</span></a></div>
 <figure class="recipe-photo">{image(r, True)}<figcaption>Иллюстрация к рецепту</figcaption></figure></div>
 <div class="recipe-body"><section class="ingredients" id="ingredients"><h2>Ингредиенты</h2>{controls}<ul class="ingredient-list" id="ingredient-list">{rows}</ul></section>
 <section class="steps" id="steps"><h2>Приготовление</h2><ol class="step-list">{steps}</ol>
@@ -239,9 +252,10 @@ def recipe(r, site, related):
               'recipeInstructions':[{'@type':'HowToStep','text':step_text(s)} for s in r['steps']]}
     if r.get('prep') is not None:
         schema['prepTime'] = f'PT{r["prep"]}M'
-    schema['cookTime'] = f'PT{r["bake"][1]}M'
+    if duration:
+        schema['cookTime'] = f'PT{duration[1]}M'
     if r.get('prep') is not None:
-        schema['totalTime'] = f'PT{r["prep"] + r["bake"][1] + (r.get("extra") or 0)}M'
+        schema['totalTime'] = f'PT{r["prep"] + (duration[1] if duration else 0) + (r.get("extra") or 0)}M'
     if site:
         schema['url'] = site+path
     return layout(r['title'] + ' — рецепт', r['description'], path, site, body, picture=f'/images/{r["id"]}.webp', schema=schema)
