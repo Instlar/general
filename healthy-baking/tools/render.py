@@ -172,7 +172,7 @@ def layout(title, description, path, site, body, *, picture=None, schema=None, s
 <title>{e(page_title)}</title><meta name="description" content="{e(description)}"><meta property="og:site_name" content="{TITLE}"><meta property="og:locale" content="ru_RU"><meta property="og:type" content="{og_type}"><meta property="og:title" content="{e(page_title)}"><meta property="og:description" content="{e(description)}">{meta}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script>{yandex_script}{structured}</head>
 <body><a class="skip" href="#main">К содержанию</a><header class="top"><div class="wrap top-inner"><a href="/" class="brand"><img src="/favicon.svg" width="33" height="33" alt="">{TITLE}</a><nav aria-label="Основная навигация">{nav}</nav></div></header>
-<main id="main">{body}</main><footer class="footer"><div class="wrap foot"><a href="/" class="brand"><img src="/favicon.svg" width="29" height="29" alt="">{TITLE}</a><span>Домашняя выпечка и завтраки по опубликованным рецептурам</span><a href="/about/">О проекте</a><a href="/privacy/">Конфиденциальность</a></div></footer><script defer src="https://api.tugarin-game.ru/api/site-analytics/tracker.js" data-site="baking"></script></body></html>'''
+<main id="main">{body}</main><footer class="footer"><div class="wrap foot"><a href="/" class="brand"><img src="/favicon.svg" width="29" height="29" alt="">{TITLE}</a><span>Домашняя выпечка, завтраки и обеды по опубликованным рецептурам</span><a href="/about/">О проекте</a><a href="/privacy/">Конфиденциальность</a></div></footer><script defer src="https://api.tugarin-game.ru/api/site-analytics/tracker.js" data-site="baking"></script></body></html>'''
 
 
 def crumbs(*links):
@@ -348,7 +348,9 @@ def recipe(r, site, related, lunches):
               'recipeInstructions':[{'@type':'HowToStep','text':step_text(s)} for s in r['steps']]}
     if r.get('prep') is not None and not total_only:
         schema['prepTime'] = f'PT{r["prep"]}M'
-    if duration:
+    # Google recommends cookTime together with prepTime. Never invent an
+    # unknown preparation duration solely to complete structured data.
+    if duration and r.get('prep') is not None:
         schema['cookTime'] = f'PT{duration[1]}M'
     if r.get('prep') is not None:
         schema['totalTime'] = f'PT{r["prep"] + (duration[1] if duration else 0) + (r.get("extra") or 0)}M'
@@ -506,7 +508,7 @@ def pages(recipes, site):
         yield path, page(title,desc,path,site,f'<section class="wrap prose block top-block">{back}<h1>{e(title)}</h1><p class="lead">{e(desc)}</p>{content}</section>',section='guides')
     for path, title, desc, body in [
         ('/about/','О проекте','Домашняя выпечка с понятным составом и мерами.','<p>Мы сверяем рецептуры и переводим меры для домашней кухни. На карточках указываем исходную форму, порядок действий и признаки готовности. Иллюстрации показывают ожидаемую подачу.</p><p>В основе каталога — опубликованные рецептуры со всего мира.</p>'),
-        ('/privacy/','Конфиденциальность','Какие данные использует сайт.','<p>Для просмотра рецептов регистрация не нужна. Отметки ингредиентов сохраняются в браузере на вашем устройстве. Их можно удалить, очистив данные этого сайта в настройках браузера.</p><p>Для понимания посещаемости используется собственная система статистики. В браузере создается случайный анонимный идентификатор посетителя (localStorage), а на сервер отправляются адрес открытой страницы, время активности видимой вкладки и домен сайта, с которого совершен переход. Мы не сохраняем IP-адреса, имена, электронную почту или User-Agent в базе статистики. Данные нужны для подсчета посещений, популярных страниц и источников переходов.</p><p>Чтобы отключить счетчик на этом устройстве, откройте сайт один раз с параметром <code>?__analytics=off</code>. Вернуть подсчет можно через <code>?__analytics=on</code>. Очистка данных сайта в браузере также удаляет идентификатор. Поставщик хостинга может вести собственные технические журналы запросов.</p>')]:
+        ('/privacy/','Конфиденциальность','Какие данные использует сайт.','<p>Для просмотра рецептов регистрация не нужна. Отметки ингредиентов сохраняются в браузере на вашем устройстве. Их можно удалить, очистив данные этого сайта в настройках браузера.</p><p>Сайт использует две независимые системы статистики: собственный счетчик и Яндекс Метрику. Собственный счетчик создает случайный идентификатор в localStorage и отправляет сведения об открытой странице, времени активности видимой вкладки и источнике перехода. Мы не сохраняем IP-адреса, имена, электронную почту или User-Agent в базе собственной статистики. Эти сведения нужны для подсчета посещений и популярных страниц.</p><p>Яндекс Метрика может получать данные о посещениях и устройстве, а также использовать cookie и localStorage. Обработка данных Яндексом регулируется условиями его сервиса; подробности доступны на yandex.ru/legal/metrica_termsofuse/. Вебвизор на этом сайте отключен.</p><p>Чтобы отключить оба счетчика на этом устройстве, откройте сайт один раз с параметром <code>?__analytics=off</code>. Включить статистику снова можно через <code>?__analytics=on</code>. Очистка данных сайта удаляет локальные идентификаторы. Поставщик хостинга также может вести собственные технические журналы запросов.</p>')]:
         yield path, page(title,desc,path,site,f'<section class="wrap prose block top-block">{crumbs()}<h1>{e(title)}</h1><p class="lead">{e(desc)}</p>{body}</section>')
 
 
