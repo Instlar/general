@@ -1,4 +1,5 @@
 import hashlib
+import importlib.util
 import re
 import json
 import shutil
@@ -199,6 +200,16 @@ class SiteTest(unittest.TestCase):
         self.assertEqual(len(drafts), 10)
         self.assertEqual(len({r['id'] for r in drafts}), len(drafts))
         self.assertEqual(len({r['sourceKey'] for r in drafts}), len(drafts))
+        tools_dir = str(self.work / 'tools')
+        sys.path.insert(0, tools_dir)
+        try:
+            spec = importlib.util.spec_from_file_location('breakfast_validation', self.work / 'tools' / 'site.py')
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            for draft in drafts:
+                module.validate_recipe({k:v for k,v in draft.items() if k != 'editorialSource'})
+        finally:
+            sys.path.remove(tools_dir)
         for draft in drafts:
             self.assertEqual(draft['mealTypes'], ['breakfast'])
             self.assertRegex(draft['sourceKey'], r'^[0-9a-f]{64}$')
