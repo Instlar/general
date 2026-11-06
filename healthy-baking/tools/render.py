@@ -151,15 +151,15 @@ def home(recipes, collections, tracks, site):
     featured = by_id.get('apple-raisin-sheet-cake', recipes[0])
     picks = [by_id[k] for k in ('whole-wheat-blueberry-muffins', 'banana-date-oat-cookies', 'whole-wheat-plum-cake') if k in by_id]
     picks = picks or recipes[:3]
-    body = f'''<section class="wrap hero"><div class="hero-copy"><p class="eyebrow"><span></span> Домашняя пекарня</p><h1>Здоровая<br><em>выпечка</em></h1>
-<p>Пироги с фруктами, цельнозерновые маффины и овсяное печенье. Выберите рецепт и пересчитайте ингредиенты под свою форму или количество порций.</p>
+    body = f'''<section class="wrap hero"><div class="hero-copy"><p class="eyebrow"><span></span> Рецепты для дома</p><h1>Здоровая<br><em>выпечка</em></h1>
+<p>Простые и необычные рецепты домашней выпечки — на каждый день, к завтраку, для всей семьи и гостей. Выбирайте по продуктам и пересчитывайте ингредиенты под свою форму и количество порций.</p>
 <div class="actions"><a class="button primary" href="/recipes/">Смотреть рецепты <span aria-hidden="true">↗</span></a><a class="quiet" href="/guides/">Меры и формы <span aria-hidden="true">→</span></a></div></div>
 <figure class="hero-photo"><a href="/recipes/{featured['id']}/">{image(featured, True)}</a><figcaption><span>Иллюстрация к рецепту</span><a href="/recipes/{featured['id']}/">{e(featured['title'])} ↗</a></figcaption></figure></section>
 <section class="band"><div class="wrap band-inner"><span><b>01</b> Порции и размер формы</span><span><b>02</b> Граммы, стаканы и ложки</span><span><b>03</b> Сколько взять каждого продукта — указано в шагах</span></div></section>
 <section class="wrap block directions"><p class="eyebrow">Найдите свой рецепт</p><h2>Простые или необычные рецепты?</h2>{track_cards(tracks)}</section>
 <section class="wrap block"><div class="section-head"><div><p class="eyebrow">Из каталога</p><h2>Что будем печь?</h2></div><a class="quiet" href="/recipes/">Весь каталог <span aria-hidden="true">→</span></a></div><div class="cards">{''.join(map(card,picks))}</div></section>
 <section class="wrap block"><p class="eyebrow">По продуктам и случаям</p><h2>Подборки</h2>{collection_grid(collections)}</section>'''
-    return layout(TITLE, 'Здоровая выпечка: простые и необычные рецепты пирогов, кексов и печенья. Поиск по продуктам, пересчёт порций, форм и мер.', '/', site, body, picture=f'/images/{featured["id"]}.webp')
+    return layout(TITLE, 'Здоровая выпечка: простые и необычные рецепты для дома, семьи и гостей. Подбор по продуктам, пересчёт ингредиентов, форм и порций.', '/', site, body, picture=f'/images/{featured["id"]}.webp')
 
 
 def catalog(recipes, site):
