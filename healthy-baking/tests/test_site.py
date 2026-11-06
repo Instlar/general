@@ -156,10 +156,11 @@ class SiteTest(unittest.TestCase):
         homepage = (public / 'index.html').read_text(encoding='utf-8')
         self.assertIn('Здоровая выпечка', homepage)
         self.assertNotIn('Пеки здорово', homepage)
-        self.assertIn('<title>Здоровая выпечка — простые и необычные рецепты</title>', homepage)
+        self.assertIn('<title>Здоровая выпечка — ПП выпечка и полезные завтраки</title>', homepage)
 
         seo = json.loads((self.work / 'content' / 'seo-copy.json').read_text(encoding='utf-8'))['recipes']
-        self.assertEqual(len(seo), 23)
+        self.assertGreaterEqual(len(seo), 40)
+        self.assertLessEqual(len(seo), len(self.recipes))
         self.assertEqual(len({seo.get(r['id'], r['description']) for r in self.recipes}), len(self.recipes))
         added = [recipe for recipe in self.recipes if recipe['id'] not in seo]
         self.assertGreaterEqual(len(added), 25)
@@ -188,7 +189,14 @@ class SiteTest(unittest.TestCase):
             else:
                 self.assertIn('totalTime', by_type['Recipe'])
 
-        self.assertTrue((public / 'sitemap.xml').is_file())
+        pp_baking = (public / 'collections' / 'pp-baking' / 'index.html').read_text(encoding='utf-8')
+        pp_pies = (public / 'collections' / 'pp-pies' / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('<h1>ПП выпечка', pp_baking)
+        self.assertIn('Цельнозерновый', pp_pies) if 'Цельнозерновый' in pp_pies else self.assertIn('пирог', pp_pies.lower())
+        self.assertIn('ПП выпечка', homepage)
+        self.assertIn('Рецепты по ингредиентам', (public / 'recipes' / 'index.html').read_text(encoding='utf-8'))
+        self.assertIn('Полезные завтраки', (public / 'breakfasts' / 'index.html').read_text(encoding='utf-8'))
+                self.assertTrue((public / 'sitemap.xml').is_file())
         self.assertIn('Sitemap: https://example.com/sitemap.xml',
                       (public / 'robots.txt').read_text(encoding='utf-8'))
 

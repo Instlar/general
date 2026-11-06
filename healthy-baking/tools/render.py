@@ -30,9 +30,31 @@ TRACKS = {
     'everyday': ('Простые рецепты', 'Простая домашняя выпечка из привычных продуктов: яблочные пироги, кексы на кефире, овсяное печенье и завтраки без сложных техник.', 'В этом разделе рецепты с доступными ингредиентами и понятными шагами. Время приготовления может различаться — смотрите его в каждой карточке.', 'simple-apple-cake'),
     'special': ('Необычные рецепты', 'Необычная выпечка: интересные сочетания продуктов, цельнозерновая и ржаная мука, финики, ягоды и нестандартные варианты теста.', 'Здесь встречаются редкие ингредиенты или непривычные сочетания. Перед приготовлением проверьте полный список продуктов и особенности рецепта.', 'rye-blueberry-bars')
 }
+PAGE_SEO_TITLES = {
+    '/': 'Здоровая выпечка — ПП выпечка и полезные завтраки',
+    '/recipes/': 'Рецепты по ингредиентам — выпечка и домашние завтраки',
+    '/breakfasts/': 'Полезные завтраки — простые ПП-рецепты на каждый день',
+    '/collections/make-ahead/': 'Завтраки с вечера — рецепты, которые готовят заранее',
+    '/collections/whole-wheat/': 'Рецепты из цельнозерновой муки — домашняя выпечка',
+    '/collections/cottage-cheese/': 'Выпечка из творога — пироги и творожные запеканки',
+    '/collections/pp-baking/': 'ПП выпечка — домашние рецепты по составу',
+    '/collections/pp-pies/': 'ПП пироги — простые рецепты для духовки',
+    '/collections/no-added-sugar/': 'Рецепты выпечки без добавленного сахара',
+}
+BAKING_KINDS = {'cake', 'bar', 'crumble', 'muffin', 'bread', 'oats', 'cookie', 'casserole', 'scone'}
+
+
+def pp_baking_candidate(r):
+    """Content-based discovery label, not a nutrition or dietary claim."""
+    return r['kind'] in BAKING_KINDS and bool({'whole-wheat', 'no-added-sugar'} & set(r['tags']))
+
+
 DIFFICULTIES = {'easy': 'Легко', 'some-technique': 'Несколько этапов'}
 PANTRY_TOP = ['Пшеничная мука', 'Цельнозерновая мука', 'Яйца', 'Кефир', 'Творог', 'Бананы', 'Яблоки', 'Овсяные хлопья', 'Молоко', 'Растительное масло', 'Сахар', 'Разрыхлитель']
 COLLECTIONS = {
+    'pp-baking': ('ПП выпечка — варианты из цельнозерновой муки и без сахара', 'Рецепты для тех, кто ищет ПП выпечку: пироги, кексы и печенье с цельнозерновой мукой или без добавленного сахара. В каждой карточке указан полный состав, порции и приготовление.', 'Обозначение «ПП» не означает, что блюдо низкокалорийное или подходит для диеты. Некоторые рецепты содержат сахар, сиропы и масло: проверяйте ингредиенты и количество порций.'),
+    'pp-pies': ('ПП пироги — рецепты домашней выпечки', 'Подборка пирогов с цельнозерновой мукой или без добавленного сахара. Яблочные, морковные и фруктовые рецепты для духовки с точными пропорциями.', 'Содержание сахара, жирность и калорийность различаются. Название подборки отражает поисковое выражение «ПП пироги», а не лечебные свойства или диетическое назначение.'),
+    'no-added-sugar': ('Выпечка без добавленного сахара — домашние рецепты', 'Печенье, батончики и другие рецепты без добавленного сахара, мёда и сиропов. Проверяйте ингредиенты, условия выпечки и размеры порций.', 'Фрукты и молочные продукты содержат природные сахара. Проверяйте состав покупных компонентов и указанные подсластители.'),
     'make-ahead': ('Завтраки, которые удобно заготовить заранее — с вечера', 'Завтраки, которые можно приготовить накануне: ночные каши, пудинги, порционные блюда из яиц и буррито для разогрева.', 'Уберите готовые порции в холодильник по инструкции в карточке. Утром подавайте холодными или разогрейте, если этого требует рецепт.'),
     'quick-breakfasts': ('Быстрые завтраки за 10–15 минут', 'Каши, блюда из яиц и другие завтраки, на которые по рецептуре требуется от 10 до 15 минут вместе с подготовкой.', 'Если увеличиваете число порций и готовите в несколько заходов, заложите дополнительное время.'),
     'everyday-breakfasts': ('Завтраки из обычных продуктов', 'Рецепты с привычными продуктами для домашнего завтрака. В каталоге можно отметить продукты, которые уже есть дома.', 'Откройте список ингредиентов целиком. В одной карточке могут понадобиться разные виды крупы, хлеба или творога.'),
@@ -106,7 +128,7 @@ def layout(title, description, path, site, body, *, picture=None, schema=None, s
         trail.append({'@type': 'ListItem', 'position': len(trail) + 1, 'name': title.removesuffix(' — рецепт'), 'item': site + path})
         breadcrumbs = {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': trail}
         structured += f'<script type="application/ld+json">{script_json(breadcrumbs)}</script>'
-    page_title = f'{title} · {TITLE}' if title != TITLE else f'{TITLE} — простые и необычные рецепты'
+    page_title = PAGE_SEO_TITLES.get(path, f'{title} · {TITLE}' if title != TITLE else f'{TITLE} — простые и необычные рецепты')
     nav = ''.join(f'<a href="{href}"'+(' aria-current="page"' if section == key else '')+f'>{label}</a>'
                   for key, href, label in [('catalog','/recipes/','Рецепты'),('breakfasts','/breakfasts/','Завтраки'),('collections','/collections/','Подборки'),('guides','/guides/','Справочник')])
     og_type = 'article' if schema and schema.get('@type') == 'Recipe' else 'website'
@@ -176,10 +198,11 @@ def home(recipes, collections, tracks, site):
 <figure class="hero-photo"><a href="/recipes/{featured['id']}/">{image(featured, True)}</a><figcaption><span>Иллюстрация к рецепту</span><a href="/recipes/{featured['id']}/">{e(featured['title'])} ↗</a></figcaption></figure></section>
 <section class="band"><div class="wrap band-inner"><span><b>01</b> Порции и размер формы</span><span><b>02</b> Граммы, стаканы и ложки</span><span><b>03</b> Сколько взять каждого продукта — указано в шагах</span></div></section>
 <section class="wrap block directions"><p class="eyebrow">Найдите свой рецепт</p><h2>Простые или необычные рецепты?</h2>{track_cards(tracks)}</section>
+<section class="wrap block"><p class="eyebrow">Поиск по составу</p><h2>ПП выпечка и ПП пироги</h2><p class="lead">Выбирайте домашние рецепты с цельнозерновой мукой или без добавленного сахара. Состав и питательная ценность блюд различаются.</p><p><a class="quiet" href="/collections/pp-baking/">ПП выпечка — подборка рецептов ↗</a>　<a class="quiet" href="/collections/pp-pies/">ПП пироги в духовке ↗</a></p></section>
 <section class="wrap block"><p class="eyebrow">Отдельный раздел</p><h2>Здоровые завтраки</h2><p class="lead">Каши, яйца, панкейки, мюсли и завтраки, которые удобно заготовить заранее — с вечера.</p><a class="quiet" href="/breakfasts/">Смотреть завтраки <span aria-hidden="true">→</span></a></section>
 <section class="wrap block"><div class="section-head"><div><p class="eyebrow">Из каталога</p><h2>Что будем печь?</h2></div><a class="quiet" href="/recipes/">Весь каталог <span aria-hidden="true">→</span></a></div><div class="cards">{''.join(map(card,picks))}</div></section>
 <section class="wrap block"><p class="eyebrow">По продуктам и случаям</p><h2>Подборки</h2>{collection_grid(collections)}</section>'''
-    return layout(TITLE, 'Здоровая выпечка: простые и необычные домашние рецепты, подборки по составу, завтраки и меню на неделю. Подбор по продуктам и пересчёт порций.', '/', site, body, picture=f'/images/{featured["id"]}.webp')
+    return layout(TITLE, 'Здоровая выпечка: ПП выпечка и полезные завтраки на каждый день. Пироги, печенье, творожные блюда. Поиск рецептов по ингредиентам и пересчёт порций.', '/', site, body, picture=f'/images/{featured["id"]}.webp')
 
 
 def catalog(recipes, site):
@@ -198,15 +221,15 @@ def catalog(recipes, site):
     secondary = sorted(available - set(primary), key=str.casefold)
     def checkboxes(products):
         return ''.join(f'<label class="pantry-chip"><input type="checkbox" value="{e(product)}" data-pantry-product> <span>{e(product)}</span></label>' for product in products)
-    body = f'''<section class="wrap block top-block">{crumbs()}<p class="eyebrow">Книга рецептов</p><h1>Рецепты выпечки</h1><p class="lead">Ищите по названию, продукту или виду выпечки. Фильтры можно сочетать.</p>
+    body = f'''<section class="wrap block top-block">{crumbs()}<p class="eyebrow">Книга рецептов</p><h1>Рецепты домашней выпечки и завтраков</h1><p class="lead">Рецепты по ингредиентам: найдите, что приготовить из продуктов, которые есть дома. Пироги, печенье, кексы, каши, сырники и другие завтраки. Поиск и фильтры можно сочетать.</p>
 <form id="filters" class="filterbox" hidden><label class="search-label">Поиск по рецептам<input id="search" type="search" placeholder="Например, яблоко или овсянка"></label>
 <div class="filter-grid">{select('kind','Вид блюда',kinds)}{groups}{select('track','Тип рецепта',{key: row[0] for key,row in TRACKS.items()})}{select('difficulty','Сложность',DIFFICULTIES)}{select('meal','Приём пищи',meal_options)}{select('method','Способ приготовления',method_options)}</div>
-<fieldset class="pantry"><legend>Что есть дома?</legend><p>Отметьте продукты. Подберём рецепты и покажем, чего не хватает. Вода считается доступной.</p><div class="pantry-options">{checkboxes(primary)}</div>
+<fieldset class="pantry"><legend>Подбор рецептов по ингредиентам — что приготовить из того, что есть дома?</legend><p>Отметьте имеющиеся продукты: покажем подходящие рецепты и недостающие ингредиенты. Вода считается доступной.</p><div class="pantry-options">{checkboxes(primary)}</div>
 <details><summary>Другие продукты</summary><label>Найти продукт<input type="search" id="pantry-search" placeholder="Например, сода"></label><div class="pantry-options">{checkboxes(secondary)}</div><p id="pantry-none" hidden>Такого продукта в этом списке нет.</p></details>
 <label class="pantry-exact"><input id="pantry-exact" type="checkbox"> Только рецепты, для которых всё есть</label></fieldset></form>
 <div class="catalog-status"><p id="recipe-count" role="status">Всего рецептов: {len(recipes)}</p><button class="quiet" id="reset-filters" type="button" hidden>Сбросить фильтры</button></div>
 <div class="cards" id="catalog">{''.join(map(card,recipes))}</div><p id="empty" class="notice" hidden>По вашему запросу ничего не нашлось. Попробуйте изменить поиск или убрать фильтр.</p></section>'''
-    return layout('Рецепты домашней выпечки', 'Простые и необычные рецепты здоровой выпечки: пироги, печенье и кексы. Выбирайте по ингредиентам, виду теста и составу.', '/recipes/', site, body, section='catalog')
+    return layout('Рецепты по ингредиентам', 'Рецепты по ингредиентам — что приготовить из того, что есть дома. ПП выпечка, пироги, сырники, каши и полезные завтраки. Выбирайте продукты и пересчитывайте порции.', '/recipes/', site, body, section='catalog')
 
 
 def recipe(r, site, related):
@@ -230,6 +253,11 @@ def recipe(r, site, related):
     tips = ''.join(f'<p>{e(tip)}</p>' for tip in r.get('tips', []))
     track_link = f'<a href="/{r["tracks"][0]}/">{e(TRACKS[r["tracks"][0]][0])}</a>'
     tag_links = track_link + ''.join(f'<a href="/collections/{tag}/">{e(TAG_NAMES[tag])}</a>' for tag in recipe_tags(r) if tag in related['collections'])
+    # Link only to actually matching SEO collections; do not label every recipe «ПП».
+    if pp_baking_candidate(r) and 'pp-baking' in related['collections']:
+        tag_links += '<a href="/collections/pp-baking/">Варианты ПП выпечки</a>'
+        if r['kind'] == 'cake' and 'пирог' in r['title'].lower() and 'pp-pies' in related['collections']:
+            tag_links += '<a href="/collections/pp-pies/">ПП пироги</a>'
     extra = f'<div><dt>Дополнительно</dt><dd>{r["extra"]} мин</dd></div>' if r.get('extra') else ''
     time_note = f'<p class="pan-line">{e(r["timeNote"])}</p>' if r.get('timeNote') else ''
     method = r.get('cookingMethod', 'oven')
@@ -327,6 +355,12 @@ def pages(recipes, site):
     collections = {key:[r for r in recipes if key in recipe_tags(r)] for key in COLLECTIONS}
     collections = {key:members for key,members in collections.items() if len(members) >= 2}
     collections.update(breakfast_groups)
+    pp_baking = [r for r in recipes if pp_baking_candidate(r)]
+    pp_pies = [r for r in pp_baking if r['kind'] == 'cake' and 'пирог' in r['title'].lower()]
+    if len(pp_baking) >= 2:
+        collections['pp-baking'] = pp_baking
+    if len(pp_pies) >= 2:
+        collections['pp-pies'] = pp_pies
     tracks = {key:[r for r in recipes if key in r['tracks']] for key in TRACKS}
     tracks = {key:members for key,members in tracks.items() if members}
     yield '/', home(recipes, collections, tracks, site)
@@ -339,8 +373,8 @@ def pages(recipes, site):
             f'<section class="wrap block"><h2>{e(KINDS[kind])}</h2>'
             f'<div class="cards">{"".join(map(card, members))}</div></section>'
             for kind, members in groups.items())
-        intro = ('Рецепты домашних завтраков: каши из разных круп, блюда из яиц, сырники, тосты и завтраки, '
-                 'которые удобно заготовить заранее — с вечера. В каждой карточке можно пересчитать порции.')
+        intro = ('Полезные завтраки на каждый день: простые рецепты каш, сырников из творога, блюд из яиц и тостов. '
+                 'Для тех, кто ищет ПП завтраки, есть подборки по составу и завтраки, которые удобно заготовить заранее — с вечера. В карточках можно пересчитать порции.')
         yield '/breakfasts/', layout('Здоровые завтраки', intro, '/breakfasts/', site,
             f'<section class="wrap block top-block">{crumbs()}<p class="eyebrow">На каждый день</p>'
             f'<h1>Здоровые завтраки</h1><p class="lead">{e(intro)}</p>'
