@@ -291,6 +291,21 @@ def pages(recipes, site):
     tracks = {key:members for key,members in tracks.items() if members}
     yield '/', home(recipes, collections, tracks, site)
     yield '/recipes/', catalog(recipes, site)
+    breakfast_recipes = [r for r in recipes if 'breakfast' in r.get('mealTypes', [])]
+    if breakfast_recipes:
+        groups = {}
+        for breakfast_item in breakfast_recipes:
+            groups.setdefault(breakfast_item['kind'], []).append(breakfast_item)
+        breakfast_sections = ''.join(
+            f'<section class="wrap block"><h2>{e(KINDS[kind])}</h2>'
+            f'<div class="cards">{"".join(map(card, members))}</div></section>'
+            for kind, members in groups.items())
+        intro = ('Рецепты полезных домашних завтраков: каши, блюда из яиц, '
+                 'панкейки, мюсли, тосты и гранола. Поиск и пересчёт порций.')
+        yield '/breakfasts/', layout('Здоровые завтраки', intro, '/breakfasts/', site,
+            f'<section class="wrap block top-block">{crumbs()}<p class="eyebrow">На каждый день</p>'
+            f'<h1>Здоровые завтраки</h1><p class="lead">{e(intro)}</p></section>'
+            + breakfast_sections, picture=f'/images/{breakfast_recipes[0]["id"]}.webp', section='breakfasts')
     for key, members in tracks.items():
         title, desc, tip, _ = TRACKS[key]
         path = f'/{key}/'
