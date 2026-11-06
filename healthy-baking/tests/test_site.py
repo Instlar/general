@@ -97,6 +97,33 @@ class SiteTest(unittest.TestCase):
                 if parsed.fragment:
                     self.assertIn(parsed.fragment, pages[target].ids)
 
+    def test_yandex_settings_are_opt_in_and_validated(self):
+        # No account-specific codes have been supplied. Do not make live requests
+        # or show fake ownership verification on the deployed site.
+        self.cli('build')
+        public = self.work / 'public'
+        homepage = (public / 'index.html').read_text(encoding='utf-8')
+        recipe = (public / 'recipes' / self.recipes[0]['id'] / 'index.html').read_text(encoding='utf-8')
+        self.assertNotIn('data-counter=', homepage)
+        self.assertNotIn('name="yandex-verification"', homepage)
+        self.assertNotIn('data-counter=', recipe)
+        self.assertTrue((public / 'yandex-metrika.js').is_file())
+
+        config_path = self.work / 'content' / 'site.json'
+        config = json.loads(config_path.read_text(encoding='utf-8'))
+        config['yandex'] = {'metrikaCounterId': 12345678, 'webmasterVerification': 'a1b2c3d4e5f6a7b8'}
+        config_path.write_text(json.dumps(config, ensure_ascii=False), encoding='utf-8')
+        self.cli('build')
+        homepage = (public / 'index.html').read_text(encoding='utf-8')
+        recipe = (public / 'recipes' / self.recipes[0]['id'] / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('data-counter="12345678"', homepage)
+        self.assertIn('data-counter="12345678"', recipe)
+        self.assertIn('name="yandex-verification" content="a1b2c3d4e5f6a7b8"', homepage)
+        self.assertNotIn('name="yandex-verification"', recipe)
+        config['yandex']['metrikaCounterId'] = -2
+        config_path.write_text(json.dumps(config), encoding='utf-8')
+        self.cli('build', succeeds=False)
+
     def test_domain_and_sitemap(self):
         self.cli('build','--site-url','https://example.com')
         self.cli('build')
