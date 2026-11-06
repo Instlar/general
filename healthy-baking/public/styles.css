@@ -162,7 +162,7 @@ input:not([type='checkbox']), select { width: 100%; min-width: 0; border: 1px so
 @media (max-width: 650px) {
   .wrap { width: calc(100% - 32px); }
   .top-inner { flex-wrap: wrap; gap: 2px 14px; padding-top: 11px; min-height: 0; }
-  .top nav { width: 100%; justify-content: space-between; }
+  .top nav { width: 100%; flex-wrap: wrap; justify-content: space-between; gap: 0 12px; }
   .hero, .recipe-head, .recipe-body { grid-template-columns: 1fr; }
   .hero { padding-block: 29px; }
   .hero h1 { font-size: clamp(3.85rem, 16vw, 6.3rem); }

@@ -322,6 +322,30 @@ class SiteTest(unittest.TestCase):
         self.assertNotIn('<dt>Выпечка</dt>', chia)
         self.assertNotIn('"cookTime"', chia)
 
+    def test_lunch_landing_and_collections(self):
+        self.cli('build', '--site-url', 'https://example.com')
+        public = self.work / 'public'
+        lunches = [r for r in self.recipes if 'lunch' in r.get('mealTypes', [])]
+        self.assertGreaterEqual(len(lunches), 35)
+        landing = (public / 'lunches' / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('<h1>Что приготовить на обед</h1>', landing)
+        self.assertIn('href="https://example.com/lunches/"', landing)
+        self.assertEqual(landing.count('<article class="card"'), len(lunches))
+        self.assertEqual(len(re.findall(r'data-kind="soup"', landing)), sum(r['kind'] == 'soup' for r in lunches))
+        for path in ('index.html', 'recipes/index.html'):
+            self.assertIn('href="/lunches/"', (public / path).read_text(encoding='utf-8'))
+        for slug in ('quick-lunches', 'everyday-lunches', 'family-lunches', 'meatless-lunches', 'make-ahead-lunches'):
+            route = f'/collections/{slug}/'
+            self.assertIn(f'href="{route}"', landing)
+            doc = (public / route.strip('/') / 'index.html').read_text(encoding='utf-8')
+            self.assertGreaterEqual(doc.count('<article class="card"'), 3)
+            self.assertIn('href="/lunches/"', doc)
+        soup = (public / 'recipes' / 'cabbage-tomato-vegetable-soup' / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('<h3>Как разогреть</h3>', soup)
+        self.assertIn('<strong>Способ.</strong> На плите', soup)
+        self.assertNotIn('<dt>Духовка</dt>', soup)
+        self.assertNotIn('<dt>Выпечка</dt>', soup)
+
 
 if __name__ == '__main__':
     unittest.main()

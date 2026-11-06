@@ -3,6 +3,7 @@
 import html
 import json
 import re
+from functools import partial
 from pathlib import Path
 
 TITLE = 'Здоровая выпечка'
@@ -22,7 +23,10 @@ KINDS = {'cake': 'Пироги', 'muffin': 'Маффины', 'cookie': 'Пече
          'porridge': 'Каши', 'eggs': 'Блюда из яиц', 'pancake': 'Оладьи и панкейки',
          'muesli': 'Мюсли', 'granola': 'Гранола', 'toast': 'Тосты', 'sandwich': 'Сэндвичи и роллы',
          'syrniki': 'Сырники', 'dumplings': 'Вареники', 'yogurt-bowl': 'Завтраки с йогуртом',
-         'breakfast-drink': 'Смузи', 'pudding': 'Пудинги', 'breakfast-dish': 'Другие завтраки'}
+         'breakfast-drink': 'Смузи', 'pudding': 'Пудинги', 'breakfast-dish': 'Другие завтраки',
+         'soup': 'Супы', 'stew': 'Рагу и тушёные блюда', 'poultry': 'Блюда из птицы',
+         'fish': 'Рыба и морепродукты', 'meat': 'Мясные блюда', 'pasta': 'Паста',
+         'grain-dish': 'Блюда из круп', 'vegetable-main': 'Овощные блюда', 'salad': 'Салаты'}
 MEALS = {'breakfast': 'Завтрак', 'lunch': 'Обед', 'dinner': 'Ужин'}
 COOKING = {'oven': 'В духовке', 'hob': 'На плите', 'no-cook': 'Без нагрева',
            'microwave': 'В микроволновке', 'mixed': 'Комбинированный способ'}
@@ -31,7 +35,7 @@ TAGS = {
         'apple': 'Яблоки', 'banana': 'Бананы', 'berries': 'Ягоды', 'dates': 'Финики',
         'yogurt': 'Йогурт', 'kefir': 'Кефир', 'cottage-cheese': 'Творог'}),
     'composition': ('По составу', {'no-butter': 'Без сливочного масла', 'no-eggs': 'Без яиц',
-        'no-added-sugar': 'Без добавленного сахара'}),
+        'no-added-sugar': 'Без добавленного сахара', 'meatless': 'Без мяса'}),
     'occasion': ('По ситуации', {'big-pan': 'На большую компанию', 'sheet-pan': 'На противне', 'family': 'Для всей семьи', 'small-batch': 'На 1–2 порции',
         'breakfast': 'К завтраку', 'freezer': 'Для заморозки', 'no-mixer': 'Без миксера', 'quick': 'До 30 минут', 'make-ahead': 'Заготовить заранее',
         'pantry-staples': 'Из обычных продуктов'})
@@ -45,6 +49,7 @@ PAGE_SEO_TITLES = {
     '/': 'Здоровая выпечка — ПП выпечка и полезные завтраки',
     '/recipes/': 'Рецепты по ингредиентам — выпечка и домашние завтраки',
     '/breakfasts/': 'Полезные завтраки — простые ПП-рецепты на каждый день',
+    '/lunches/': 'Что приготовить на обед — простые рецепты на каждый день · Здоровая выпечка',
     '/collections/make-ahead/': 'Завтраки с вечера — рецепты, которые готовят заранее',
     '/collections/whole-wheat/': 'Рецепты из цельнозерновой муки — домашняя выпечка',
     '/collections/cottage-cheese/': 'Рецепты из творога — сырники, запеканки и выпечка',
@@ -57,12 +62,18 @@ BAKING_KINDS = {'cake', 'bar', 'crumble', 'muffin', 'bread', 'oats', 'cookie', '
 
 def pp_baking_candidate(r):
     """Content-based discovery label, not a nutrition or dietary claim."""
-    return r['kind'] in BAKING_KINDS and bool({'whole-wheat', 'no-added-sugar'} & set(r['tags']))
+    return ('lunch' not in r.get('mealTypes', []) and r['kind'] in BAKING_KINDS
+            and bool({'whole-wheat', 'no-added-sugar'} & set(r['tags'])))
 
 
 DIFFICULTIES = {'easy': 'Легко', 'some-technique': 'Несколько этапов'}
 PANTRY_TOP = ['Пшеничная мука', 'Цельнозерновая мука', 'Яйца', 'Кефир', 'Творог', 'Бананы', 'Яблоки', 'Овсяные хлопья', 'Молоко', 'Растительное масло', 'Сахар', 'Разрыхлитель']
 COLLECTIONS = {
+    'quick-lunches': ('Быстрые обеды за 15–30 минут', 'Рецепты домашних обедов за 15–30 минут с учётом подготовки и приготовления. Блюда на сковороде и варианты без нагрева.', 'Проверьте, нужны ли уже сваренная крупа или размороженные продукты. Такие условия указаны в карточке.'),
+    'everyday-lunches': ('Обеды из доступных продуктов', 'Супы, горячие блюда и салаты из привычных продуктов на каждый день. Проверьте, какие ингредиенты уже есть дома.', 'В общем каталоге можно отметить имеющиеся продукты и увидеть, чего не хватает.'),
+    'family-lunches': ('Обеды для всей семьи', 'Супы, запеканки и другие домашние обеды, рассчитанные как минимум на четыре порции. Количество можно изменить в карточке.', 'При увеличении порций проверьте вместимость кастрюли или формы.'),
+    'meatless-lunches': ('Обеды без мяса', 'Рецепты домашних обедов без мяса, птицы, рыбы и бульонов из них. Овощи, бобовые, крупы и блюда с яйцами или сыром.', 'Для рецептов с готовым бульоном или соусом сверяйте состав на упаковке.'),
+    'make-ahead-lunches': ('Обеды, которые можно приготовить заранее', 'Обеды для приготовления впрок. В каждой карточке есть условия охлаждения, хранения и способ разогрева или холодной подачи.', 'Охлаждайте готовые порции и храните их по инструкции в карточке. У блюд с рисом могут быть отдельные условия.'),
     'pp-baking': ('ПП выпечка — варианты из цельнозерновой муки и без сахара', 'Рецепты для тех, кто ищет ПП выпечку: пироги, кексы и печенье с цельнозерновой мукой или без добавленного сахара. В каждой карточке указан полный состав, порции и приготовление.', 'Обозначение «ПП» не означает, что блюдо низкокалорийное или подходит для диеты. Некоторые рецепты содержат сахар, сиропы и масло: проверяйте ингредиенты и количество порций.'),
     'pp-pies': ('ПП пироги — рецепты домашней выпечки', 'Подборка пирогов с цельнозерновой мукой или без добавленного сахара. Яблочные, морковные и фруктовые рецепты для духовки с точными пропорциями.', 'Содержание сахара, жирность и калорийность различаются. Название подборки отражает поисковое выражение «ПП пироги», а не лечебные свойства или диетическое назначение.'),
     'no-added-sugar': ('Выпечка без добавленного сахара — домашние рецепты', 'Печенье, батончики и другие рецепты без добавленного сахара, мёда и сиропов. Проверяйте ингредиенты, условия выпечки и размеры порций.', 'Фрукты и молочные продукты содержат природные сахара. Проверяйте состав покупных компонентов и указанные подсластители.'),
@@ -122,7 +133,7 @@ def image(r, priority=False):
     return f'<img src="/images/{r["id"]}.webp" alt="{e(r["imageAlt"])}" width="960" height="640" {loading} decoding="async">'
 
 
-def layout(title, description, path, site, body, *, picture=None, schema=None, section=''):
+def layout(title, description, path, site, body, *, picture=None, schema=None, section='', lunches=False):
     canonical = site + path if site else None
     meta = f'<link rel="canonical" href="{e(canonical)}"><meta property="og:url" content="{e(canonical)}">' if canonical else ''
     if picture:
@@ -136,16 +147,25 @@ def layout(title, description, path, site, body, *, picture=None, schema=None, s
         trail = [{'@type': 'ListItem', 'position': 1, 'name': TITLE, 'item': site + '/'}]
         if path.startswith('/recipes/') and path != '/recipes/':
             trail.append({'@type': 'ListItem', 'position': 2, 'name': 'Рецепты', 'item': site + '/recipes/'})
+            if section == 'lunches':
+                trail.append({'@type': 'ListItem', 'position': 3, 'name': 'Обеды', 'item': site + '/lunches/'})
         elif path.startswith('/collections/') and path != '/collections/':
-            trail.append({'@type': 'ListItem', 'position': 2, 'name': 'Подборки', 'item': site + '/collections/'})
+            name, parent = ('Обеды', '/lunches/') if section == 'lunches' else ('Подборки', '/collections/')
+            trail.append({'@type': 'ListItem', 'position': 2, 'name': name, 'item': site + parent})
         elif path.startswith('/guides/') and path != '/guides/':
             trail.append({'@type': 'ListItem', 'position': 2, 'name': 'Справочник', 'item': site + '/guides/'})
         trail.append({'@type': 'ListItem', 'position': len(trail) + 1, 'name': title.removesuffix(' — рецепт'), 'item': site + path})
         breadcrumbs = {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': trail}
         structured += f'<script type="application/ld+json">{script_json(breadcrumbs)}</script>'
     page_title = PAGE_SEO_TITLES.get(path, f'{title} · {TITLE}' if title != TITLE else f'{TITLE} — простые и необычные рецепты')
+    if lunches and path == '/recipes/':
+        page_title = 'Рецепты по ингредиентам — выпечка, завтраки и обеды'
+    nav_items = [('catalog', '/recipes/', 'Рецепты'), ('breakfasts', '/breakfasts/', 'Завтраки')]
+    if lunches:
+        nav_items.append(('lunches', '/lunches/', 'Обеды'))
+    nav_items.extend([('collections', '/collections/', 'Подборки'), ('guides', '/guides/', 'Справочник')])
     nav = ''.join(f'<a href="{href}"'+(' aria-current="page"' if section == key else '')+f'>{label}</a>'
-                  for key, href, label in [('catalog','/recipes/','Рецепты'),('breakfasts','/breakfasts/','Завтраки'),('collections','/collections/','Подборки'),('guides','/guides/','Справочник')])
+                  for key, href, label in nav_items)
     og_type = 'article' if schema and schema.get('@type') == 'Recipe' else 'website'
     return f'''<!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#ffffff">
@@ -178,7 +198,8 @@ def card(r):
     keys = ' '.join([r['title'], r['description'], KINDS[r['kind']], COOKING[method]] + [MEALS[m] for m in meals] + [TAG_NAMES[t] for t in tags]
                     + [i['label'] for i in r['ingredients']])
     duration = r.get('bake') if method == 'oven' else r.get('cook')
-    time = (f'{min_range(duration)} мин ' + ('выпечки' if method == 'oven' else 'приготовления')) if duration else (
+    heat_label = ('запекания' if 'lunch' in meals else 'выпечки') if method == 'oven' else 'приготовления'
+    time = (f'{min_range(duration)} мин ' + heat_label) if duration else (
         f'{r["prep"]} мин' if r.get('prep') else COOKING[method])
     pantry = sorted(({i['product'] for i in r['ingredients'] if not i.get('optional')} | set(r.get('pantryExtra', []))) - {'Вода'})
     return f'''<article class="card" data-kind="{r['kind']}" data-tags="{' '.join(tags)}" data-meals="{' '.join(meals)}" data-method="{method}" data-track="{' '.join(r['tracks'])}" data-difficulty="{r['difficulty']}" data-pantry="{e(script_json(pantry))}" data-search="{e(keys)}">
@@ -201,13 +222,14 @@ def track_cards(tracks):
     return '<div class="track-grid">' + ''.join(cards) + '</div>'
 
 
-def home(recipes, collections, tracks, site):
+def home(recipes, collections, tracks, site, lunches):
     by_id = {r['id']:r for r in recipes}
     featured = by_id.get('apple-raisin-sheet-cake', recipes[0])
     picks = [by_id[k] for k in ('whole-wheat-blueberry-muffins', 'banana-date-oat-cookies', 'whole-wheat-plum-cake') if k in by_id]
     picks = picks or recipes[:3]
+    lunch_section = '''<section class="wrap block"><p class="eyebrow">Отдельный раздел</p><h2>Что приготовить на обед</h2><p class="lead">Супы и горячие блюда на каждый день, быстрые обеды и рецепты, которые удобно приготовить заранее.</p><a class="quiet" href="/lunches/">Смотреть обеды <span aria-hidden="true">→</span></a></section>''' if lunches else ''
     body = f'''<section class="wrap hero"><div class="hero-copy"><p class="eyebrow"><span></span> Рецепты для дома</p><h1>Здоровая<br><em>выпечка</em></h1>
-<p>Простые и необычные рецепты домашней выпечки — на каждый день, к завтраку, для всей семьи и гостей. Отдельные подборки: выпечка из цельнозерновой муки, без добавленного сахара, без сливочного масла и на большую компанию, а также здоровые завтраки и готовые меню на неделю и месяц.</p>
+<p>Простые и необычные рецепты домашней выпечки — на каждый день, к завтраку, для всей семьи и гостей. Отдельные подборки: выпечка из цельнозерновой муки, без добавленного сахара, без сливочного масла и на большую компанию.</p>
 <p>Выбирайте рецепты по продуктам и готовьте из того, что есть дома. Легко пересчитывайте ингредиенты под свою форму и количество порций.</p>
 <div class="actions"><a class="button primary" href="/recipes/">Смотреть рецепты <span aria-hidden="true">↗</span></a><a class="quiet" href="/guides/">Меры и формы <span aria-hidden="true">→</span></a></div></div>
 <figure class="hero-photo"><a href="/recipes/{featured['id']}/">{image(featured, True)}</a><figcaption><span>Иллюстрация к рецепту</span><a href="/recipes/{featured['id']}/">{e(featured['title'])} ↗</a></figcaption></figure></section>
@@ -215,12 +237,13 @@ def home(recipes, collections, tracks, site):
 <section class="wrap block directions"><p class="eyebrow">Найдите свой рецепт</p><h2>Простые или необычные рецепты?</h2>{track_cards(tracks)}</section>
 <section class="wrap block"><p class="eyebrow">Поиск по составу</p><h2>ПП выпечка и ПП пироги</h2><p class="lead">Выбирайте домашние рецепты с цельнозерновой мукой или без добавленного сахара. Состав и питательная ценность блюд различаются.</p><p><a class="quiet" href="/collections/pp-baking/">ПП выпечка — подборка рецептов ↗</a>　<a class="quiet" href="/collections/pp-pies/">ПП пироги в духовке ↗</a></p></section>
 <section class="wrap block"><p class="eyebrow">Отдельный раздел</p><h2>Здоровые завтраки</h2><p class="lead">Каши, яйца, панкейки, мюсли и завтраки, которые удобно заготовить заранее — с вечера.</p><a class="quiet" href="/breakfasts/">Смотреть завтраки <span aria-hidden="true">→</span></a></section>
+{lunch_section}
 <section class="wrap block"><div class="section-head"><div><p class="eyebrow">Из каталога</p><h2>Что будем печь?</h2></div><a class="quiet" href="/recipes/">Весь каталог <span aria-hidden="true">→</span></a></div><div class="cards">{''.join(map(card,picks))}</div></section>
 <section class="wrap block"><p class="eyebrow">По продуктам и случаям</p><h2>Подборки</h2>{collection_grid(collections)}</section>'''
-    return layout(TITLE, 'Здоровая выпечка: ПП выпечка и полезные завтраки на каждый день. Пироги, печенье, творожные блюда. Поиск рецептов по ингредиентам и пересчёт порций.', '/', site, body, picture=f'/images/{featured["id"]}.webp')
+    return layout(TITLE, 'Здоровая выпечка: ПП выпечка и полезные завтраки на каждый день. Пироги, печенье, творожные блюда. Поиск рецептов по ингредиентам и пересчёт порций.', '/', site, body, picture=f'/images/{featured["id"]}.webp', lunches=lunches)
 
 
-def catalog(recipes, site):
+def catalog(recipes, site, lunches):
     def select(id, title, choices):
         return f'<label>{title}<select id="{id}"><option value="">Все варианты</option>' + ''.join(
             f'<option value="{key}">{e(label)}</option>' for key, label in choices.items()) + '</select></label>'
@@ -236,7 +259,9 @@ def catalog(recipes, site):
     secondary = sorted(available - set(primary), key=str.casefold)
     def checkboxes(products):
         return ''.join(f'<label class="pantry-chip"><input type="checkbox" value="{e(product)}" data-pantry-product> <span>{e(product)}</span></label>' for product in products)
-    body = f'''<section class="wrap block top-block">{crumbs()}<p class="eyebrow">Книга рецептов</p><h1>Рецепты домашней выпечки и завтраков</h1><p class="lead">Рецепты по ингредиентам: найдите, что приготовить из продуктов, которые есть дома. Пироги, печенье, кексы, каши, сырники и другие завтраки. Поиск и фильтры можно сочетать.</p>
+    heading = 'Домашняя выпечка, завтраки и обеды' if lunches else 'Рецепты домашней выпечки и завтраков'
+    lunch_link = ' Для супов и горячих блюд откройте <a href="/lunches/">раздел обедов</a>.' if lunches else ''
+    body = f'''<section class="wrap block top-block">{crumbs()}<p class="eyebrow">Книга рецептов</p><h1>{heading}</h1><p class="lead">Рецепты по ингредиентам: найдите, что приготовить из продуктов, которые есть дома. Поиск и фильтры можно сочетать.{lunch_link}</p>
 <form id="filters" class="filterbox" hidden><label class="search-label">Поиск по рецептам<input id="search" type="search" placeholder="Например, яблоко или овсянка"></label>
 <div class="filter-grid">{select('kind','Вид блюда',kinds)}{groups}{select('track','Тип рецепта',{key: row[0] for key,row in TRACKS.items()})}{select('difficulty','Сложность',DIFFICULTIES)}{select('meal','Приём пищи',meal_options)}{select('method','Способ приготовления',method_options)}</div>
 <fieldset class="pantry"><legend>Подбор рецептов по ингредиентам — что приготовить из того, что есть дома?</legend><p>Отметьте имеющиеся продукты: покажем подходящие рецепты и недостающие ингредиенты. Вода считается доступной.</p><div class="pantry-options">{checkboxes(primary)}</div>
@@ -244,10 +269,12 @@ def catalog(recipes, site):
 <label class="pantry-exact"><input id="pantry-exact" type="checkbox"> Только рецепты, для которых всё есть</label></fieldset></form>
 <div class="catalog-status"><p id="recipe-count" role="status">Всего рецептов: {len(recipes)}</p><button class="quiet" id="reset-filters" type="button" hidden>Сбросить фильтры</button></div>
 <div class="cards" id="catalog">{''.join(map(card,recipes))}</div><p id="empty" class="notice" hidden>По вашему запросу ничего не нашлось. Попробуйте изменить поиск или убрать фильтр.</p></section>'''
-    return layout('Рецепты по ингредиентам', 'Рецепты по ингредиентам — что приготовить из того, что есть дома. ПП выпечка, пироги, сырники, каши и полезные завтраки. Выбирайте продукты и пересчитывайте порции.', '/recipes/', site, body, section='catalog')
+    dishes = 'Пироги, сырники, полезные завтраки и домашние обеды.' if lunches else 'ПП выпечка, пироги, сырники, каши и полезные завтраки.'
+    desc = f'Рецепты по ингредиентам — что приготовить из того, что есть дома. {dishes} Выбирайте продукты и пересчитывайте порции.'
+    return layout('Рецепты по ингредиентам', desc, '/recipes/', site, body, section='catalog', lunches=lunches)
 
 
-def recipe(r, site, related):
+def recipe(r, site, related, lunches):
     path = f'/recipes/{r["id"]}/'
     ingredients = {i['id']:i for i in r['ingredients']}
     intro = r.get('intro', r['description'])
@@ -268,6 +295,11 @@ def recipe(r, site, related):
     tips = ''.join(f'<p>{e(tip)}</p>' for tip in r.get('tips', []))
     track_link = f'<a href="/{r["tracks"][0]}/">{e(TRACKS[r["tracks"][0]][0])}</a>'
     tag_links = track_link + ''.join(f'<a href="/collections/{tag}/">{e(TAG_NAMES[tag])}</a>' for tag in recipe_tags(r) if tag in related['collections'])
+    lunch = 'lunch' in r.get('mealTypes', [])
+    if lunch:
+        tag_links += '<a href="/lunches/">Обеды</a>'
+        tag_links += ''.join(f'<a href="/collections/{key}/">{e(COLLECTIONS[key][0])}</a>'
+                             for key in related['lunch_groups'])
     # Link only to actually matching SEO collections; do not label every recipe «ПП».
     if pp_baking_candidate(r) and 'pp-baking' in related['collections']:
         tag_links += '<a href="/collections/pp-baking/">Варианты ПП выпечки</a>'
@@ -281,7 +313,8 @@ def recipe(r, site, related):
     prep_label = 'Общее время' if total_only else 'Подготовка'
     prep = f'<div><dt>{prep_label}</dt><dd>{r["prep"]} мин</dd></div>' if r.get('prep') is not None else ''
     cooking_info = COOKING[method]
-    duration_fact = (f'<div><dt>{"Выпечка" if method == "oven" else "Приготовление"}</dt>'
+    heating_label = ('Запекание' if lunch else 'Выпечка') if method == 'oven' else 'Приготовление'
+    duration_fact = (f'<div><dt>{heating_label}</dt>'
                      f'<dd>{min_range(duration)} мин</dd></div>') if duration else ''
     oven_fact = f'<div><dt>Духовка</dt><dd>{r["temp"]} °C</dd></div>' if method == 'oven' else ''
     oven = r.get('mode') or ('Режим в источнике не указан' if method == 'oven' else cooking_info)
@@ -296,7 +329,9 @@ def recipe(r, site, related):
 <label id="cup-wrap" hidden>Объём стакана<select id="cup-size"><option value="250">250 мл</option><option value="200">200 мл</option></select></label></div>
 <p id="scale-note" role="status" hidden></p><p class="small" id="volume-note" hidden>Объёмные меры приблизительные. Если округление слишком велико или для продукта нет надёжного пересчёта, остаются исходные единицы.</p>
 {pan}<div class="cook-actions"><button id="reset-recipe" class="quiet" type="button">Исходные количества</button><button id="copy-list" class="quiet" type="button">Скопировать покупки</button><button id="print-recipe" class="quiet" type="button">Печать</button></div><p id="cook-status" role="status" hidden></p></div>'''
-    body = f'''<article class="wrap recipe top-block">{crumbs(('/recipes/','Рецепты'))}
+    back = crumbs(('/recipes/', 'Рецепты'), ('/lunches/', 'Обеды')) if lunch else crumbs(('/recipes/', 'Рецепты'))
+    reheat = f'<h3>Как разогреть</h3><p>{e(r["reheat"])}</p>' if r.get('reheat') else ''
+    body = f'''<article class="wrap recipe top-block">{back}
 <div class="recipe-head"><div class="recipe-intro"><p class="eyebrow">{e(KINDS[r['kind']])}</p><h1>{e(r['title'])}</h1><p class="lead">{e(intro)}</p><div class="chips">{tag_links}</div>
 <dl class="facts">{prep}{duration_fact}{extra}{oven_fact}<div><dt>Исходный выход</dt><dd>{r['servings']} порц.</dd></div></dl>{time_note}
 {equipment}<a class="button primary jump" href="#ingredients">К ингредиентам <span aria-hidden="true">↓</span></a></div>
@@ -304,7 +339,7 @@ def recipe(r, site, related):
 <div class="recipe-body"><section class="ingredients" id="ingredients"><h2>Ингредиенты</h2>{controls}<ul class="ingredient-list" id="ingredient-list">{rows}</ul></section>
 <section class="steps" id="steps"><h2>Приготовление</h2><ol class="step-list">{steps}</ol>
 <div class="notice"><h3>Как проверить готовность</h3><p>{e(r['doneness'])}</p></div>
-<h3>Как хранить</h3><p>{e(r['storage'])}</p><h3>Аллергены</h3><p>{e(', '.join(r['allergens']) if r['allergens'] else 'Проверьте состав и маркировку продуктов.')}</p>{f'<h3>На заметку</h3>{tips}' if tips else ''}</section></div></article>
+<h3>Как хранить</h3><p>{e(r['storage'])}</p>{reheat}<h3>Аллергены</h3><p>{e(', '.join(r['allergens']) if r['allergens'] else 'Проверьте состав и маркировку продуктов.')}</p>{f'<h3>На заметку</h3>{tips}' if tips else ''}</section></div></article>
 {f'<section class="wrap block"><h2>Ещё из каталога</h2><div class="cards">{"".join(map(card,related["recipes"]))}</div></section>' if related['recipes'] else ''}
 <script type="application/json" id="recipe-data">{script_json({k:r[k] for k in ('id','servings','ingredients','panSize','cookingMethod') if k in r})}</script>'''
     schema = {'@context':'https://schema.org','@type':'Recipe','name':r['title'],'description':r['description'],
@@ -319,7 +354,8 @@ def recipe(r, site, related):
         schema['totalTime'] = f'PT{r["prep"] + (duration[1] if duration else 0) + (r.get("extra") or 0)}M'
     if site:
         schema['url'] = site+path
-    return layout(r['title'] + ' — рецепт', r['description'], path, site, body, picture=f'/images/{r["id"]}.webp', schema=schema)
+    return layout(r['title'] + ' — рецепт', r['description'], path, site, body, picture=f'/images/{r["id"]}.webp',
+                  schema=schema, section='lunches' if lunch else '', lunches=lunches)
 
 
 def shape_fields(id, title):
@@ -363,13 +399,60 @@ def breakfast_collections(recipes):
     }
 
 
+def lunch_collections(recipes):
+    def quick(r):
+        if 'quick' not in r['tags'] or r.get('prep') is None:
+            return False
+        duration = r.get('bake') or r.get('cook') or (0, 0)
+        earliest = r['prep'] + duration[0] + (r.get('extra') or 0)
+        latest = r['prep'] + duration[1] + (r.get('extra') or 0)
+        return 15 <= earliest and latest <= 30
+
+    candidates = {
+        'quick-lunches': [r for r in recipes if quick(r)],
+        'everyday-lunches': [r for r in recipes if 'pantry-staples' in r['tags']],
+        'family-lunches': [r for r in recipes if r['servings'] >= 4],
+        'meatless-lunches': [r for r in recipes if 'meatless' in r['tags']],
+        'make-ahead-lunches': [r for r in recipes if 'make-ahead' in r['tags']],
+    }
+    groups = {}
+    for key, members in candidates.items():
+        if 3 <= len(members) < len(recipes) and members not in groups.values():
+            groups[key] = members
+    return groups
+
+
+def meal_sections(recipes):
+    groups = {}
+    for r in recipes:
+        groups.setdefault(r['kind'], []).append(r)
+    return ''.join(f'<section class="wrap block"><h2>{e(KINDS[kind])}</h2>'
+                   f'<div class="cards">{"".join(map(card, members))}</div></section>'
+                   for kind, members in groups.items())
+
+
+def item_list(recipes, site):
+    return {'@context': 'https://schema.org', '@type': 'ItemList', 'itemListElement': [
+        {'@type': 'ListItem', 'position': index, 'name': r['title'], 'url': site+f'/recipes/{r["id"]}/'}
+        for index, r in enumerate(recipes, 1)]}
+
+
 def pages(recipes, site):
     breakfast_recipes = [r for r in recipes if 'breakfast' in r.get('mealTypes', [])]
+    lunch_recipes = [r for r in recipes if 'lunch' in r.get('mealTypes', [])]
+    lunch_ids = {r['id'] for r in lunch_recipes}
+    other_recipes = [r for r in recipes if r['id'] not in lunch_ids]
+    lunches = bool(lunch_recipes)
+    page = partial(layout, lunches=lunches)
     breakfast_groups = breakfast_collections(breakfast_recipes)
     breakfast_groups = {key:members for key,members in breakfast_groups.items() if members}
-    collections = {key:[r for r in recipes if key in recipe_tags(r) and (key != 'no-added-sugar' or r['kind'] in BAKING_KINDS)] for key in COLLECTIONS}
+    lunch_groups = lunch_collections(lunch_recipes)
+    collections = {key:[r for r in recipes if key in recipe_tags(r) and
+                        (key != 'no-added-sugar' or (r['kind'] in BAKING_KINDS and r['id'] not in lunch_ids))]
+                   for key in COLLECTIONS}
     collections = {key:members for key,members in collections.items() if len(members) >= 2}
     collections.update(breakfast_groups)
+    collections.update(lunch_groups)
     pp_baking = [r for r in recipes if pp_baking_candidate(r)]
     pp_pies = [r for r in pp_baking if r['kind'] == 'cake' and 'пирог' in r['title'].lower()]
     if len(pp_baking) >= 2:
@@ -378,49 +461,53 @@ def pages(recipes, site):
         collections['pp-pies'] = pp_pies
     tracks = {key:[r for r in recipes if key in r['tracks']] for key in TRACKS}
     tracks = {key:members for key,members in tracks.items() if members}
-    yield '/', home(recipes, collections, tracks, site)
-    yield '/recipes/', catalog(recipes, site)
+    yield '/', home(recipes, collections, tracks, site, lunches)
+    yield '/recipes/', catalog(recipes, site, lunches)
     if breakfast_recipes:
-        groups = {}
-        for breakfast_item in breakfast_recipes:
-            groups.setdefault(breakfast_item['kind'], []).append(breakfast_item)
-        breakfast_sections = ''.join(
-            f'<section class="wrap block"><h2>{e(KINDS[kind])}</h2>'
-            f'<div class="cards">{"".join(map(card, members))}</div></section>'
-            for kind, members in groups.items())
         intro = ('Полезные завтраки на каждый день: простые рецепты каш, сырников из творога, блюд из яиц и тостов. '
                  'Для тех, кто ищет ПП завтраки, есть подборки по составу и завтраки, которые удобно заготовить заранее — с вечера. В карточках можно пересчитать порции.')
-        yield '/breakfasts/', layout('Здоровые завтраки', intro, '/breakfasts/', site,
+        yield '/breakfasts/', page('Здоровые завтраки', intro, '/breakfasts/', site,
             f'<section class="wrap block top-block">{crumbs()}<p class="eyebrow">На каждый день</p>'
             f'<h1>Здоровые завтраки</h1><p class="lead">{e(intro)}</p>'
             f'{collection_grid(breakfast_groups)}</section>'
-            + breakfast_sections, picture=f'/images/{breakfast_recipes[0]["id"]}.webp', section='breakfasts')
+            + meal_sections(breakfast_recipes), picture=f'/images/{breakfast_recipes[0]["id"]}.webp', section='breakfasts')
+    if lunches:
+        title = 'Что приготовить на обед'
+        intro = ('Простые рецепты домашних обедов на каждый день. Выбирайте супы, горячие блюда и обеды без мяса. '
+                 'В каждой карточке можно пересчитать порции и посмотреть, как хранить готовое блюдо.')
+        yield '/lunches/', page(title, intro, '/lunches/', site,
+            f'<section class="wrap block top-block">{crumbs()}<p class="eyebrow">Домашние обеды</p>'
+            f'<h1>{title}</h1><p class="lead">{e(intro)}</p>'
+            f'{collection_grid(lunch_groups)}<p><a class="quiet" href="/recipes/">Подобрать рецепт по продуктам →</a></p></section>'
+            + meal_sections(lunch_recipes), picture=f'/images/{lunch_recipes[0]["id"]}.webp',
+            schema=item_list(lunch_recipes, site), section='lunches')
     for key, members in tracks.items():
         title, desc, tip, _ = TRACKS[key]
         path = f'/{key}/'
-        yield path, layout(title, desc, path, site, f'<section class="wrap block top-block">{crumbs()}<p class="eyebrow">Выберите рецепт</p><h1>{e(title)}</h1><p class="lead">{e(desc)}</p><p class="notice">{e(tip)}</p><div class="cards">{"".join(map(card,members))}</div></section>',
+        yield path, page(title, desc, path, site, f'<section class="wrap block top-block">{crumbs()}<p class="eyebrow">Выберите рецепт</p><h1>{e(title)}</h1><p class="lead">{e(desc)}</p><p class="notice">{e(tip)}</p><div class="cards">{"".join(map(card,members))}</div></section>',
                            picture=f'/images/{members[0]["id"]}.webp', section='catalog')
-    yield '/collections/', layout('Подборки рецептов', 'Домашняя выпечка по продуктам, составу и случаю.', '/collections/', site,
+    yield '/collections/', page('Подборки рецептов', 'Домашние рецепты по продуктам, составу и случаю.', '/collections/', site,
         f'<section class="wrap block top-block">{crumbs()}<p class="eyebrow">Выберите по случаю</p><h1>Подборки</h1>{track_cards(tracks)}{collection_grid(collections)}</section>',section='collections')
     for key, members in collections.items():
         title, desc, tip = COLLECTIONS[key]
         path = f'/collections/{key}/'
-        schema = {'@context':'https://schema.org','@type':'ItemList','itemListElement':[
-            {'@type':'ListItem','position':index,'name':r['title'],'url':site+f'/recipes/{r["id"]}/'} for index,r in enumerate(members,1)]}
-        yield path, layout(title, desc, path, site,
-            f'<section class="wrap block top-block">{crumbs(("/collections/","Подборки"))}<h1>{e(title)}</h1><p class="lead">{e(desc)}</p><p class="notice">{e(tip)}</p><div class="cards">{"".join(map(card,members))}</div></section>',
-            picture=f'/images/{members[0]["id"]}.webp', schema=schema, section='collections')
+        parent = ('/lunches/', 'Обеды') if key in lunch_groups else ('/collections/', 'Подборки')
+        yield path, page(title, desc, path, site,
+            f'<section class="wrap block top-block">{crumbs(parent)}<h1>{e(title)}</h1><p class="lead">{e(desc)}</p><p class="notice">{e(tip)}</p><div class="cards">{"".join(map(card,members))}</div></section>',
+            picture=f'/images/{members[0]["id"]}.webp', schema=item_list(members, site), section=parent[0].strip('/'))
     for r in recipes:
-        others = [item for item in recipes if item['id'] != r['id']]
+        pool = lunch_recipes if r['id'] in lunch_ids else other_recipes
+        others = [item for item in pool if item['id'] != r['id']]
         picks = sorted(others,key=lambda item:(item['kind'] == r['kind'], len(set(item['tags']) & set(r['tags']))),reverse=True)[:3]
-        yield f'/recipes/{r["id"]}/', recipe(r, site, {'collections':collections, 'recipes':picks})
+        matching_lunch_groups = [key for key, members in lunch_groups.items() if r in members]
+        yield f'/recipes/{r["id"]}/', recipe(r, site, {'collections':collections, 'recipes':picks, 'lunch_groups':matching_lunch_groups}, lunches)
     for path, (title, desc, content) in guide_pages(site).items():
         back = crumbs(('/guides/','Справочник')) if path != '/guides/' else crumbs()
-        yield path, layout(title,desc,path,site,f'<section class="wrap prose block top-block">{back}<h1>{e(title)}</h1><p class="lead">{e(desc)}</p>{content}</section>',section='guides')
+        yield path, page(title,desc,path,site,f'<section class="wrap prose block top-block">{back}<h1>{e(title)}</h1><p class="lead">{e(desc)}</p>{content}</section>',section='guides')
     for path, title, desc, body in [
         ('/about/','О проекте','Домашняя выпечка с понятным составом и мерами.','<p>Мы сверяем рецептуры и переводим меры для домашней кухни. На карточках указываем исходную форму, порядок действий и признаки готовности. Иллюстрации показывают ожидаемую подачу.</p><p>В основе каталога — опубликованные рецептуры со всего мира.</p>'),
         ('/privacy/','Конфиденциальность','Какие данные использует сайт.','<p>Для просмотра рецептов регистрация не нужна. Отметки ингредиентов сохраняются в браузере на вашем устройстве. Их можно удалить, очистив данные этого сайта в настройках браузера.</p><p>Для понимания посещаемости используется собственная система статистики. В браузере создается случайный анонимный идентификатор посетителя (localStorage), а на сервер отправляются адрес открытой страницы, время активности видимой вкладки и домен сайта, с которого совершен переход. Мы не сохраняем IP-адреса, имена, электронную почту или User-Agent в базе статистики. Данные нужны для подсчета посещений, популярных страниц и источников переходов.</p><p>Чтобы отключить счетчик на этом устройстве, откройте сайт один раз с параметром <code>?__analytics=off</code>. Вернуть подсчет можно через <code>?__analytics=on</code>. Очистка данных сайта в браузере также удаляет идентификатор. Поставщик хостинга может вести собственные технические журналы запросов.</p>')]:
-        yield path, layout(title,desc,path,site,f'<section class="wrap prose block top-block">{crumbs()}<h1>{e(title)}</h1><p class="lead">{e(desc)}</p>{body}</section>')
+        yield path, page(title,desc,path,site,f'<section class="wrap prose block top-block">{crumbs()}<h1>{e(title)}</h1><p class="lead">{e(desc)}</p>{body}</section>')
 
 
 def write_pages(destination, recipes, site):

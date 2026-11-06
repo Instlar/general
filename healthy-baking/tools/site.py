@@ -24,7 +24,7 @@ IMAGE_PATH = re.compile(r'images/[a-z0-9]+(?:-[a-z0-9]+)*\.webp')
 LIMIT = 32 * 1024 * 1024
 MAX_IMAGE = 2 * 1024 * 1024
 RECIPE_FIELDS = {'id', 'title', 'description', 'intro', 'kind', 'tags', 'servings', 'prep', 'bake', 'extra',
-                 'temp', 'mode', 'pan', 'panSize', 'ingredients', 'steps', 'doneness', 'storage',
+                 'temp', 'mode', 'pan', 'panSize', 'ingredients', 'steps', 'doneness', 'storage', 'reheat',
                  'allergens', 'tips', 'imageAlt', 'sourceKey', 'tracks', 'difficulty', 'pantryExtra', 'timeNote', 'mealTypes', 'cookingMethod', 'cook', 'usesOven'}
 INGREDIENT_FIELDS = {'id', 'label', 'product', 'amount', 'unit', 'density', 'optional', 'note'}
 
@@ -91,6 +91,8 @@ def validate_recipe(r):
     meals = r.get('mealTypes', [])
     require(string_list(meals, 0, 3) and len(meals) == len(set(meals))
             and set(meals) <= {'breakfast', 'lunch', 'dinner'}, 'Некорректные приёмы пищи.')
+    require(('reheat' not in r and 'lunch' not in meals) or clean_text(r.get('reheat')),
+            'Укажите способ разогрева или подачи холодным.')
     method = r.get('cookingMethod', 'oven')
     require(method in {'oven', 'hob', 'no-cook', 'microwave', 'mixed'}, 'Некорректный способ приготовления.')
     require('usesOven' not in r or (method == 'mixed' and type(r['usesOven']) is bool),
