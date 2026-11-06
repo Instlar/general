@@ -192,5 +192,44 @@ class SiteTest(unittest.TestCase):
                       (public / 'robots.txt').read_text(encoding='utf-8'))
 
 
+    def test_breakfast_editorial_batch_and_method_support(self):
+        staged_file = self.work / 'content' / 'editorial-breakfast-batch-01.json'
+        self.assertTrue(staged_file.is_file())
+        drafts = json.loads(staged_file.read_text(encoding='utf-8'))['recipes']
+        self.assertEqual(len(drafts), 10)
+        self.assertEqual(len({r['id'] for r in drafts}), len(drafts))
+        self.assertEqual(len({r['sourceKey'] for r in drafts}), len(drafts))
+        for draft in drafts:
+            self.assertEqual(draft['mealTypes'], ['breakfast'])
+            self.assertRegex(draft['sourceKey'], r'^[0-9a-f]{64}
+    unittest.main()
+)
+            self.assertTrue(draft['editorialSource']['url'].startswith('https://'))
+            ingredient_ids = {i['id'] for i in draft['ingredients']}
+            step_ids = set(re.findall(r'\{\{([a-z0-9-]+)\}\}', '\n'.join(draft['steps'])))
+            self.assertEqual(ingredient_ids, step_ids, draft['id'])
+            if draft['cookingMethod'] == 'no-cook':
+                self.assertNotIn('bake', draft)
+                self.assertNotIn('cook', draft)
+                self.assertNotIn('temp', draft)
+            elif draft['cookingMethod'] == 'oven':
+                self.assertIn('bake', draft)
+                self.assertIn('temp', draft)
+            else:
+                self.assertIn('cook', draft)
+                self.assertNotIn('temp', draft)
+
+    def test_breakfast_landing_and_stovetop_metadata(self):
+        self.cli('build', '--site-url', 'https://example.com')
+        breakfast = (self.work / 'public' / 'breakfasts' / 'index.html').read_text(encoding='utf-8')
+        recipe_page = (self.work / 'public' / 'recipes' / 'pear-walnut-yogurt-porridge'
+                       / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('<h1>Здоровые завтраки</h1>', breakfast)
+        self.assertIn('pear-walnut-yogurt-porridge', breakfast)
+        self.assertIn('<dt>Приготовление</dt><dd>3 мин</dd>', recipe_page)
+        self.assertNotIn('<dt>Духовка</dt>', recipe_page)
+        self.assertIn('href="/breakfasts/"', recipe_page)
+
+
 if __name__ == '__main__':
     unittest.main()
