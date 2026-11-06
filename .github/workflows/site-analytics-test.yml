@@ -1,0 +1,32 @@
+name: Test shared sites analytics admin
+on:
+  push:
+    branches: [healthy-baking-v1]
+    paths:
+      - "site-analytics/**"
+      - ".github/workflows/site-analytics-test.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ["22", "24"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Check syntax
+        working-directory: site-analytics
+        run: |
+          node --check server.mjs
+          node --check public/admin.js
+          node --check public/tracker.js
+      - name: Run auth, analytics and security tests
+        working-directory: site-analytics
+        run: npm test

@@ -1,0 +1,23 @@
+[Unit]
+Description=Shared site analytics dashboard
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=site-analytics
+Group=site-analytics
+WorkingDirectory=/opt/site-analytics
+EnvironmentFile=/etc/site-analytics.env
+ExecStart=/usr/bin/node /opt/site-analytics/server.mjs
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/site-analytics
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target
