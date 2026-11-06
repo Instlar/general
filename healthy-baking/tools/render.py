@@ -6,7 +6,7 @@ import re
 from pathlib import Path
 
 TITLE = 'Здоровая выпечка'
-KINDS = {'cake': 'Пироги', 'muffin': 'Маффины', 'cookie': 'Печенье', 'oats': 'Запечённая овсянка',
+KINDS = {'cake': 'Пироги', 'muffin': 'Маффины', 'cookie': 'Печенье', 'casserole': 'Запеканки', 'oats': 'Запечённая овсянка',
          'bread': 'Кексы', 'bar': 'Батончики', 'crumble': 'Крамблы и коблеры'}
 TAGS = {
     'ingredient': ('По ингредиентам', {'whole-wheat': 'Цельнозерновая мука', 'oat': 'Овёс',
@@ -14,7 +14,7 @@ TAGS = {
         'yogurt': 'Йогурт', 'kefir': 'Кефир', 'cottage-cheese': 'Творог'}),
     'composition': ('По составу', {'no-butter': 'Без сливочного масла', 'no-eggs': 'Без яиц',
         'no-added-sugar': 'Без добавленного сахара'}),
-    'occasion': ('По ситуации', {'big-pan': 'На большую компанию', 'small-batch': 'На 1–2 порции',
+    'occasion': ('По ситуации', {'big-pan': 'На большую компанию', 'sheet-pan': 'На противне', 'family': 'Для всей семьи', 'small-batch': 'На 1–2 порции',
         'breakfast': 'К завтраку', 'freezer': 'Для заморозки', 'no-mixer': 'Без миксера', 'quick': 'До 30 минут'})
 }
 TAG_NAMES = {key: title for _, choices in TAGS.values() for key, title in choices.items()}
@@ -29,6 +29,11 @@ COLLECTIONS = {
     'no-butter': ('Выпечка без сливочного масла', 'Домашние рецепты, в которых сливочного масла нет в списке ингредиентов. В одних используется растительное масло, в других влажность дают фрукты или кисломолочные продукты.', 'Проверьте отдельный список аллергенов, если вам нужно исключить молочные продукты.'),
     'dates': ('Выпечка с финиками', 'Овсяные батончики, печенье и маффины, где финики добавляют карамельный вкус.', 'Удалите косточки перед взвешиванием. Финики содержат собственные сахара, а в отдельных рецептах есть и другие подсластители.'),
     'big-pan': ('Большие пироги для компании', 'Пироги, рецептура которых рассчитана на большую форму или противень. Удобно заранее разрезать на порции и подать на общем столе.', 'Если ваша форма отличается по размеру, сравните площади дна. Исходные время и температура относятся к форме из рецепта.'),
+    'sheet-pan': ('Большие пироги на противне', 'Пироги, рассчитанные на выпечку одним пластом в большом противне или широкой прямоугольной форме. Их удобно нарезать порционными квадратами.', 'Сверьте внутренние размеры и высоту бортиков. Большая площадь сама по себе не гарантирует, что тесто пропечётся в исходное время.'),
+    'family': ('Выпечка для всей семьи', 'Пироги и кексы на несколько порций для общего завтрака и домашнего чаепития. Для каждого рецепта указан выход и размер формы.', 'При выборе учитывайте время охлаждения. Остывший пирог удобно нарезать заранее, а условия хранения указаны в рецепте.'),
+    'kefir': ('Выпечка на кефире', 'Домашние пироги, кексы и маффины на кефире. Можно выбрать выпечку с яблоками, бананом, лимоном или какао.', 'Используйте кефир, указанный в составе. Его кислотность влияет на работу соды, поэтому сверяйте замену с конкретной рецептурой.'),
+    'cottage-cheese': ('Творожная выпечка', 'Пироги с творожной начинкой, запеканки и порционная выпечка из творога. Есть сладкие и несладкие варианты.', 'Обращайте внимание на тип творога и влажность. Если рецепт просит протереть его или слить лишнюю сыворотку, сохраните этот шаг.'),
+    'breakfast': ('Выпечка к завтраку', 'Рецепты запеканок, овсяной выпечки и домашних кексов к завтраку. В карточках указано, какие блюда нужно охладить или подготовить заранее.', 'Сверяйте время подготовки и выпечки отдельно. Готовую творожную или яичную выпечку храните по инструкции на карточке.'),
     'small-batch': ('Выпечка на 1–2 порции', 'Небольшие десерты, изначально рассчитанные на одну или две порции. У каждого указана исходная форма.', 'Для нескольких порций сохраните размер отдельных формочек, если инструкция рассчитана на индивидуальную подачу.')
 }
 UNIT = {'g':'г', 'ml':'мл', 'tsp':'ч. л.', 'tbsp':'ст. л.', 'each':'шт.', 'pinch':'щеп.'}
@@ -104,13 +109,24 @@ def crumbs(*links):
         f' <span aria-hidden="true">/</span> <a href="{url}">{e(title)}</a>' for url, title in links) + '</nav>'
 
 
+def recipe_tags(r):
+    tags = r['tags']
+    pan = r.get('panSize', {})
+    if ('sheet-pan' not in tags and 'big-pan' in tags and r['kind'] == 'cake'
+            and pan.get('kind') == 'rectangle' and min(pan['width'], pan['length']) >= 20
+            and max(pan['width'], pan['length']) >= 28):
+        return [*tags, 'sheet-pan']
+    return tags
+
+
 def card(r):
     path = f'/recipes/{r["id"]}/'
-    keys = ' '.join([r['title'], r['description'], KINDS[r['kind']]] + [TAG_NAMES[t] for t in r['tags']]
+    tags = recipe_tags(r)
+    keys = ' '.join([r['title'], r['description'], KINDS[r['kind']]] + [TAG_NAMES[t] for t in tags]
                     + [i['label'] for i in r['ingredients']])
     time = f'{min_range(r["bake"])} мин выпечки'
     pantry = sorted(({i['product'] for i in r['ingredients'] if not i.get('optional')} | set(r.get('pantryExtra', []))) - {'Вода'})
-    return f'''<article class="card" data-kind="{r['kind']}" data-tags="{' '.join(r['tags'])}" data-track="{' '.join(r['tracks'])}" data-difficulty="{r['difficulty']}" data-pantry="{e(script_json(pantry))}" data-search="{e(keys)}">
+    return f'''<article class="card" data-kind="{r['kind']}" data-tags="{' '.join(tags)}" data-track="{' '.join(r['tracks'])}" data-difficulty="{r['difficulty']}" data-pantry="{e(script_json(pantry))}" data-search="{e(keys)}">
 <a class="card-photo" href="{path}" tabindex="-1" aria-hidden="true">{image(r)}</a>
 <div class="card-copy"><p class="card-meta">{e(KINDS[r['kind']])} <span>·</span> {time}</p><h3><a href="{path}">{e(r['title'])}</a></h3><p>{e(r['description'])}</p><p class="pantry-result" hidden></p></div></article>'''
 
@@ -151,7 +167,7 @@ def catalog(recipes, site):
         return f'<label>{title}<select id="{id}"><option value="">Все варианты</option>' + ''.join(
             f'<option value="{key}">{e(label)}</option>' for key, label in choices.items()) + '</select></label>'
     kinds = {k:v for k,v in KINDS.items() if any(r['kind'] == k for r in recipes)}
-    groups = ''.join(select(key, label, {k:v for k,v in choices.items() if any(k in r['tags'] for r in recipes)})
+    groups = ''.join(select(key, label, {k:v for k,v in choices.items() if any(k in recipe_tags(r) for r in recipes)})
                      for key,(label,choices) in TAGS.items())
     available = {i['product'] for r in recipes for i in r['ingredients'] if not i.get('optional')}
     available.update(product for r in recipes for product in r.get('pantryExtra', []))
@@ -174,6 +190,7 @@ def catalog(recipes, site):
 def recipe(r, site, related):
     path = f'/recipes/{r["id"]}/'
     ingredients = {i['id']:i for i in r['ingredients']}
+    intro = r.get('intro', r['description'])
 
     def step_text(s, interactive=False):
         esc = e(s) if interactive else s
@@ -190,7 +207,7 @@ def recipe(r, site, related):
     steps = ''.join(f'<li><div>{step_text(s, True)}</div></li>' for s in r['steps'])
     tips = ''.join(f'<p>{e(tip)}</p>' for tip in r.get('tips', []))
     track_link = f'<a href="/{r["tracks"][0]}/">{e(TRACKS[r["tracks"][0]][0])}</a>'
-    tag_links = track_link + ''.join(f'<a href="/collections/{tag}/">{e(TAG_NAMES[tag])}</a>' for tag in r['tags'] if tag in related['collections'])
+    tag_links = track_link + ''.join(f'<a href="/collections/{tag}/">{e(TAG_NAMES[tag])}</a>' for tag in recipe_tags(r) if tag in related['collections'])
     prep = f'<div><dt>Подготовка</dt><dd>{r["prep"]} мин</dd></div>' if r.get('prep') is not None else ''
     extra = f'<div><dt>Дополнительно</dt><dd>{r["extra"]} мин</dd></div>' if r.get('extra') else ''
     time_note = f'<p class="pan-line">{e(r["timeNote"])}</p>' if r.get('timeNote') else ''
@@ -205,7 +222,7 @@ def recipe(r, site, related):
 <p id="scale-note" role="status" hidden></p><p class="small" id="volume-note" hidden>Объёмные меры приблизительные. Если округление слишком велико или для продукта нет надёжного пересчёта, остаются исходные единицы.</p>
 {pan}<div class="cook-actions"><button id="reset-recipe" class="quiet" type="button">Исходные количества</button><button id="copy-list" class="quiet" type="button">Скопировать покупки</button><button id="print-recipe" class="quiet" type="button">Печать</button></div><p id="cook-status" role="status" hidden></p></div>'''
     body = f'''<article class="wrap recipe top-block">{crumbs(('/recipes/','Рецепты'))}
-<div class="recipe-head"><div class="recipe-intro"><p class="eyebrow">{e(KINDS[r['kind']])}</p><h1>{e(r['title'])}</h1><p class="lead">{e(r['description'])}</p><div class="chips">{tag_links}</div>
+<div class="recipe-head"><div class="recipe-intro"><p class="eyebrow">{e(KINDS[r['kind']])}</p><h1>{e(r['title'])}</h1><p class="lead">{e(intro)}</p><div class="chips">{tag_links}</div>
 <dl class="facts">{prep}<div><dt>Выпечка</dt><dd>{min_range(r['bake'])} мин</dd></div>{extra}<div><dt>Духовка</dt><dd>{r['temp']} °C</dd></div><div><dt>Исходный выход</dt><dd>{r['servings']} порц.</dd></div></dl>{time_note}
 <p class="pan-line"><strong>Форма.</strong> {e(r['pan'])}<br><strong>Нагрев.</strong> {e(oven)}</p><a class="button primary jump" href="#ingredients">К ингредиентам <span aria-hidden="true">↓</span></a></div>
 <figure class="recipe-photo">{image(r, True)}<figcaption>Иллюстрация к рецепту</figcaption></figure></div>
@@ -253,7 +270,7 @@ def guide_pages(site):
 
 
 def pages(recipes, site):
-    collections = {key:[r for r in recipes if key in r['tags']] for key in COLLECTIONS}
+    collections = {key:[r for r in recipes if key in recipe_tags(r)] for key in COLLECTIONS}
     collections = {key:members for key,members in collections.items() if len(members) >= 2}
     tracks = {key:[r for r in recipes if key in r['tracks']] for key in TRACKS}
     tracks = {key:members for key,members in tracks.items() if members}

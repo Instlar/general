@@ -8,6 +8,7 @@ import unittest
 import uuid
 import zipfile
 from html.parser import HTMLParser
+from html import escape
 from pathlib import Path
 from urllib.parse import urlsplit
 from xml.etree import ElementTree
@@ -61,6 +62,7 @@ class SiteTest(unittest.TestCase):
         original_image = self.work / 'content' / 'images' / (recipe['id'] + '.webp')
         recipe['id'] = 'integration-test-cake'
         recipe['title'] = 'Тестовая карточка для проверки импорта'
+        recipe['intro'] = 'Проверяем, что введение сохраняется после импорта. Оно отличается от краткого описания.'
         recipe['source'] = {'url':'https://example.org/fixture/one','title':'Fixture','author':'QA','status':'source-checked'}
         recipe['image'] = 'images/sample.webp'
         if invalid_token:
@@ -110,6 +112,7 @@ class SiteTest(unittest.TestCase):
         self.cli('import', self.package_file)
         output = self.work / 'public' / 'recipes' / 'integration-test-cake' / 'index.html'
         self.assertIn('Тестовая карточка', output.read_text(encoding='utf-8'))
+        self.assertIn('Проверяем, что введение сохраняется после импорта.', output.read_text(encoding='utf-8'))
         self.assertNotIn('example.org', output.read_text(encoding='utf-8'))
         self.assertIn('https://example.org/fixture/one', (self.work / 'editorial-sources.local.json').read_text(encoding='utf-8'))
         before = digest(self.recipe_file), digest(output)
@@ -126,11 +129,11 @@ class SiteTest(unittest.TestCase):
                 self.assertEqual(before,(digest(self.recipe_file),digest(self.work / 'public' / 'index.html')))
 
     def test_disjoint_simple_and_unusual_groups(self):
-        self.assertEqual(len(self.recipes), 23)
+        self.assertEqual(len(self.recipes), 48)
         self.assertTrue(all(len(r.get('tracks', [])) == 1 for r in self.recipes))
         self.cli('build', '--site-url', 'https://example.com')
         public = self.work / 'public'
-        expected = [('everyday', 'Простые рецепты', 4),
+        expected = [('everyday', 'Простые рецепты', 29),
                     ('special', 'Необычные рецепты', 19)]
         home = (public / 'index.html').read_text(encoding='utf-8')
         for category, title, count in expected:
@@ -151,17 +154,27 @@ class SiteTest(unittest.TestCase):
         homepage = (public / 'index.html').read_text(encoding='utf-8')
         self.assertIn('Здоровая выпечка', homepage)
         self.assertNotIn('Пеки здорово', homepage)
-        self.assertIn('Простые рецепты здоровой домашней выпечки', homepage)
+        self.assertIn('<title>Здоровая выпечка — простые и необычные рецепты</title>', homepage)
 
         seo = json.loads((self.work / 'content' / 'seo-copy.json').read_text(encoding='utf-8'))['recipes']
+        self.assertEqual(len(seo), 23)
+        self.assertEqual(len({seo.get(r['id'], r['description']) for r in self.recipes}), 48)
+        added = [recipe for recipe in self.recipes if recipe['id'] not in seo]
+        self.assertEqual(len(added), 25)
+        self.assertTrue(all(r['tracks'] == ['everyday'] and 120 <= len(r['description']) <= 160
+                            and r.get('intro') and r['intro'] != r['description'] for r in added))
         for recipe in self.recipes:
             page = (public / 'recipes' / recipe['id'] / 'index.html').read_text(encoding='utf-8')
-            self.assertIn(seo[recipe['id']], page)
+            description = seo.get(recipe['id'], recipe['description'])
+            self.assertIn(f'<meta name="description" content="{escape(description)}">', page)
+            if 'intro' in recipe:
+                self.assertIn(f'<p class="lead">{escape(recipe["intro"])}</p>', page)
+            self.assertIn('· Здоровая выпечка</title>', page)
             self.assertIn('rel="canonical"', page)
             schemas = [json.loads(v) for v in re.findall(r'<script type="application/ld\+json">([^<]*)</script>', page)]
             by_type = {schema['@type']: schema for schema in schemas}
             self.assertEqual(set(by_type), {'Recipe', 'BreadcrumbList'})
-            self.assertEqual(by_type['Recipe']['description'], seo[recipe['id']])
+            self.assertEqual(by_type['Recipe']['description'], description)
             self.assertIn('cookTime', by_type['Recipe'])
             self.assertEqual(by_type['BreadcrumbList']['itemListElement'][-1]['item'],
                              'https://example.com/recipes/' + recipe['id'] + '/')

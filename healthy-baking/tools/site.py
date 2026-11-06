@@ -22,7 +22,7 @@ SOURCE_KEY = re.compile(r'[0-9a-f]{64}')
 IMAGE_PATH = re.compile(r'images/[a-z0-9]+(?:-[a-z0-9]+)*\.webp')
 LIMIT = 32 * 1024 * 1024
 MAX_IMAGE = 2 * 1024 * 1024
-RECIPE_FIELDS = {'id', 'title', 'description', 'kind', 'tags', 'servings', 'prep', 'bake', 'extra',
+RECIPE_FIELDS = {'id', 'title', 'description', 'intro', 'kind', 'tags', 'servings', 'prep', 'bake', 'extra',
                  'temp', 'mode', 'pan', 'panSize', 'ingredients', 'steps', 'doneness', 'storage',
                  'allergens', 'tips', 'imageAlt', 'sourceKey', 'tracks', 'difficulty', 'pantryExtra', 'timeNote'}
 INGREDIENT_FIELDS = {'id', 'label', 'product', 'amount', 'unit', 'density', 'optional', 'note'}
@@ -75,6 +75,7 @@ def validate_recipe(r):
     require(set(r) <= RECIPE_FIELDS, 'Неизвестные поля рецепта.')
     require(r['id'] not in {'index', 'images'}, 'Зарезервированный идентификатор.')
     require(all(clean_text(r.get(key)) for key in ('title','description','pan','doneness','storage','imageAlt')), 'Заполните обязательные текстовые поля.')
+    require('intro' not in r or clean_text(r['intro']), 'Проверьте вводный текст.')
     require(r.get('mode') is None or clean_text(r['mode']), 'Некорректный режим духовки.')
     require(r.get('timeNote') is None or clean_text(r['timeNote']), 'Некорректное пояснение о времени.')
     require(isinstance(r.get('kind'), str) and r['kind'] in KINDS, 'Неизвестный вид выпечки.')

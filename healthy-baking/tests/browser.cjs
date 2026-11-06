@@ -70,7 +70,7 @@ async function main() {
     assert.equal(await page.locator('#catalog .card:visible').count(), content.length);
     assert.ok(content.every(recipe => recipe.tracks.length === 1), 'Each recipe belongs to one group');
     await page.locator('#track').selectOption('everyday');
-    assert.equal(await page.locator('#catalog .card:visible').count(), 4);
+    assert.equal(await page.locator('#catalog .card:visible').count(), 29);
     await page.locator('#track').selectOption('special');
     assert.equal(await page.locator('#catalog .card:visible').count(), 19);
     await page.locator('#track').selectOption('everyday');
