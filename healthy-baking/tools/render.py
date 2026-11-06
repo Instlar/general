@@ -152,7 +152,7 @@ def home(recipes, collections, tracks, site):
     picks = [by_id[k] for k in ('whole-wheat-blueberry-muffins', 'banana-date-oat-cookies', 'whole-wheat-plum-cake') if k in by_id]
     picks = picks or recipes[:3]
     body = f'''<section class="wrap hero"><div class="hero-copy"><p class="eyebrow"><span></span> Рецепты для дома</p><h1>Здоровая<br><em>выпечка</em></h1>
-<p>Простые и необычные рецепты домашней выпечки — на каждый день, к завтраку, для всей семьи и гостей. Подборки из цельнозерновой муки, без добавленного сахара и без сливочного масла, выпечка на большую компанию, здоровые завтраки и готовые меню на неделю и месяц.</p>
+<p>Простые и необычные рецепты домашней выпечки — на каждый день, к завтраку, для всей семьи и гостей. Отдельные подборки: выпечка из цельнозерновой муки, без добавленного сахара, без сливочного масла и на большую компанию, а также здоровые завтраки и готовые меню на неделю и месяц.</p>
 <p>Выбирайте рецепты по продуктам и готовьте из того, что есть дома. Легко пересчитывайте ингредиенты под свою форму и количество порций.</p>
 <div class="actions"><a class="button primary" href="/recipes/">Смотреть рецепты <span aria-hidden="true">↗</span></a><a class="quiet" href="/guides/">Меры и формы <span aria-hidden="true">→</span></a></div></div>
 <figure class="hero-photo"><a href="/recipes/{featured['id']}/">{image(featured, True)}</a><figcaption><span>Иллюстрация к рецепту</span><a href="/recipes/{featured['id']}/">{e(featured['title'])} ↗</a></figcaption></figure></section>
