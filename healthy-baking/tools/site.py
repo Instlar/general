@@ -24,7 +24,7 @@ LIMIT = 32 * 1024 * 1024
 MAX_IMAGE = 2 * 1024 * 1024
 RECIPE_FIELDS = {'id', 'title', 'description', 'intro', 'kind', 'tags', 'servings', 'prep', 'bake', 'extra',
                  'temp', 'mode', 'pan', 'panSize', 'ingredients', 'steps', 'doneness', 'storage',
-                 'allergens', 'tips', 'imageAlt', 'sourceKey', 'tracks', 'difficulty', 'pantryExtra', 'timeNote', 'mealTypes', 'cookingMethod', 'cook'}
+                 'allergens', 'tips', 'imageAlt', 'sourceKey', 'tracks', 'difficulty', 'pantryExtra', 'timeNote', 'mealTypes', 'cookingMethod', 'cook', 'usesOven'}
 INGREDIENT_FIELDS = {'id', 'label', 'product', 'amount', 'unit', 'density', 'optional', 'note'}
 
 
@@ -92,6 +92,8 @@ def validate_recipe(r):
             and set(meals) <= {'breakfast', 'lunch', 'dinner'}, 'Некорректные приёмы пищи.')
     method = r.get('cookingMethod', 'oven')
     require(method in {'oven', 'hob', 'no-cook', 'microwave', 'mixed'}, 'Некорректный способ приготовления.')
+    require('usesOven' not in r or (method == 'mixed' and type(r['usesOven']) is bool),
+            'Потребность в духовке отдельно указывают только для комбинированного способа.')
     def valid_duration(value):
         return (isinstance(value, list) and len(value) == 2 and
                 all(integer(x, 1, 360) for x in value) and value[0] <= value[1])
@@ -102,8 +104,11 @@ def validate_recipe(r):
     else:
         require(r.get('temp') is None and r.get('bake') is None,
                 'У блюд без духовки не должно быть температуры и времени выпечки.')
-        require(r.get('cook') is None if method == 'no-cook' else valid_duration(r.get('cook')),
-                'Для приготовления укажите время, а для блюд без нагрева оставьте cook пустым.')
+        if method == 'no-cook':
+            require(r.get('cook') is None, 'У блюд без нагрева не должно быть времени cook.')
+        else:
+            require(valid_duration(r.get('cook')) or (r.get('cook') is None and integer(r.get('prep'), 1, 20000)),
+                    'Укажите время приготовления или подтверждённое время подготовки.')
     if 'panSize' in r:
         shape = r['panSize']
         require(isinstance(shape, dict) and shape.get('kind') in ('round', 'rectangle'), 'Неверный тип формы.')

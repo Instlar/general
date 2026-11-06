@@ -181,6 +181,7 @@ input:not([type='checkbox']), select { width: 100%; min-width: 0; border: 1px so
   .foot span { width: 100%; }
 }
 @media (max-width: 360px) {
+  .top nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; }
   .cards, .collection-grid, .prose .collection-grid { grid-template-columns: 1fr; }
   .recipe h1 { font-size: 2.22rem; }
 }

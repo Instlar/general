@@ -9,7 +9,12 @@ TITLE = 'Здоровая выпечка'
 KINDS = {'cake': 'Пироги', 'muffin': 'Маффины', 'cookie': 'Печенье', 'casserole': 'Запеканки', 'oats': 'Запечённая овсянка',
          'bread': 'Кексы', 'scone': 'Сконы', 'bar': 'Батончики', 'crumble': 'Крамблы и коблеры',
          'porridge': 'Каши', 'eggs': 'Блюда из яиц', 'pancake': 'Оладьи и панкейки',
-         'muesli': 'Мюсли', 'granola': 'Гранола', 'toast': 'Тосты'}
+         'muesli': 'Мюсли', 'granola': 'Гранола', 'toast': 'Тосты', 'sandwich': 'Сэндвичи и роллы',
+         'syrniki': 'Сырники', 'dumplings': 'Вареники', 'yogurt-bowl': 'Завтраки с йогуртом',
+         'breakfast-drink': 'Смузи', 'pudding': 'Пудинги', 'breakfast-dish': 'Другие завтраки'}
+MEALS = {'breakfast': 'Завтрак', 'lunch': 'Обед', 'dinner': 'Ужин'}
+COOKING = {'oven': 'В духовке', 'hob': 'На плите', 'no-cook': 'Без нагрева',
+           'microwave': 'В микроволновке', 'mixed': 'Комбинированный способ'}
 TAGS = {
     'ingredient': ('По ингредиентам', {'whole-wheat': 'Цельнозерновая мука', 'oat': 'Овёс',
         'apple': 'Яблоки', 'banana': 'Бананы', 'berries': 'Ягоды', 'dates': 'Финики',
@@ -17,7 +22,8 @@ TAGS = {
     'composition': ('По составу', {'no-butter': 'Без сливочного масла', 'no-eggs': 'Без яиц',
         'no-added-sugar': 'Без добавленного сахара'}),
     'occasion': ('По ситуации', {'big-pan': 'На большую компанию', 'sheet-pan': 'На противне', 'family': 'Для всей семьи', 'small-batch': 'На 1–2 порции',
-        'breakfast': 'К завтраку', 'freezer': 'Для заморозки', 'no-mixer': 'Без миксера', 'quick': 'До 30 минут', 'make-ahead': 'Заготовить заранее'})
+        'breakfast': 'К завтраку', 'freezer': 'Для заморозки', 'no-mixer': 'Без миксера', 'quick': 'До 30 минут', 'make-ahead': 'Заготовить заранее',
+        'pantry-staples': 'Из обычных продуктов'})
 }
 TAG_NAMES = {key: title for _, choices in TAGS.values() for key, title in choices.items()}
 TRACKS = {
@@ -27,7 +33,12 @@ TRACKS = {
 DIFFICULTIES = {'easy': 'Легко', 'some-technique': 'Несколько этапов'}
 PANTRY_TOP = ['Пшеничная мука', 'Цельнозерновая мука', 'Яйца', 'Кефир', 'Творог', 'Бананы', 'Яблоки', 'Овсяные хлопья', 'Молоко', 'Растительное масло', 'Сахар', 'Разрыхлитель']
 COLLECTIONS = {
-    'make-ahead': ('Завтраки, которые удобно заготовить заранее — с вечера', 'Рецепты завтраков, которые можно приготовить накануне: ночная овсянка, мюсли Бирхер и другие блюда, для которых предусмотрено настаивание в холодильнике.', 'Соблюдайте время подготовки, указываемое в рецепте, а блюда с молочными продуктами и фруктами держите в холодильнике.'),
+    'make-ahead': ('Завтраки, которые удобно заготовить заранее — с вечера', 'Завтраки, которые можно приготовить накануне: ночные каши, пудинги, порционные блюда из яиц и буррито для разогрева.', 'Уберите готовые порции в холодильник по инструкции в карточке. Утром подавайте холодными или разогрейте, если этого требует рецепт.'),
+    'quick-breakfasts': ('Быстрые завтраки за 10–15 минут', 'Каши, блюда из яиц и другие завтраки, на которые по рецептуре требуется от 10 до 15 минут вместе с подготовкой.', 'Если увеличиваете число порций и готовите в несколько заходов, заложите дополнительное время.'),
+    'everyday-breakfasts': ('Завтраки из обычных продуктов', 'Рецепты с привычными продуктами для домашнего завтрака. В каталоге можно отметить продукты, которые уже есть дома.', 'Откройте список ингредиентов целиком. В одной карточке могут понадобиться разные виды крупы, хлеба или творога.'),
+    'breakfast-no-added-sugar': ('Завтраки без добавленного сахара', 'Завтраки, в рецептуре которых нет сахара, мёда и сиропов. Среди них несладкие блюда и варианты с фруктами.', 'Для покупных ингредиентов проверяйте состав на упаковке. У хлеба, йогурта и напитков есть варианты с добавленным сахаром.'),
+    'family-breakfasts': ('Завтраки для всей семьи', 'Каши, блюда из яиц и другие завтраки, исходно рассчитанные на четыре порции и больше.', 'Пересчёт меняет количества продуктов. Вместимость сковороды, кастрюли и время приготовления проверяйте отдельно.'),
+    'no-oven-breakfasts': ('Завтраки без духовки', 'Домашние завтраки на плите, в микроволновке или без нагрева. Способ приготовления указан в каждой карточке.', 'Блюда с пометкой «На плите» требуют нагрева. Для холодных заготовок смотрите время настаивания и условия хранения.'),
     'whole-wheat': ('Выпечка из цельнозерновой муки', 'Пироги, маффины, кексы и печенье с цельнозерновой мукой. Здесь есть и полностью цельнозерновые рецепты, и рецепты со смесью муки.', 'Сверяйтесь с составом каждого рецепта: доля цельнозерновой муки и помол влияют на мякиш. Взвешивайте муку перед замесом.'),
     'no-butter': ('Выпечка без сливочного масла', 'Домашние рецепты, в которых сливочного масла нет в списке ингредиентов. В одних используется растительное масло, в других влажность дают фрукты или кисломолочные продукты.', 'Проверьте отдельный список аллергенов, если вам нужно исключить молочные продукты.'),
     'dates': ('Выпечка с финиками', 'Овсяные батончики, печенье и маффины, где финики добавляют карамельный вкус.', 'Удалите косточки перед взвешиванием. Финики содержат собственные сахара, а в отдельных рецептах есть и другие подсластители.'),
@@ -39,7 +50,7 @@ COLLECTIONS = {
     'breakfast': ('Выпечка к завтраку', 'Рецепты запеканок, овсяной выпечки и домашних кексов к завтраку. В карточках указано, какие блюда нужно охладить или подготовить заранее.', 'Сверяйте время подготовки и выпечки отдельно. Готовую творожную или яичную выпечку храните по инструкции на карточке.'),
     'small-batch': ('Выпечка на 1–2 порции', 'Небольшие десерты, изначально рассчитанные на одну или две порции. У каждого указана исходная форма.', 'Для нескольких порций сохраните размер отдельных формочек, если инструкция рассчитана на индивидуальную подачу.')
 }
-UNIT = {'g':'г', 'ml':'мл', 'tsp':'ч. л.', 'tbsp':'ст. л.', 'each':'шт.', 'pinch':'щеп.'}
+UNIT = {'g':'г', 'ml':'мл', 'tsp':'ч. л.', 'tbsp':'ст. л.', 'each':'шт.', 'pinch':'щеп.', 'bunch':'пуч.', 'handful':'горст.'}
 TOKEN = re.compile(r'\{\{([a-z0-9-]+)\}\}')
 MEASURES = [('Цельнозерновая пшеничная мука', 113 / 236.588), ('Пшеничная мука общего назначения', 120 / 236.588),
             ('Овсяные хлопья', 89 / 236.588), ('Сахар-песок', 198 / 236.588), ('Мёд', 21 / 14.7868)]
@@ -125,12 +136,15 @@ def recipe_tags(r):
 def card(r):
     path = f'/recipes/{r["id"]}/'
     tags = recipe_tags(r)
-    keys = ' '.join([r['title'], r['description'], KINDS[r['kind']]] + [TAG_NAMES[t] for t in tags]
+    meals = r.get('mealTypes', [])
+    method = r.get('cookingMethod', 'oven')
+    keys = ' '.join([r['title'], r['description'], KINDS[r['kind']], COOKING[method]] + [MEALS[m] for m in meals] + [TAG_NAMES[t] for t in tags]
                     + [i['label'] for i in r['ingredients']])
-    duration = r.get('bake') if r.get('cookingMethod', 'oven') == 'oven' else r.get('cook')
-    time = (f'{min_range(duration)} мин ' + ('выпечки' if r.get('cookingMethod', 'oven') == 'oven' else 'приготовления')) if duration else 'Без нагрева'
+    duration = r.get('bake') if method == 'oven' else r.get('cook')
+    time = (f'{min_range(duration)} мин ' + ('выпечки' if method == 'oven' else 'приготовления')) if duration else (
+        f'{r["prep"]} мин' if r.get('prep') else COOKING[method])
     pantry = sorted(({i['product'] for i in r['ingredients'] if not i.get('optional')} | set(r.get('pantryExtra', []))) - {'Вода'})
-    return f'''<article class="card" data-kind="{r['kind']}" data-tags="{' '.join(tags)}" data-track="{' '.join(r['tracks'])}" data-difficulty="{r['difficulty']}" data-pantry="{e(script_json(pantry))}" data-search="{e(keys)}">
+    return f'''<article class="card" data-kind="{r['kind']}" data-tags="{' '.join(tags)}" data-meals="{' '.join(meals)}" data-method="{method}" data-track="{' '.join(r['tracks'])}" data-difficulty="{r['difficulty']}" data-pantry="{e(script_json(pantry))}" data-search="{e(keys)}">
 <a class="card-photo" href="{path}" tabindex="-1" aria-hidden="true">{image(r)}</a>
 <div class="card-copy"><p class="card-meta">{e(KINDS[r['kind']])} <span>·</span> {time}</p><h3><a href="{path}">{e(r['title'])}</a></h3><p>{e(r['description'])}</p><p class="pantry-result" hidden></p></div></article>'''
 
@@ -173,6 +187,8 @@ def catalog(recipes, site):
         return f'<label>{title}<select id="{id}"><option value="">Все варианты</option>' + ''.join(
             f'<option value="{key}">{e(label)}</option>' for key, label in choices.items()) + '</select></label>'
     kinds = {k:v for k,v in KINDS.items() if any(r['kind'] == k for r in recipes)}
+    meal_options = {key: value for key,value in MEALS.items() if any(key in r.get('mealTypes', []) for r in recipes)}
+    method_options = {key: value for key,value in COOKING.items() if any(key == r.get('cookingMethod', 'oven') for r in recipes)}
     groups = ''.join(select(key, label, {k:v for k,v in choices.items() if any(k in recipe_tags(r) for r in recipes)})
                      for key,(label,choices) in TAGS.items())
     available = {i['product'] for r in recipes for i in r['ingredients'] if not i.get('optional')}
@@ -184,7 +200,7 @@ def catalog(recipes, site):
         return ''.join(f'<label class="pantry-chip"><input type="checkbox" value="{e(product)}" data-pantry-product> <span>{e(product)}</span></label>' for product in products)
     body = f'''<section class="wrap block top-block">{crumbs()}<p class="eyebrow">Книга рецептов</p><h1>Рецепты выпечки</h1><p class="lead">Ищите по названию, продукту или виду выпечки. Фильтры можно сочетать.</p>
 <form id="filters" class="filterbox" hidden><label class="search-label">Поиск по рецептам<input id="search" type="search" placeholder="Например, яблоко или овсянка"></label>
-<div class="filter-grid">{select('kind','Вид выпечки',kinds)}{groups}{select('track','Тип рецепта',{key: row[0] for key,row in TRACKS.items()})}{select('difficulty','Приготовление',DIFFICULTIES)}</div>
+<div class="filter-grid">{select('kind','Вид блюда',kinds)}{groups}{select('track','Тип рецепта',{key: row[0] for key,row in TRACKS.items()})}{select('difficulty','Сложность',DIFFICULTIES)}{select('meal','Приём пищи',meal_options)}{select('method','Способ приготовления',method_options)}</div>
 <fieldset class="pantry"><legend>Что есть дома?</legend><p>Отметьте продукты. Подберём рецепты и покажем, чего не хватает. Вода считается доступной.</p><div class="pantry-options">{checkboxes(primary)}</div>
 <details><summary>Другие продукты</summary><label>Найти продукт<input type="search" id="pantry-search" placeholder="Например, сода"></label><div class="pantry-options">{checkboxes(secondary)}</div><p id="pantry-none" hidden>Такого продукта в этом списке нет.</p></details>
 <label class="pantry-exact"><input id="pantry-exact" type="checkbox"> Только рецепты, для которых всё есть</label></fieldset></form>
@@ -214,13 +230,14 @@ def recipe(r, site, related):
     tips = ''.join(f'<p>{e(tip)}</p>' for tip in r.get('tips', []))
     track_link = f'<a href="/{r["tracks"][0]}/">{e(TRACKS[r["tracks"][0]][0])}</a>'
     tag_links = track_link + ''.join(f'<a href="/collections/{tag}/">{e(TAG_NAMES[tag])}</a>' for tag in recipe_tags(r) if tag in related['collections'])
-    prep = f'<div><dt>Подготовка</dt><dd>{r["prep"]} мин</dd></div>' if r.get('prep') is not None else ''
     extra = f'<div><dt>Дополнительно</dt><dd>{r["extra"]} мин</dd></div>' if r.get('extra') else ''
     time_note = f'<p class="pan-line">{e(r["timeNote"])}</p>' if r.get('timeNote') else ''
     method = r.get('cookingMethod', 'oven')
     duration = r.get('bake') if method == 'oven' else r.get('cook')
-    cooking_info = {'oven':'В духовке','hob':'На плите','no-cook':'Без нагрева',
-                    'microwave':'В микроволновке','mixed':'Комбинированный способ'}[method]
+    total_only = method != 'no-cook' and not duration
+    prep_label = 'Общее время' if total_only else 'Подготовка'
+    prep = f'<div><dt>{prep_label}</dt><dd>{r["prep"]} мин</dd></div>' if r.get('prep') is not None else ''
+    cooking_info = COOKING[method]
     duration_fact = (f'<div><dt>{"Выпечка" if method == "oven" else "Приготовление"}</dt>'
                      f'<dd>{min_range(duration)} мин</dd></div>') if duration else ''
     oven_fact = f'<div><dt>Духовка</dt><dd>{r["temp"]} °C</dd></div>' if method == 'oven' else ''
@@ -246,12 +263,12 @@ def recipe(r, site, related):
 <div class="notice"><h3>Как проверить готовность</h3><p>{e(r['doneness'])}</p></div>
 <h3>Как хранить</h3><p>{e(r['storage'])}</p><h3>Аллергены</h3><p>{e(', '.join(r['allergens']) if r['allergens'] else 'Проверьте состав и маркировку продуктов.')}</p>{f'<h3>На заметку</h3>{tips}' if tips else ''}</section></div></article>
 {f'<section class="wrap block"><h2>Ещё из каталога</h2><div class="cards">{"".join(map(card,related["recipes"]))}</div></section>' if related['recipes'] else ''}
-<script type="application/json" id="recipe-data">{script_json({k:r[k] for k in ('id','servings','ingredients','panSize') if k in r})}</script>'''
+<script type="application/json" id="recipe-data">{script_json({k:r[k] for k in ('id','servings','ingredients','panSize','cookingMethod') if k in r})}</script>'''
     schema = {'@context':'https://schema.org','@type':'Recipe','name':r['title'],'description':r['description'],
               'image':site+f'/images/{r["id"]}.webp','recipeYield':str(r['servings']),'recipeCategory':KINDS[r['kind']],
               'recipeIngredient':[f'{quantity(i)} {i["label"]}'+(' (по желанию)' if i.get('optional') else '') for i in ingredients.values()],
               'recipeInstructions':[{'@type':'HowToStep','text':step_text(s)} for s in r['steps']]}
-    if r.get('prep') is not None:
+    if r.get('prep') is not None and not total_only:
         schema['prepTime'] = f'PT{r["prep"]}M'
     if duration:
         schema['cookTime'] = f'PT{duration[1]}M'
@@ -285,14 +302,35 @@ def guide_pages(site):
     }
 
 
+def breakfast_collections(recipes):
+    def quick(r):
+        if r.get('prep') is None or r.get('extra') or 'make-ahead' in r['tags']:
+            return False
+        heat = r.get('bake') if r.get('cookingMethod') == 'oven' else r.get('cook')
+        shortest, longest = heat or (0, 0)
+        return 10 <= r['prep'] + shortest and r['prep'] + longest <= 15
+
+    return {
+        'quick-breakfasts': [r for r in recipes if quick(r)],
+        'everyday-breakfasts': [r for r in recipes if 'pantry-staples' in r['tags']],
+        'breakfast-no-added-sugar': [r for r in recipes if 'no-added-sugar' in r['tags']],
+        'family-breakfasts': [r for r in recipes if r['servings'] >= 4],
+        'no-oven-breakfasts': [r for r in recipes if r.get('cookingMethod', 'oven') != 'oven' and not r.get('usesOven')],
+        'make-ahead': [r for r in recipes if 'make-ahead' in r['tags']],
+    }
+
+
 def pages(recipes, site):
+    breakfast_recipes = [r for r in recipes if 'breakfast' in r.get('mealTypes', [])]
+    breakfast_groups = breakfast_collections(breakfast_recipes)
+    breakfast_groups = {key:members for key,members in breakfast_groups.items() if members}
     collections = {key:[r for r in recipes if key in recipe_tags(r)] for key in COLLECTIONS}
     collections = {key:members for key,members in collections.items() if len(members) >= 2}
+    collections.update(breakfast_groups)
     tracks = {key:[r for r in recipes if key in r['tracks']] for key in TRACKS}
     tracks = {key:members for key,members in tracks.items() if members}
     yield '/', home(recipes, collections, tracks, site)
     yield '/recipes/', catalog(recipes, site)
-    breakfast_recipes = [r for r in recipes if 'breakfast' in r.get('mealTypes', [])]
     if breakfast_recipes:
         groups = {}
         for breakfast_item in breakfast_recipes:
@@ -301,12 +339,12 @@ def pages(recipes, site):
             f'<section class="wrap block"><h2>{e(KINDS[kind])}</h2>'
             f'<div class="cards">{"".join(map(card, members))}</div></section>'
             for kind, members in groups.items())
-        intro = ('Рецепты полезных домашних завтраков: каши, блюда из яиц, '
-                 'панкейки, мюсли, тосты, гранола и завтраки, которые удобно заготовить заранее — с вечера. Поиск и пересчёт порций.')
+        intro = ('Рецепты домашних завтраков: каши из разных круп, блюда из яиц, сырники, тосты и завтраки, '
+                 'которые удобно заготовить заранее — с вечера. В каждой карточке можно пересчитать порции.')
         yield '/breakfasts/', layout('Здоровые завтраки', intro, '/breakfasts/', site,
             f'<section class="wrap block top-block">{crumbs()}<p class="eyebrow">На каждый день</p>'
             f'<h1>Здоровые завтраки</h1><p class="lead">{e(intro)}</p>'
-            '<p><a class="quiet" href="/collections/make-ahead/">Завтраки, которые удобно заготовить заранее — с вечера →</a></p></section>'
+            f'{collection_grid(breakfast_groups)}</section>'
             + breakfast_sections, picture=f'/images/{breakfast_recipes[0]["id"]}.webp', section='breakfasts')
     for key, members in tracks.items():
         title, desc, tip, _ = TRACKS[key]

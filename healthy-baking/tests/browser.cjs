@@ -47,7 +47,9 @@ async function main() {
         assert.ok(source, path);
         assert.equal(await html.locator('.ingredient-list li').count(), source.ingredients.length, path);
         assert.equal(await html.locator('.step-list li').count(), source.steps.length, path);
-        const data = JSON.parse(await html.locator('script[type="application/ld+json"]').textContent());
+        const data = (await html.locator('script[type="application/ld+json"]').allTextContents())
+          .map(source => JSON.parse(source)).find(schema => schema['@type'] === 'Recipe');
+        assert.ok(data, path);
         assert.equal(data['@type'], 'Recipe', path);
         assert.equal(data.recipeIngredient.length, source.ingredients.length, path);
         assert.equal(await html.locator('.recipe-photo figcaption').textContent(), 'Иллюстрация к рецепту');
@@ -70,9 +72,16 @@ async function main() {
     assert.equal(await page.locator('#catalog .card:visible').count(), content.length);
     assert.ok(content.every(recipe => recipe.tracks.length === 1), 'Each recipe belongs to one group');
     await page.locator('#track').selectOption('everyday');
-    assert.equal(await page.locator('#catalog .card:visible').count(), 29);
+    assert.equal(await page.locator('#catalog .card:visible').count(), content.filter(r => r.tracks[0] === 'everyday').length);
     await page.locator('#track').selectOption('special');
-    assert.equal(await page.locator('#catalog .card:visible').count(), 19);
+    assert.equal(await page.locator('#catalog .card:visible').count(), content.filter(r => r.tracks[0] === 'special').length);
+    await page.locator('#track').selectOption('');
+    await page.locator('#meal').selectOption('breakfast');
+    const breakfasts = content.filter(r => r.mealTypes?.includes('breakfast'));
+    assert.equal(await page.locator('#catalog .card:visible').count(), breakfasts.length);
+    await page.locator('#method').selectOption('no-cook');
+    assert.equal(await page.locator('#catalog .card:visible').count(), breakfasts.filter(r => r.cookingMethod === 'no-cook').length);
+    await page.locator('#reset-filters').click();
     await page.locator('#track').selectOption('everyday');
     await page.locator('.pantry summary').click();
     for (const product of ['Бананы', 'Корица', 'Финики', 'Овсяные хлопья быстрого приготовления']) {

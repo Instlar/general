@@ -177,7 +177,7 @@ class SiteTest(unittest.TestCase):
             by_type = {schema['@type']: schema for schema in schemas}
             self.assertEqual(set(by_type), {'Recipe', 'BreadcrumbList'})
             self.assertEqual(by_type['Recipe']['description'], description)
-            if recipe.get('cookingMethod', 'oven') != 'no-cook':
+            if recipe.get('bake') or recipe.get('cook'):
                 self.assertIn('cookTime', by_type['Recipe'])
             else:
                 self.assertNotIn('cookTime', by_type['Recipe'])
@@ -250,6 +250,23 @@ class SiteTest(unittest.TestCase):
         self.assertIn('apple-banana-bircher-muesli', make_ahead)
         self.assertIn('raspberry-peanut-overnight-oats', make_ahead)
         self.assertNotIn('pear-walnut-yogurt-porridge', make_ahead)
+        breakfasts = [r for r in self.recipes if 'breakfast' in r.get('mealTypes', [])]
+        self.assertGreaterEqual(len(breakfasts), 35)
+        self.assertEqual(breakfast.count('<article class="card"'), len(breakfasts))
+        for slug in ('quick-breakfasts','everyday-breakfasts','breakfast-no-added-sugar',
+                     'family-breakfasts','no-oven-breakfasts','make-ahead'):
+            path = f'/collections/{slug}/'
+            self.assertIn(f'href="{path}"', breakfast)
+            collection = (self.work / 'public' / path.strip('/') / 'index.html').read_text(encoding='utf-8')
+            self.assertIn('<article class="card"', collection)
+            if slug == 'no-oven-breakfasts':
+                self.assertNotIn('data-method="oven"', collection)
+                self.assertNotIn('/recipes/courgette-potato-mint-frittata/', collection)
+                self.assertIn('/recipes/white-bean-feta-toast/', collection)
+        chia = (self.work / 'public' / 'recipes' / 'overnight-chocolate-chia-pudding' / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('<strong>Способ.</strong> Без нагрева', chia)
+        self.assertNotIn('<dt>Выпечка</dt>', chia)
+        self.assertNotIn('"cookTime"', chia)
 
 
 if __name__ == '__main__':

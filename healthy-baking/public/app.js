@@ -2,7 +2,7 @@
 
 const decimal = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 3 });
 const fractions = [[1 / 8, '⅛'], [1 / 6, '⅙'], [1 / 4, '¼'], [1 / 3, '⅓'], [1 / 2, '½'], [2 / 3, '⅔'], [3 / 4, '¾']];
-const units = { g: 'г', ml: 'мл', tsp: 'ч. л.', tbsp: 'ст. л.', each: 'шт.', pinch: 'щеп.' };
+const units = { g: 'г', ml: 'мл', tsp: 'ч. л.', tbsp: 'ст. л.', each: 'шт.', pinch: 'щеп.', bunch: 'пуч.', handful: 'горст.' };
 
 function kitchenNumber(value) {
   const whole = Math.floor(value);
@@ -72,11 +72,12 @@ function setupCatalog() {
   const catalog = document.getElementById('catalog');
   const cards = [...catalog.querySelectorAll('.card')].map(node => ({
     node, kind: node.dataset.kind, tags: node.dataset.tags.split(' '), search: normalize(node.dataset.search),
+    meals: node.dataset.meals.split(' '), method: node.dataset.method,
     track: node.dataset.track.split(' '), difficulty: node.dataset.difficulty, pantry: JSON.parse(node.dataset.pantry),
     pantryNote: node.querySelector('.pantry-result'),
   }));
   const update = () => {
-    const [kind, ingredient, composition, occasion, track, difficulty] = fields.map(field => field.value);
+    const [kind, ingredient, composition, occasion, track, difficulty, meal, method] = fields.map(field => field.value);
     const tags = [ingredient, composition, occasion];
     const selected = new Set(boxes.filter(box => box.checked).map(box => box.value));
     const ranking = [];
@@ -86,6 +87,7 @@ function setupCatalog() {
       const available = card.pantry.length - missing.length;
       const visible = (!kind || card.kind === kind) && tags.every(tag => !tag || card.tags.includes(tag))
         && (!track || card.track.includes(track)) && (!difficulty || card.difficulty === difficulty) && matches(search.value, card.search)
+        && (!meal || card.meals.includes(meal)) && (!method || card.method === method)
         && (!selected.size || (pantryExact.checked ? !missing.length : available > 0));
       card.node.hidden = !visible;
       card.pantryNote.hidden = !selected.size;
@@ -174,9 +176,13 @@ function setupRecipe() {
     spans.forEach(span => { span.textContent = format(ingredients.get(span.dataset.amount)); });
     const notes = [];
     if (byPan) notes.push(`По площади формы: ×${decimal.format(factor)}. Примерный выход: ${decimal.format(factor * data.servings)} порц.`);
-    if (Math.abs(factor - 1) > 0.00001) notes.push('Время и температура указаны для исходной формы. Для отдельных изделий сохраняйте размер порции и при необходимости пеките партиями.');
+    if (Math.abs(factor - 1) > 0.00001) {
+      const cooking = data.cookingMethod || 'oven';
+      if (cooking === 'oven') notes.push('Время и температура указаны для исходной формы. Для отдельных изделий сохраняйте размер порции и при необходимости пеките партиями.');
+      else if (cooking !== 'no-cook') notes.push('Время указано для исходного объёма. При необходимости готовьте партиями и проверяйте готовность по рецепту.');
+    }
     if (data.ingredients.some(i => i.unit === 'each' && /яйц/u.test(i.label.toLowerCase()) && Math.abs(i.amount * factor - Math.round(i.amount * factor)) > 0.00001)) {
-      notes.push('Для доли яйца перемешайте яйцо до однородности и отмерьте нужную часть.');
+      notes.push('Для доли сырого яйца перемешайте его и отмерьте нужную часть. Готовое яйцо разделите после варки.');
     }
     scaleNote.textContent = notes.join(' ');
     scaleNote.hidden = !notes.length;
