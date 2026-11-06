@@ -30,3 +30,15 @@ jobs:
       - name: Run auth, analytics and security tests
         working-directory: site-analytics
         run: npm test
+      - name: Package tested admin for deployment
+        if: matrix.node == '24'
+        run: |
+          zip -q -r "$RUNNER_TEMP/site-analytics-deploy.zip" site-analytics/ \
+            -x "site-analytics/data/*" "site-analytics/.env" "site-analytics/node_modules/*"
+      - uses: actions/upload-artifact@v4
+        if: matrix.node == '24'
+        with:
+          name: ready-site-analytics-admin
+          path: ${{ runner.temp }}/site-analytics-deploy.zip
+          if-no-files-found: error
+          retention-days: 30
