@@ -217,6 +217,10 @@ class SiteTest(unittest.TestCase):
             ingredient_ids = {i['id'] for i in draft['ingredients']}
             step_ids = set(re.findall(r'\{\{([a-z0-9-]+)\}\}', '\n'.join(draft['steps'])))
             self.assertEqual(ingredient_ids, step_ids, draft['id'])
+            if draft['id'] == 'raspberry-peanut-overnight-oats':
+                self.assertEqual(draft['cookingMethod'], 'mixed')
+                self.assertEqual(draft['cook'], [1, 1])
+                self.assertIn('кипятите не менее 1 минуты', '\n'.join(draft['steps']))
             if draft['cookingMethod'] == 'no-cook':
                 self.assertNotIn('bake', draft)
                 self.assertNotIn('cook', draft)
@@ -234,6 +238,9 @@ class SiteTest(unittest.TestCase):
         recipe_page = (self.work / 'public' / 'recipes' / 'pear-walnut-yogurt-porridge'
                        / 'index.html').read_text(encoding='utf-8')
         self.assertIn('<h1>Здоровые завтраки</h1>', breakfast)
+        self.assertIn('завтраки, которые удобно заготовить заранее — с вечера', breakfast)
+        self.assertIn('завтраки, которые удобно заготовить заранее — с вечера',
+                      (self.work / 'public' / 'index.html').read_text(encoding='utf-8'))
         self.assertIn('pear-walnut-yogurt-porridge', breakfast)
         self.assertIn('<dt>Приготовление</dt><dd>3 мин</dd>', recipe_page)
         self.assertNotIn('<dt>Духовка</dt>', recipe_page)
