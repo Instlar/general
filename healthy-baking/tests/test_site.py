@@ -113,6 +113,18 @@ class SiteTest(unittest.TestCase):
         self.assertIn("tag.js?id=' + counterId", js)
         self.assertIn('webvisor: false', js)
 
+    def test_privacy_discloses_both_tracking_systems(self):
+        self.cli('build')
+        public = self.work / 'public'
+        privacy = (public / 'privacy' / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('Яндекс Метрика', privacy)
+        self.assertIn('собственный счетчик', privacy)
+        self.assertIn('cookie и localStorage', privacy)
+        self.assertIn('?__analytics=off', privacy)
+        self.assertIn('?__analytics=on', privacy)
+        self.assertIn('Вебвизор на этом сайте отключен', privacy)
+        self.assertIn('src="/yandex-metrika.js"', privacy)
+
     def test_yandex_settings_are_opt_in_and_validated(self):
         # Explicitly disable for the negative check: production has an active ID.
         config_path = self.work / 'content' / 'site.json'
@@ -224,8 +236,10 @@ class SiteTest(unittest.TestCase):
             by_type = {schema['@type']: schema for schema in schemas}
             self.assertEqual(set(by_type), {'Recipe', 'BreadcrumbList'})
             self.assertEqual(by_type['Recipe']['description'], description)
-            if recipe.get('bake') or recipe.get('cook'):
+            # An unknown preparation duration must not be fabricated in JSON-LD.
+            if (recipe.get('bake') or recipe.get('cook')) and recipe.get('prep') is not None:
                 self.assertIn('cookTime', by_type['Recipe'])
+                self.assertIn('prepTime', by_type['Recipe'])
             else:
                 self.assertNotIn('cookTime', by_type['Recipe'])
             self.assertEqual(by_type['BreadcrumbList']['itemListElement'][-1]['item'],
