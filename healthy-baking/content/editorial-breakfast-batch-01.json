@@ -946,7 +946,8 @@
         "no-butter",
         "no-eggs",
         "breakfast",
-        "family"
+        "family",
+        "make-ahead"
       ],
       "ingredients": [
         {
